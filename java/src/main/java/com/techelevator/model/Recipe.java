@@ -7,17 +7,15 @@ public class Recipe {
     private int recipe_id;
     private int user_id;
     private String recipe_name;
-    private String[] instructions_list;
-    private String[] categories;
+    private String instructions_list;
 
     public Recipe() { }
 
-    public Recipe(int recipe_id, int user_id, String recipe_name, String[] instructions_list, String[] categories) {
+    public Recipe(int recipe_id, int user_id, String recipe_name, String instructions_list) {
         this.recipe_id = recipe_id;
         this.user_id = user_id;
         this.recipe_name = recipe_name;
         this.instructions_list = instructions_list;
-        this.categories = categories;
     }
 
     public int getRecipe_id() {
@@ -38,17 +36,11 @@ public class Recipe {
     public void setRecipe_name(String recipe_name) {
         this.recipe_name = recipe_name;
     }
-    public String[] getInstructions_list() {
+    public String getInstructions_list() {
         return instructions_list;
     }
-    public void setInstructions_list(String[] instructions_list) {
+    public void setInstructions_list(String instructions_list) {
         this.instructions_list = instructions_list;
-    }
-    public String[] getCategories() {
-        return categories;
-    }
-    public void setCategories(String[] categories) {
-        this.categories = categories;
     }
 
     @Override
@@ -57,7 +49,6 @@ public class Recipe {
                 "recipe_id=" + recipe_id +
                 " user_id=" + user_id +
                 " recipe_name=" + recipe_name +
-                " instructions_list=" + Arrays.toString(instructions_list) +
-                " categories=" + Arrays.toString(categories) + " }";
+                " instructions_list=" + instructions_list + " }";
     }
 }
