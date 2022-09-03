@@ -64,8 +64,7 @@ public class JdbcRecipeDao implements RecipeDao {
         recipe.setRecipe_id(rs.getInt("recipe_id"));
         recipe.setUser_id(rs.getInt("user_id"));
         recipe.setRecipe_name(rs.getString("recipe_name"));
-        recipe.setInstructions_list((String[]) rs.getArray("instructions_list").getArray());
-        recipe.setCategories((String[]) rs.getArray("categories").getArray());
+        recipe.setInstructions_list(rs.getString("instructions_list"));
 
         return recipe;
     }
