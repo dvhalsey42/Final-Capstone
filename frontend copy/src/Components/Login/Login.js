@@ -80,7 +80,7 @@ class Login extends Component {
             </Link>
             {"  "}
             <button type="submit" onClick={this.handleLogin}>
-              Sign In
+              Sign in
             </button>
           </div>
         </div>

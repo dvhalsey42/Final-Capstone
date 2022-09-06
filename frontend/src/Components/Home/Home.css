@@ -1,0 +1,30 @@
+.row {
+  background-color: #f0eae1;
+}
+
+h1 {
+  font-size: 80px;
+}
+
+.home-banner {
+  max-height: 20rem;
+  max-width: 50rem;
+  align-items: center;
+  margin: 50px 50px;
+}
+
+.pantry-card {
+  max-width: 30rem;
+}
+
+.pantry-card-title {
+  font-size: 50px;
+}
+
+.pantry-card-subtitle {
+  font-size: 30px;
+}
+
+.recipe-card {
+max-width: 30rem;
+}
