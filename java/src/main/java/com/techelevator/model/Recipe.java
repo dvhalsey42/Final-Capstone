@@ -1,13 +1,19 @@
 package com.techelevator.model;
 
-import java.util.Arrays;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class Recipe {
 
     private int recipe_id;
+    @NotNull
     private int user_id;
+    @NotBlank
     private String recipe_name;
+    @NotBlank
     private String instructions_list;
+
+    private Ingredient[] ingredients;
 
     public Recipe() { }
 
@@ -16,6 +22,14 @@ public class Recipe {
         this.user_id = user_id;
         this.recipe_name = recipe_name;
         this.instructions_list = instructions_list;
+    }
+
+    public Recipe(int recipe_id, int user_id, String recipe_name, String instructions_list, Ingredient[] ingredients) {
+        this.recipe_id = recipe_id;
+        this.user_id = user_id;
+        this.recipe_name = recipe_name;
+        this.instructions_list = instructions_list;
+        this.ingredients = ingredients;
     }
 
     public int getRecipe_id() {
@@ -42,6 +56,9 @@ public class Recipe {
     public void setInstructions_list(String instructions_list) {
         this.instructions_list = instructions_list;
     }
+
+    public Ingredient[] getIngredients() { return this.ingredients; }
+    public void setIngredients(Ingredient[] ingredients) { this.ingredients = ingredients; }
 
     @Override
     public String toString() {
