@@ -4,7 +4,7 @@ export const Ingredient = (
   state = {
     id: null,
     ingredient_name: "",
-    category: [],
+    category: "",
   },
   action
 ) => {
@@ -12,13 +12,12 @@ export const Ingredient = (
     case ActionTypes.ADD_INGREDIENT:
       return {
         ...state,
-        id: action.payload.id,
-        ingredient_name: action.payload.username,
+        ingredient_name: action.payload.ingredient_name,
         category: action.payload.category,
       };
 
     case ActionTypes.DELETE_INGREDIENT:
-      return { ...state, id: null, ingredient_name: "", category: [] };
+      return state.filter(ingredient => ingredient.ingredient_name !== action.payload.ingredient_name);
 
     default:
       return state;
