@@ -44,8 +44,17 @@ public class JdbcPantryDao implements PantryDao{
     }
 
     @Override
-    public boolean addIngredient() {
-        return false;
+    public boolean addIngredient(int pantryId, int ingredientId) {
+        boolean isComplete = false;
+        String sql = "INSERT INTO pantries_ingredients(pantry_id, ingredient_id) VALUES(?,?)";
+        try {
+            Connection conn = Objects.requireNonNull(jdbcTemplate.getDataSource()).getConnection();
+            isComplete = jdbcTemplate.update(sql, pantryId, ingredientId) == 1;
+        }catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+
+        return isComplete;
     }
 
 

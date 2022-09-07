@@ -21,6 +21,8 @@ public class PantryController {
     @PostMapping("/pantry/create")
     public boolean createPantry(@Valid @RequestBody int userId){ return pantryDao.createPantry(userId); }
 
-    
+    @PostMapping("/pantry/add")
+    public boolean addIngredient(@Valid @RequestBody int pantryId, int ingredientId){return pantryDao.addIngredient(pantryId, ingredientId);}
+
 
 }

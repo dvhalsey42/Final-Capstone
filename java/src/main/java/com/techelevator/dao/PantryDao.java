@@ -12,6 +12,6 @@ public interface PantryDao {
 
     List<Ingredient> getPantryIngredients();
 
-    boolean addIngredient();
+    boolean addIngredient(int pantryId, int ingredientId);
 
 }
