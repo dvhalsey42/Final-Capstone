@@ -10,7 +10,7 @@ public interface PantryDao {
 
     boolean createPantry(int userId);
 
-    List<Ingredient> getPantryIngredients();
+    List<Ingredient> getPantryIngredients(int pantryId);
 
     boolean addIngredient(int pantryId, int ingredientId);
 

@@ -4,6 +4,7 @@ import com.techelevator.model.Ingredient;
 import com.techelevator.model.Pantry;
 import com.techelevator.model.User;
 import io.jsonwebtoken.lang.Collections;
+import com.techelevator.dao.JdbcIngredientDao;
 import org.springframework.data.relational.core.sql.SQL;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -39,8 +40,16 @@ public class JdbcPantryDao implements PantryDao{
     }
 
     @Override
-    public List<Ingredient> getPantryIngredients() {
-        return null;
+    public List<Ingredient> getPantryIngredients(int pantryId) {
+        List<Ingredient> ingredients = new ArrayList<>();
+        String sql = "SELECT * FROM ingredients " +
+                "JOIN pantries_ingredients USING ingredient_id" +
+                "WHERE pantry_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, pantryId);
+        while(results.next()){
+            ingredients.add(mapRowToIngredient(results));
+        }
+        return ingredients;
     }
 
     @Override
@@ -55,6 +64,15 @@ public class JdbcPantryDao implements PantryDao{
         }
 
         return isComplete;
+    }
+
+    private Ingredient mapRowToIngredient(SqlRowSet rs) {
+        Ingredient ingredient = new Ingredient();
+        ingredient.setIngredient_id(rs.getInt("ingredient_id"));
+        ingredient.setIngredient_name(rs.getString("ingredient_name"));
+        ingredient.setCategory(rs.getString("category"));
+
+        return ingredient;
     }
 
 

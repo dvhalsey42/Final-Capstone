@@ -4,6 +4,7 @@ import com.techelevator.dao.PantryDao;
 import com.techelevator.dao.RecipeDao;
 import com.techelevator.model.Pantry;
 import com.techelevator.model.Recipe;
+import com.techelevator.model.Ingredient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,5 +25,7 @@ public class PantryController {
     @PostMapping("/pantry/add")
     public boolean addIngredient(@Valid @RequestBody int pantryId, int ingredientId){return pantryDao.addIngredient(pantryId, ingredientId);}
 
+    @RequestMapping(path="/mypantry/{pantryId}", method= RequestMethod.GET)
+    public List<Ingredient> getPantryIngredients(@PathVariable int pantryId){return pantryDao.getPantryIngredients(pantryId);}
 
 }
