@@ -24,6 +24,7 @@ import MyRecipes from "../Recipes/MyRecipes";
 import MyMealPlans from "../MealPlans/MyMealPlan";
 import MyMeals from "../Meals/MyMeals";
 import logo from "../images/DummyLogo 2.png";
+import Ingredient from "../Ingredients/Ingredient";
 
 const mapStateToProps = (state) => {
   return {
@@ -73,6 +74,24 @@ class Main extends Component {
               <Col className=" bg-light border">
                 <UncontrolledDropdown>
                   <DropdownToggle nav caret className="menu">
+                    Ingredients
+                  </DropdownToggle>
+                  <DropdownMenu right className="sub-menu">
+                    <DropdownItem className="sub-item">
+                      <NavItem className="links">
+                        <NavLink className="links" tag={Link} to="/myingredients">
+                          My Ingredients
+                        </NavLink>
+                      </NavItem>
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem>Reset</DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              </Col>
+              <Col className=" bg-light border">
+                <UncontrolledDropdown>
+                  <DropdownToggle nav caret className="menu">
                     Recipes
                   </DropdownToggle>
                   <DropdownMenu right className="sub-menu">
@@ -105,7 +124,7 @@ class Main extends Component {
                       <NavItem>
                         <NavItem>
                           <NavLink className="links" tag={Link} to="/mymeals">
-                            My Saved Meals
+                            My Meals
                           </NavLink>
                         </NavItem>
                       </NavItem>
@@ -113,7 +132,7 @@ class Main extends Component {
                     <DropdownItem className="sub-item">
                       <NavItem>
                         <NavLink className="links" tag={Link} to="/mymeals">
-                          Create New Meals
+                          Create New Meal
                         </NavLink>
                       </NavItem>
                     </DropdownItem>
@@ -187,6 +206,12 @@ class Main extends Component {
             path="/mymeals"
             component={
               this.props.token.token !== undefined ? () => <MyMeals /> : null
+            }
+          />
+          <Route
+            path="/myingredients"
+            component={
+              this.props.token.token !== undefined ? () => <Ingredient /> : null
             }
           />
           <Redirect to="/login" />

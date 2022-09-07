@@ -10,11 +10,8 @@ import {
 import "../Home/Home.css";
 import Pantry from "../Ingredients/Pantry";
 import greenpantry from "../images/greenpantry.png";
-import EditIngredient from "../Ingredients/EditIngredient";
-import RecipeList from "../Recipes/RecipeList";
-import axios from "axios";
-import { Component, useState } from "react";
-import { baseUrl } from "../../Shared/baseUrl";
+import RecipeList from "../Recipes/NewRecipe";
+
 
 const Home = () => {
   const handleLogout = () => {
