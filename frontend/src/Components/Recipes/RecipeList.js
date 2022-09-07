@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-export default function RecipeList() {
+export default function RecipeList(props) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="collapsible">
       <button className="toggle" onClick={() => setIsOpen(!isOpen)}>
-        Show Recipe
+        My Recipe Library
       </button>
       {isOpen && (
         <div className="content">

@@ -13,7 +13,6 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Main />
-        
       </BrowserRouter>
     </Provider>
   );

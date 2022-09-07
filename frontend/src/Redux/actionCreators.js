@@ -1,4 +1,4 @@
-import Ingredientlist from "../Components/Ingredients/IngredientList";
+import Ingredientlist from "../Components/Ingredients/Pantry";
 import * as ActionTypes from "./actionTypes";
 import { Ingredient } from "./ingredient";
 
@@ -16,7 +16,7 @@ export const deleteUser = () => ({
   type: ActionTypes.DELETE_USER,
 });
 
-export const addIngredient = () => ({
+export const addIngredient = (ingredient) => ({
   type: ActionTypes.ADD_INGREDIENT,
-payload: Ingredient,
+payload: ingredient,
 });
