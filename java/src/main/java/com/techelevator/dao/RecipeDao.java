@@ -20,5 +20,7 @@ public interface RecipeDao {
     List<Recipe> getUserRecipes(int userId);
 
     //edit or something
-    boolean editRecipe(Recipe updatedRecipe);
+    boolean editRecipe(int recipeId, Recipe updatedRecipe);
+
+    boolean deleteRecipe(int recipeId);
 }

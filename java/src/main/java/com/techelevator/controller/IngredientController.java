@@ -17,7 +17,7 @@ public class IngredientController {
         this.ingredientDao = ingredientDao;
     }
 
-    @GetMapping("/ingredients/all")
+    @GetMapping("/myingredients")
     public List<Ingredient> getAllIngredients() {
         return ingredientDao.getIngredients();
     }

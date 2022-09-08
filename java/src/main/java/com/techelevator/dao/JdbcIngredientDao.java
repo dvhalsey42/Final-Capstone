@@ -31,8 +31,15 @@ public class JdbcIngredientDao implements IngredientDao {
     }
 
     @Override
-    public List<Ingredient> getIngredientByRecipe() {
-        return null;
+    public List<Ingredient> getIngredientByRecipe(int recipe_id) {
+        List<Ingredient> ingredients = new ArrayList<>();
+        String sql = "SELECT * FROM recipe_ingredients WHERE recipe_id = ?";
+        SqlRowSet rs = jdbcTemplate.queryForRowSet(sql, recipe_id);
+        while (rs.next()) {
+            Ingredient ingredient = mapRowToIngredient(rs);
+            ingredients.add(ingredient);
+        }
+        return ingredients;
     }
 
     @Override
