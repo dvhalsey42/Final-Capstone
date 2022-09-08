@@ -51,6 +51,7 @@ CREATE TABLE meals (
 CREATE TABLE meal_plans (
 	plan_id int GENERATED ALWAYS AS IDENTITY,
 	user_id int NOT NULL,
+	meal_plan_name varchar(100) NOT NULL,
 	PRIMARY KEY(plan_id),
 	CONSTRAINT fk_user
 		FOREIGN KEY(user_id)

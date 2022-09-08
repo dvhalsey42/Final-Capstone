@@ -1,0 +1,22 @@
+.login-form {
+  width: 100%;
+  padding: 15px;
+  margin: auto;
+  max-width: 500px;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f2f0;
+  height: 100vh;
+}
+
+input {
+  margin: 10px;
+}
+
+button {
+  max-width: 300px;
+}
