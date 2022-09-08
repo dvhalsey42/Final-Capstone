@@ -17,7 +17,7 @@ import java.io.*;
 import java.sql.*;
 import java.util.*;
 
-
+@Service
 public class JdbcPantryDao implements PantryDao{
 
     private JdbcTemplate jdbcTemplate;

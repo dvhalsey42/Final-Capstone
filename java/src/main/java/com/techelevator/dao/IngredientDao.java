@@ -8,7 +8,8 @@ public interface IngredientDao {
 
     List<Ingredient> getIngredients();
 
-    List<Ingredient> getIngredientByRecipe();
+    // this also could be changed to recipe object, but that seems unnecessary
+    List<Ingredient> getIngredientByRecipe(int recipe_id);
 
     boolean createIngredient(Ingredient ingredient);
 
