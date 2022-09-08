@@ -1,9 +1,13 @@
 package com.techelevator.model;
 
+import java.util.List;
+
 public class Pantry {
 
     private int pantry_id;
     private int user_id;
+
+    List<Ingredient> ingredientList;
 
     public int getPantry_id() {
         return pantry_id;
@@ -21,6 +25,13 @@ public class Pantry {
         this.user_id = user_id;
     }
 
+    public List<Ingredient> getIngredientList() {
+        return ingredientList;
+    }
+
+    public void setIngredientList(List<Ingredient> ingredientList) {
+        this.ingredientList = ingredientList;
+    }
 
     public Pantry(){};
 
