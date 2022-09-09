@@ -1,7 +1,10 @@
 package com.techelevator.model;
 
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public class Recipe {
 
@@ -13,7 +16,7 @@ public class Recipe {
     @NotBlank
     private String instructions_list;
 
-    private Ingredient[] ingredients;
+    private List<Ingredient> ingredients;
 
     public Recipe() { }
 
@@ -24,7 +27,7 @@ public class Recipe {
         this.instructions_list = instructions_list;
     }
 
-    public Recipe(int recipe_id, int user_id, String recipe_name, String instructions_list, Ingredient[] ingredients) {
+    public Recipe(int recipe_id, int user_id, String recipe_name, String instructions_list, List<Ingredient> ingredients) {
         this.recipe_id = recipe_id;
         this.user_id = user_id;
         this.recipe_name = recipe_name;
@@ -57,8 +60,8 @@ public class Recipe {
         this.instructions_list = instructions_list;
     }
 
-    public Ingredient[] getIngredients() { return this.ingredients; }
-    public void setIngredients(Ingredient[] ingredients) { this.ingredients = ingredients; }
+    public List<Ingredient> getIngredients() { return this.ingredients; }
+    public void setIngredients(List<Ingredient> ingredients) { this.ingredients = ingredients; }
 
     @Override
     public String toString() {
@@ -68,4 +71,6 @@ public class Recipe {
                 " recipe_name=" + recipe_name +
                 " instructions_list=" + instructions_list + " }";
     }
+
+
 }

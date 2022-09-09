@@ -1,11 +1,19 @@
 package com.techelevator.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.List;
+
 public class Meal {
 
 
     private int meal_id;
+    @NotBlank
     private String meal_name;
+    @NotNull
     private int user_id;
+
+    List<Recipe> recipes; // THIS LINE WAS ADDED FOR FUNCTIONALITY ON 9/8/2022 BY DEVIN
 
     public Meal() { };
 
@@ -32,6 +40,13 @@ public class Meal {
     }
     public void setUser_id(int user_id) {
         this.user_id = user_id;
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
     }
 
     @Override

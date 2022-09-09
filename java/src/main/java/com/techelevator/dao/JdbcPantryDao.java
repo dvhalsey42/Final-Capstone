@@ -66,6 +66,13 @@ public class JdbcPantryDao implements PantryDao{
         return isComplete;
     }
 
+    @Override
+    public boolean deletePantryItem(int pantryId, int itemId) {
+        String sql = "DELETE FROM pantries_ingredients WHERE pantry_id = ? AND ingredient_id = ?";
+        jdbcTemplate.update(sql, pantryId, itemId);
+        return true;
+    }
+
     private Ingredient mapRowToIngredient(SqlRowSet rs) {
         Ingredient ingredient = new Ingredient();
         ingredient.setIngredient_id(rs.getInt("ingredient_id"));

@@ -70,6 +70,14 @@ public class JdbcRecipeDao implements RecipeDao {
         while (rs.next()) {
             recipe = mapToRecipe(rs);
         }
+
+        sql = "SELECT * FROM recipe_ingredients WHERE recipe_id = ?";
+        SqlRowSet ingRs = jdbcTemplate.queryForRowSet(sql, id);
+        List<Ingredient> ingredients = new ArrayList<>();
+        while (ingRs.next()) {
+            ingredients.add(mapRowToIngredient(ingRs));
+        }
+        recipe.setIngredients(ingredients);
         return recipe;
     }
 
@@ -86,9 +94,9 @@ public class JdbcRecipeDao implements RecipeDao {
             if (recipe_id > 0) {
                 //basically make sure the recipe can even be added to database, then worry about adding ingredients to the recipe
                 if (newRecipe.getIngredients() != null) {
-                    Ingredient[] ingredients = newRecipe.getIngredients();
-                    for (int i = 0; i < ingredients.length; i++) {
-                        jdbcTemplate.update(sqlForJoiner, recipe_id, ingredients[i].getIngredient_id());
+                    List<Ingredient> ingredients = newRecipe.getIngredients();
+                    for (int i = 0; i < ingredients.size(); i++) {
+                        jdbcTemplate.update(sqlForJoiner, recipe_id, ingredients.get(i).getIngredient_id());
                     }
                 }
             }
@@ -116,11 +124,11 @@ public class JdbcRecipeDao implements RecipeDao {
         }
 
         String removerSql = "DELETE FROM recipe_ingredients WHERE recipe_id = ? AND ingredient_id = ?";
-        for (int i = 0; i < updatedRecipe.getIngredients().length; i++) {
+        for (int i = 0; i < updatedRecipe.getIngredients().size(); i++) {
             for (int a = 0; a < ingredients.size(); a++) {
-                if (updatedRecipe.getIngredients()[i].getIngredient_id() == ingredients.get(a).getIngredient_id()) {
+                if (updatedRecipe.getIngredients().get(i).getIngredient_id() == ingredients.get(a).getIngredient_id()) {
                     // remove ingredient from database
-                    jdbcTemplate.update(removerSql, id, updatedRecipe.getIngredients()[i].getIngredient_id());
+                    jdbcTemplate.update(removerSql, id, updatedRecipe.getIngredients().get(i).getIngredient_id());
                 }
             }
         }
@@ -135,6 +143,15 @@ public class JdbcRecipeDao implements RecipeDao {
                         "WHERE recipe_id = ?";
 
         jdbcTemplate.update(sql, updatedRecipe.getUser_id(), updatedRecipe.getRecipe_name(), updatedRecipe.getInstructions_list(), id);
+        return true;
+    }
+
+    @Override
+    public boolean addIngredientToRecipe(int recipe_id, Ingredient ingredient) {
+        if (!recipeExists(recipe_id)) return false;
+
+        String sql = "INSERT INTO recipe_ingredients (ingredient_id, recipe_id) VALUES (?,?)";
+        jdbcTemplate.update(sql, ingredient.getIngredient_id(), recipe_id);
         return true;
     }
 
@@ -154,22 +171,34 @@ public class JdbcRecipeDao implements RecipeDao {
         return i>=1; // if there are 1 or more recipes with this id (shouldn't be possible but edge cases) then it exists!
     }
 
+    public List<Ingredient> getIngredientsByRecipeId(int recipe_id) {
+        String sql = "SELECT * FROM recipe_ingredients JOIN ingredients ON ingredients.ingredient_id = recipe_ingredients.ingredient_id WHERE recipe_id = ?";
+        SqlRowSet rs = jdbcTemplate.queryForRowSet(sql, recipe_id);
+        List<Ingredient> ingredients = new ArrayList<>();
+        while (rs.next()) {
+            ingredients.add(mapRowToIngredient(rs));
+        }
+
+        return ingredients;
+    }
+
     private Recipe mapToRecipe(ResultSet rs) throws SQLException {
         Recipe recipe = new Recipe();
         recipe.setRecipe_id(rs.getInt("recipe_id"));
         recipe.setUser_id(rs.getInt("user_id"));
         recipe.setRecipe_name(rs.getString("recipe_name"));
         recipe.setInstructions_list(rs.getString("instructions_list"));
-
+        recipe.setIngredients(getIngredientsByRecipeId(rs.getInt("recipe_id")));
         return recipe;
     }
 
-    private Recipe mapToRecipe(SqlRowSet rs) {
+    public Recipe mapToRecipe(SqlRowSet rs) {
         Recipe recipe = new Recipe();
         recipe.setRecipe_id(rs.getInt("recipe_id"));
         recipe.setUser_id(rs.getInt("user_id"));
         recipe.setRecipe_name("recipe_name");
         recipe.setInstructions_list(rs.getString("instructions_list"));
+        recipe.setIngredients(getIngredientsByRecipeId(rs.getInt("recipe_id")));
 
         return recipe;
     }
