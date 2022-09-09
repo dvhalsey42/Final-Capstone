@@ -20,11 +20,12 @@ import {
   Col,
 } from "reactstrap";
 import "../Main/Main.css";
-import MyRecipes from "../Recipes/MyRecipes";
+import Recipe from "../Recipes/MyRecipes";
 import MyMealPlans from "../MealPlans/MyMealPlan";
 import MyMeals from "../Meals/MyMeals";
 import logo from "../images/DummyLogo 2.png";
 import Ingredient from "../Ingredients/Ingredient";
+import MyRecipes from "../Recipes/MyRecipes";
 
 const mapStateToProps = (state) => {
   return {
@@ -74,38 +75,20 @@ class Main extends Component {
               <Col className=" bg-light border">
                 <UncontrolledDropdown>
                   <DropdownToggle nav caret className="menu">
-                    Ingredients
-                  </DropdownToggle>
-                  <DropdownMenu right className="sub-menu">
-                    <DropdownItem className="sub-item">
-                      <NavItem className="links">
-                        <NavLink className="links" tag={Link} to="/myingredients">
-                          My Ingredients
-                        </NavLink>
-                      </NavItem>
-                    </DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem>Reset</DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              </Col>
-              <Col className=" bg-light border">
-                <UncontrolledDropdown>
-                  <DropdownToggle nav caret className="menu">
                     Recipes
                   </DropdownToggle>
                   <DropdownMenu right className="sub-menu">
                     <DropdownItem className="sub-item">
                       <NavItem className="links">
                         <NavLink className="links" tag={Link} to="/myrecipes">
-                          My Saved Recipes
+                          Create New Recipe
                         </NavLink>
                       </NavItem>
                     </DropdownItem>
                     <DropdownItem className="sub-item">
                       <NavItem>
                         <NavLink className="links" tag={Link} to="/myrecipes">
-                          Create New Recipe
+                          Recipe Library
                         </NavLink>
                       </NavItem>
                     </DropdownItem>
@@ -178,7 +161,7 @@ class Main extends Component {
             <Link to="/login">Home | </Link>
           )}
         </Navbar>
-
+{/* below is where you can edit/add the rounting of front-end endpoints to their components */}
         <Switch>
           <Route path="/login" component={() => <Login />} />
           <Route path="/register" component={() => <Register />} />

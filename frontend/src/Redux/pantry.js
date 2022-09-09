@@ -17,7 +17,10 @@ export const Ingredient = (
       };
 
     case ActionTypes.DELETE_INGREDIENT:
-      return { ...state, ingredient_name: "", category: "" };
+      return state.filter(
+        (ingredient) =>
+          ingredient.ingredient_name !== action.payload.ingredient_name
+      );
 
     default:
       return state;

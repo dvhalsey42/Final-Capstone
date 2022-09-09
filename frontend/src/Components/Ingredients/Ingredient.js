@@ -1,16 +1,33 @@
 import { Component, useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
-import { Form, Label, Col, Button, Input, Row } from "reactstrap";
+import {
+  Form,
+  Card,
+  Col,
+  Button,
+  Input,
+  Row,
+  ListGroup,
+  ListGroupItem,
+} from "reactstrap";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { addIngredient, addToken } from "../../Redux/actionCreators";
+import { withRouter, Link } from "react-router-dom";
+import {
+  addIngredient,
+  addToken,
+  fetchIngredients,
+} from "../../Redux/actionCreators";
+import IngredientList from "./IngredientList";
 
+// MAPPING TO THE ACTION METHODS IN THE REDUX
 const mapDispatchToProps = (dispatch) => ({
   addIngredient: () => dispatch(addIngredient()),
   addToken: () => dispatch(addToken()),
+  fetchIngredients: () => dispatch(fetchIngredients()),
 });
 
+// PARENT COMPONENT THAT CARRIES OUT BASIC CRUD & RECIEVES INGREDIENTLIST AS CHILD
 class Ingredient extends Component {
   constructor(props) {
     super(props);
@@ -22,14 +39,19 @@ class Ingredient extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
+  // FOOTER LOGOUT LOGIX
+  handleLogout = () => {
+    this.props.addToken("");
+    this.props.deleteUser();
+  };
+
+  // ADD INGREDIENT LOGIC
   handleAddIngredient = async () => {
     const data = {
       ingredient_id: "",
       ingredient_name: this.state.ingredient_name,
       category: "",
     };
-
-    console.log(this.data);
 
     const ingredientWithToken = await axios.post(
       baseUrl + "/ingredients/create",
@@ -39,6 +61,7 @@ class Ingredient extends Component {
     await this.props.dispatch(ingredientWithToken(this.data.ingredient_name));
   };
 
+  // INGREDIENT INPUT 
   handleInputChange = (event) => {
     event.preventDefault();
     this.setState({
@@ -46,37 +69,34 @@ class Ingredient extends Component {
     });
   };
 
+  
+  
   render() {
     return (
-      <div>
-        <div className="row justify-content-center align-items-center">
-          <div className="content mt-5 justify-content-center align-items-center">
-            <Form>
-              <Row className="row-cols-lg-auto g-3 align-items-center">
-                <Col>
-                  <Label className="visually-hidden" for="ingredient">
-                    Ingredient
-                  </Label>
-                  <Input
-                    type="text"
-                    id="ingredient"
-                    name="ingredient_name"
-                    class="form-control"
-                    placeholder="Ingredient"
-                    v-model="ingredient.ingredient_name"
-                    onChange={this.handleInputChange}
-                    required
-                  />
-                </Col>
-                <Col>
-                  <Button type="submit" onClick={this.handleAddIngredient}>
-                    Submit
-                  </Button>
-                </Col>
-              </Row>
-            </Form>
-          </div>
-        </div>
+      <div
+        style={{
+         
+          width: "20rem",
+        }}
+      >
+        <Card className="border-dark align-items-center">
+          <IngredientList />
+          <Form>
+            <Input
+              type="text"
+              id="ingredient"
+              name="ingredient_name"
+              class="form-control"
+              placeholder="Ingredient"
+              v-model="ingredient.ingredient_name"
+              onChange={this.handleInputChange}
+              required
+            />
+            <Button type="submit" onClick={this.handleAddIngredient}>
+              Add To List
+            </Button>
+          </Form>
+        </Card>
       </div>
     );
   }
