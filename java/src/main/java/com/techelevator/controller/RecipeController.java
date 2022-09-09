@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.RecipeDao;
+import com.techelevator.model.Ingredient;
 import com.techelevator.model.Recipe;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +40,11 @@ public class RecipeController {
     @RequestMapping(path="/myrecipes/{recipeId}/update", method=RequestMethod.POST)
     public boolean editRecipe(@PathVariable int recipeId, @RequestBody @Valid Recipe updatedRecipe) {
         return recipeDao.editRecipe(recipeId, updatedRecipe);
+    }
+
+    @PostMapping("/myrecipes/{recipeId}/ingredient")
+    public boolean addIngredientToRecipe(@PathVariable int recipeId, @Valid @RequestBody Ingredient ingredient) {
+        return recipeDao.addIngredientToRecipe(recipeId, ingredient); // all we technically need here is an ingredient id but I feel like going through validation could be a good idea
     }
 
     @DeleteMapping(path="/myrecipes/{recipeId}/delete")

@@ -2,7 +2,6 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Ingredient;
 import com.techelevator.model.Recipe;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
@@ -71,6 +70,14 @@ public class JdbcRecipeDao implements RecipeDao {
         while (rs.next()) {
             recipe = mapToRecipe(rs);
         }
+
+        sql = "SELECT * FROM recipe_ingredients WHERE recipe_id = ?";
+        SqlRowSet ingRs = jdbcTemplate.queryForRowSet(sql, id);
+        List<Ingredient> ingredients = new ArrayList<>();
+        while (ingRs.next()) {
+            ingredients.add(mapRowToIngredient(ingRs));
+        }
+        recipe.setIngredients(ingredients);
         return recipe;
     }
 
@@ -140,6 +147,15 @@ public class JdbcRecipeDao implements RecipeDao {
     }
 
     @Override
+    public boolean addIngredientToRecipe(int recipe_id, Ingredient ingredient) {
+        if (!recipeExists(recipe_id)) return false;
+
+        String sql = "INSERT INTO recipe_ingredients (ingredient_id, recipe_id) VALUES (?,?)";
+        jdbcTemplate.update(sql, ingredient.getIngredient_id(), recipe_id);
+        return true;
+    }
+
+    @Override
     public boolean deleteRecipe(int id) { // TODO: IMPLEMENT ID CHECK SO USER CAN ONLY DELETE THEIR OWN RECIPES
         if (getRecipeById(id) == null) return false;
         String sql = "DELETE FROM recipe_ingredients WHERE recipe_id = ?";
@@ -155,7 +171,7 @@ public class JdbcRecipeDao implements RecipeDao {
         return i>=1; // if there are 1 or more recipes with this id (shouldn't be possible but edge cases) then it exists!
     }
 
-    private List<Ingredient> getIngredientsByRecipeId(int recipe_id) {
+    public List<Ingredient> getIngredientsByRecipeId(int recipe_id) {
         String sql = "SELECT * FROM recipe_ingredients JOIN ingredients ON ingredients.ingredient_id = recipe_ingredients.ingredient_id WHERE recipe_id = ?";
         SqlRowSet rs = jdbcTemplate.queryForRowSet(sql, recipe_id);
         List<Ingredient> ingredients = new ArrayList<>();
