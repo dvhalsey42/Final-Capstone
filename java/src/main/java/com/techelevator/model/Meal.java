@@ -1,12 +1,16 @@
 package com.techelevator.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class Meal {
 
 
     private int meal_id;
+    @NotBlank
     private String meal_name;
+    @NotNull
     private int user_id;
 
     List<Recipe> recipes; // THIS LINE WAS ADDED FOR FUNCTIONALITY ON 9/8/2022 BY DEVIN

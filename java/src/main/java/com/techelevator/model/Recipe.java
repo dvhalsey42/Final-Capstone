@@ -1,5 +1,7 @@
 package com.techelevator.model;
 
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -69,4 +71,6 @@ public class Recipe {
                 " recipe_name=" + recipe_name +
                 " instructions_list=" + instructions_list + " }";
     }
+
+
 }
