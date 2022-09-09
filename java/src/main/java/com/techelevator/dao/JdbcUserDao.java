@@ -83,6 +83,11 @@ public class JdbcUserDao implements UserDao {
                 , keyHolder) == 1;
         int newUserId = (int) keyHolder.getKeys().get(id_column);
 
+        if(userCreated){
+            String sql = "INSERT INTO pantries (user_id) VALUES(?) RETURNING pantry_id";
+            int pantryId = jdbcTemplate.queryForObject(sql, int.class, newUserId);
+        }
+
         return userCreated;
     }
 
