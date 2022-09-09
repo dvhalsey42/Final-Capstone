@@ -40,6 +40,22 @@ public class JdbcPantryDao implements PantryDao{
     }
 
     @Override
+    public Pantry getPantryByUserId(int userId){
+        Pantry pantry = new Pantry();
+        String sql = "SELECT * FROM pantries WHERE user_id = ?";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+            if (results.next()) {
+                pantry = mapRowToPantry(results);
+            }
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+
+        return pantry;
+    }
+
+    @Override
     public List<Ingredient> getPantryIngredients(int pantryId) {
         List<Ingredient> ingredients = new ArrayList<>();
         String sql = "SELECT * FROM ingredients " +
@@ -80,6 +96,14 @@ public class JdbcPantryDao implements PantryDao{
         ingredient.setCategory(rs.getString("category"));
 
         return ingredient;
+    }
+
+    private Pantry mapRowToPantry(SqlRowSet rs){
+        Pantry pantry = new Pantry();
+        pantry.setPantry_id(rs.getInt("pantry_id"));
+        pantry.setUser_id(rs.getInt("user_id"));
+
+        return pantry;
     }
 
 
