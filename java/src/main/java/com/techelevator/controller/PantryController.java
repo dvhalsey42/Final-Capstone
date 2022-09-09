@@ -19,6 +19,9 @@ public class PantryController {
         this.pantryDao = pantryDao;
     }
 
+    @RequestMapping(path="/pantry/get/{userId}", method= RequestMethod.GET)
+    public Pantry getPantryByUserId(@PathVariable int userId){return pantryDao.getPantryByUserId(userId);}
+
     @PostMapping("/pantry/create")
     public boolean createPantry(@Valid @RequestBody int userId){ return pantryDao.createPantry(userId); }
 

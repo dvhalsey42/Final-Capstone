@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useState, Component } from "react";
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
 import { Form, Label, Col, Button, Input, Row } from "reactstrap";
+import { addIngredient, addToken, fetchIngredients } from "../../Redux/actionCreators";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-export default function Pantry(props) {
-  const [viewIsOpen, setViewIsOpen] = useState(false);
-  const [editIsOpen, setEditIsOpen] = useState(false);
+// MAPPING TO THE ACTION METHODS IN THE REDUX
+const mapDispatchToProps = (dispatch) => ({
+  addIngredient: () => dispatch(addIngredient()),
+  addToken: () => dispatch(addToken()),
+  fetchIngredients: () => dispatch(fetchIngredients()),
+});
 
-  const handleAddIngredient = async () => {
+
+class Pantry extends Component {
+
+
+  handleAddIngredient = async () => {
     const data = {
       ingredient_id: "",
       ingredient_name: this.state.ingredient_name,
@@ -22,42 +32,33 @@ export default function Pantry(props) {
     await this.props.dispatch(addIngredient(data.ingredient_name));
   };
 
-  const handleInputChange = (event) => {
+  handleInputChange = (event) => {
     event.preventDefault();
     this.setState({
       [event.target.name]: event.target.value,
     });
   };
 
+  render() {
   return (
     <div>
       <div className="mb-3 mx-auto">
         <button
           className="toggle"
           style={{ backgroundColor: "#F0EAE1", textDecorationColor: "#92AB75" }}
-          onClick={() => setViewIsOpen(!viewIsOpen)}
         >
           My Pantry
         </button>
-        {viewIsOpen && (
-          <div className="content">
-            <ul>
-              <li>Ingredient</li>
-              <li>Ingredient</li>
-              <li>Ingredient</li>
-              <li>Ingredient</li>
-            </ul>
             <button
               className="toggle"
               style={{
                 backgroundColor: "#F0EAE1",
                 textDecorationColor: "#92AB75",
               }}
-              onClick={() => setEditIsOpen(!editIsOpen)}
             >
               Add More Staples
             </button>
-            {editIsOpen && (
+           
               <div className="content">
                 <Form>
                   <Row className="row-cols-lg-auto g-3 align-items-center">
@@ -72,22 +73,24 @@ export default function Pantry(props) {
                         class="form-control"
                         placeholder="Ingredient"
                         v-model="ingredient.ingredient_name"
-                        onChange={handleInputChange}
+                        onChange={this.handleInputChange}
                         required
                       />
                     </Col>
                     <Col>
-                      <Button type="submit" onClick={handleAddIngredient}>
+                      <Button type="submit" onClick={this.handleAddIngredient}>
                         Submit
                       </Button>
                     </Col>
                   </Row>
                 </Form>
               </div>
-            )}
+          
           </div>
-        )}
+      
       </div>
-    </div>
+    
   );
+ }
 }
+export default withRouter(connect(mapDispatchToProps)(Pantry));

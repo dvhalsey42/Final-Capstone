@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface PantryDao {
 
+    Pantry getPantryByUserId(int userId);
+
     boolean createPantry(int userId);
 
     List<Ingredient> getPantryIngredients(int pantryId);
