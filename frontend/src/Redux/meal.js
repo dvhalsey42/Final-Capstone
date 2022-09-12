@@ -14,6 +14,25 @@ export const Meal = (
         meal_name: action.payload.recipe_name,
       };
 
+      case ActionTypes.EDIT_MEAL:
+        return {
+          ...state,
+          meal_name: action.payload.recipe_name,
+        };
+
+        case ActionTypes.DELETE_MEAL:
+          return {
+            ...state,
+            meal_name: "",
+          };
+
+          // JOIN TABLE LOGIC NEEDED HERE
+          case ActionTypes.DELETE_RECIPE_IN_MEAL:
+            return {
+              ...state,
+              // meal_recipes: 
+            }
+
     default:
       return state;
   }

@@ -5,6 +5,7 @@ import {
   addIngredient,
   addToken,
   fetchIngredients,
+  fetchMyRecipes,
 } from "../../Redux/actionCreators";
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
@@ -15,13 +16,14 @@ const mapDispatchToProps = (dispatch) => ({
   addIngredient: () => dispatch(addIngredient()),
   addToken: () => dispatch(addToken()),
   fetchIngredients: () => dispatch(fetchIngredients()),
+  fetchMyRecipes: () => dispatch(fetchMyRecipes()),
 });
 
 // MAPPING TO THE ACTION METHODS IN THE REDUX
-class IngredientList extends Component {
+class RecipeList extends Component {
   constructor(props) {
     super(props);
-    this.state = { ingredients: [] };
+    this.state = { recipes: [] };
     this.removeIngredient = this.removeIngredient.bind(this);
   }
 
@@ -32,22 +34,22 @@ class IngredientList extends Component {
   }
 
   // FETCH INGREDIENTS LOGIC
-  handleFetchIngredients = async () => {
-    const ingredientsWithToken = await axios.get(baseUrl + "/myingredients");
+  handleFetchRecipes = async () => {
+    const recipesWithToken = await axios.get(baseUrl + "/myrecipes");
 
-    await this.props.dispatch(fetchIngredients(ingredientsWithToken.data));
+    await this.props.dispatch(fetchMyRecipes(recipesWithToken.data));
 
-    this.setState({ ingredients: ingredientsWithToken.data });
+    this.setState({ ingredients: recipesWithToken.data });
 
-    console.log(ingredientsWithToken.data);
+    console.log(recipesWithToken.data);
   };
 
   // REMOVE LOGIC- THIS STILL NEEDS AN API CALL ENDPOINT FROM BACK-END
-  removeIngredient(ingredient_name) {
+  removeRecipe(recipe_name) {
     this.setState({
-      ingredients: this.state.ingredients.filter(
-        (ingredient) => ingredient !== ingredient_name
-      )
+      recipes: this.state.recipes.filter(
+        (ingredient) => ingredient !== recipe_name,
+      ),
     });
   }
 
@@ -62,15 +64,14 @@ class IngredientList extends Component {
         >
           <h2>Ingredients</h2>
           <ListGroup className="row-cols-lg-auto g-3 mb-5 ">
-            {this.state.ingredients.map((ingredient) => {
+            {this.state.recipes.map((recipe) => {
               return (
-                <ListGroupItem >
-                  {/* this is where ingredient this is rendered */}
-                  {ingredient.ingredient_name}
+                <ListGroupItem>
+                  {/* this is where recipe list is rendered */}
+                  {recipe.recipe_name}
                   <button
-                 
                     onClick={() => {
-                      this.removeIngredient(ingredient);
+                      this.removeIngredient(recipe);
                     }}
                   >
                     x
@@ -84,4 +85,4 @@ class IngredientList extends Component {
     );
   }
 }
-export default withRouter(connect(mapDispatchToProps)(IngredientList));
+export default withRouter(connect(mapDispatchToProps)(RecipeList));

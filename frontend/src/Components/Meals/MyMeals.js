@@ -34,8 +34,8 @@ class MyMeals extends Component {
   render() {
     return (
       <div>
-        <Ingredient></Ingredient>
-       <NewRecipe/>
+        
+     
         <footer className="text-center pt-5">
           <Link to="/home">Home | </Link>
           <Link to="/login" onClick={this.handleLogout}>

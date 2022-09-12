@@ -1,0 +1,6 @@
+.recipe-layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 35px;
+}
