@@ -22,8 +22,8 @@ public class PantryController {
     @RequestMapping(path="/pantry/get/{userId}", method= RequestMethod.GET)
     public Pantry getPantryByUserId(@PathVariable int userId){return pantryDao.getPantryByUserId(userId);}
 
-    @PostMapping("/pantry/create")
-    public boolean createPantry(@Valid @RequestBody int userId){ return pantryDao.createPantry(userId); }
+    //@PostMapping("/pantry/create")
+    //public boolean createPantry(@Valid @RequestBody int userId){ return pantryDao.createPantry(userId); }
 
     @PostMapping("/pantry/add")
     public boolean addIngredient(@Valid @RequestBody int pantryId, int ingredientId){return pantryDao.addIngredient(pantryId, ingredientId);}

@@ -16,16 +16,16 @@ const mapDispatchToProps = (dispatch) => ({
 
 class Pantry extends Component {
 
-
-  handleAddIngredient = async () => {
+// ASK ABOUT HOW TO MODEL THE DATA OBJECT FOR JOIN TABLES
+  handleAddPantryIngredient = async () => {
     const data = {
       ingredient_id: "",
       ingredient_name: this.state.ingredient_name,
-      category: "dairy",
+      category: "",
     };
 
     const addIngredient = await axios.post(
-      baseUrl + "/ingredients/create",
+      baseUrl + "/pantry/add",
       data
     );
 
@@ -78,7 +78,7 @@ class Pantry extends Component {
                       />
                     </Col>
                     <Col>
-                      <Button type="submit" onClick={this.handleAddIngredient}>
+                      <Button type="submit" onClick={this.handleAddPantryIngredient}>
                         Submit
                       </Button>
                     </Col>

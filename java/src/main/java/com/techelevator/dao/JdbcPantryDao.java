@@ -26,7 +26,7 @@ public class JdbcPantryDao implements PantryDao{
 
 
 
-    @Override
+   /* @Override
     public boolean createPantry(int userId){
         String sql = "INSERT INTO pantries (user_id) VALUES(?) RETURNING pantry_id";
         int pantryId=0;
@@ -38,7 +38,7 @@ public class JdbcPantryDao implements PantryDao{
         }
         return pantryId > 0;
     }
-
+  */
     @Override
     public Pantry getPantryByUserId(int userId){
         Pantry pantry = new Pantry();
