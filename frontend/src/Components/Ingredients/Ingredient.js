@@ -46,7 +46,8 @@ class Ingredient extends Component {
   };
 
   // ADD INGREDIENT LOGIC
-  handleAddIngredient = async () => {
+  handleAddIngredient = async (e) => {
+    e.preventDefault();
     const data = {
       ingredient_id: "",
       ingredient_name: this.state.ingredient_name,
@@ -81,7 +82,7 @@ class Ingredient extends Component {
       >
         <Card className="border-dark align-items-center">
           <IngredientList />
-          <Form>
+          <Form onSubmit={this.handleAddIngredient}>
             <Input
               type="text"
               id="ingredient"
@@ -92,7 +93,7 @@ class Ingredient extends Component {
               onChange={this.handleInputChange}
               required
             />
-            <Button type="submit" onClick={this.handleAddIngredient}>
+            <Button type="submit" >
               Add To List
             </Button>
           </Form>
