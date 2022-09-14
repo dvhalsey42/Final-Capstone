@@ -22,19 +22,14 @@ import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
 import IngredientList from "../Ingredients/IngredientList";
 
-const mapDispatchToProps = (dispatch) => ({
-  addIngredient: () => dispatch(addIngredient()),
-  addToken: () => dispatch(addToken()),
-  fetchIngredients: () => dispatch(fetchIngredients()),
-  createRecipe: () => dispatch(createRecipe()),
-  addIngredientToRecipe: () => dispatch(addIngredientToRecipe()),
-});
+
 
 class MyRecipes extends Component {
   constructor(props) {
     super(props);
     this.state = {
       recipe_id: "",
+      user_id: this.props.user,
       recipe_name: "",
       instructions_list: "",
       ingredients: [],
@@ -42,10 +37,9 @@ class MyRecipes extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  componentDidMount() {
-    this.handleCreateRecipe();
-  }
-
+  // componentDidMount() {
+  //   this.handleCreateRecipe();
+  // }
 
   handleLogout = () => {
     this.props.addToken("");
@@ -58,25 +52,25 @@ class MyRecipes extends Component {
     e.preventDefault();
     const data = {
       recipe_id: "",
+      user_id: this.state.user_id,
       recipe_name: this.state.recipe_name,
       instructions_list: this.state.instructions_list,
       ingredients: this.state.ingredients,
     };
 
-    console.log(data.recipe_name);
-
-    const recipeIngredientWithToken = await axios.post(
+    // const recipeIngredientWithToken = 
+    await axios.post(
       baseUrl + "/recipes/create",
       data
     );
 
-    await this.props.dispatch(
-      recipeIngredientWithToken(
-        this.data.recipe_name,
-        this.data.instructions_list,
-        this.data.ingredients
-      )
-    );
+    // await this.props.dispatch(
+    //   recipeIngredientWithToken(
+    //     this.data.recipe_name,
+    //     this.data.instructions_list,
+    //     this.data.ingredients
+    //   )
+    // );
   };
 
   // INGREDIENT INPUT
@@ -171,4 +165,6 @@ class MyRecipes extends Component {
     );
   }
 }
-export default withRouter(connect(mapDispatchToProps)(MyRecipes));
+export default withRouter(
+  connect()(MyRecipes)
+);

@@ -33,7 +33,7 @@ public class RecipeController {
     }
 
     @PostMapping("/recipes/create")
-    public boolean addNewRecipe(@Valid @RequestBody Recipe newRecipe) {
+    public Recipe addNewRecipe(@Valid @RequestBody Recipe newRecipe) {
         return recipeDao.addNewRecipe(newRecipe);
     }
 

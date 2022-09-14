@@ -4,7 +4,7 @@ import { useState } from "react";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Home from "../Home/Home";
-import { addToken, deleteUser } from "../../Redux/actionCreators";
+import { addToken, deleteUser, fetchIngredients,createRecipe, addIngredientToRecipe } from "../../Redux/actionCreators";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {
@@ -31,6 +31,10 @@ const mapStateToProps = (state) => {
   return {
     token: state.token,
     user: state.user,
+    recipe: state.recipe,
+    recipes: state.recipes,
+    meal: state.meal,
+
   };
 };
 
@@ -41,7 +45,11 @@ const mapDispatchToProps = (dispatch) => ({
   deleteUser: () => {
     dispatch(deleteUser());
   },
+  fetchIngredients: () => { dispatch(fetchIngredients())},
+  createRecipe: () => {dispatch(createRecipe())},
+  addIngredientToRecipe: () => {dispatch(addIngredientToRecipe())},
 });
+
 
 class Main extends Component {
   constructor(props) {
@@ -174,8 +182,8 @@ class Main extends Component {
           <Route
             path="/myrecipes"
             component={
-              this.props.token.token !== undefined ? () => <MyRecipes /> : null
-            }
+              this.props.token.token !== undefined ? () => <MyRecipes user= {this.props.user.id} /> : null
+            } 
           />
           <Route
             path="/mymealplans"
