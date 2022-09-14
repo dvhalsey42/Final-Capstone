@@ -12,7 +12,7 @@ public interface RecipeDao {
 
 
     //create recipe
-    boolean addNewRecipe(Recipe recipe);
+    Recipe addNewRecipe(Recipe recipe);
     boolean addIngredientToRecipe(int recipe_id, Ingredient ingredient);
     //get recipe by name, id, user
     Recipe getRecipeByName(String name); // certain recipes might be able to go by the same name, maybe return a list?

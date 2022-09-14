@@ -83,7 +83,7 @@ public class JdbcRecipeDao implements RecipeDao {
 
 
     @Override
-    public boolean addNewRecipe(Recipe newRecipe) {
+    public Recipe addNewRecipe(Recipe newRecipe) {
 
         String sqlForRecipesTable = "INSERT INTO recipes (user_id, recipe_name, instructions_list) VALUES (?,?,?) RETURNING recipe_id";
         String sqlForJoiner = "INSERT INTO recipe_ingredients (recipe_id, ingredient_id) VALUES (?,?)";
@@ -104,7 +104,9 @@ public class JdbcRecipeDao implements RecipeDao {
             System.err.println(e.getMessage());
         }
 
-        return recipe_id > 0;
+        newRecipe.setRecipe_id(recipe_id);
+
+        return newRecipe;
     }
 
     @Override

@@ -48,6 +48,7 @@ export const deletePantryIngredient = (pantry_ingredient) => ({
 
 export const createRecipe = (recipe) => ({
   type: ActionTypes.CREATE_RECIPE,
+  
   payload: recipe,
 });
 

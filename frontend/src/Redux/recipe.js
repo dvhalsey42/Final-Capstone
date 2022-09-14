@@ -3,6 +3,7 @@ import * as ActionTypes from "./actionTypes";
 export const Recipe = (
   state = {
     id: "",
+    user_id: "",
     recipe_name: "",
     instructions_list: "",
     ingredients: [],
@@ -13,7 +14,7 @@ export const Recipe = (
     case ActionTypes.CREATE_RECIPE:
       console.log(action.payload);
       return {
-        ...state,
+        recipe_id: "",
         recipe_name: action.payload.recipe_name,
         instructions_list: action.payload.instructions_list,
         ingredients: action.payload.ingredients,
