@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
 import { Card, ListGroup, ListGroupItem, CloseButton } from "reactstrap";
-import NewRecipe from "../Recipes/NewRecipe";
+
 
 const mapDispatchToProps = (dispatch) => ({
   addIngredient: () => dispatch(addIngredient()),
@@ -42,6 +42,15 @@ class IngredientList extends Component {
     console.log(ingredientsWithToken.data);
   };
 
+  handleAddIngredientToRecipe =  (ingredient) => {
+    this.setState({
+      ...this.state,
+      ingredients: this.ingredient.push,
+    });
+    
+    console.log(this.state);
+  }
+
   // REMOVE LOGIC- THIS STILL NEEDS AN API CALL ENDPOINT FROM BACK-END
   removeIngredient(ingredient_name) {
     this.setState({
@@ -64,16 +73,22 @@ class IngredientList extends Component {
           <ListGroup className="row-cols-lg-auto g-3 mb-5 ">
             {this.state.ingredients.map((ingredient) => {
               return (
-                <ListGroupItem >
+                <ListGroupItem>
                   {/* this is where ingredient this is rendered */}
                   {ingredient.ingredient_name}
                   <button
-                 
                     onClick={() => {
                       this.removeIngredient(ingredient);
                     }}
                   >
                     x
+                  </button>
+                  <button
+                    onClick={() => {
+                      this.handleAddIngredientToRecipe(ingredient);
+                    }}
+                  >
+                    + to recipe
                   </button>
                 </ListGroupItem>
               );

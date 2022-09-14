@@ -2,7 +2,7 @@ import * as ActionTypes from "./actionTypes";
 
 export const Ingredient = (
   state = {
-    id: null,
+    id: "",
     ingredient_name: "",
     category: "",
   },

@@ -1,6 +1,5 @@
-import Ingredientlist from "../Components/Pantry/Pantry";
+
 import * as ActionTypes from "./actionTypes";
-import { Ingredient } from "./ingredient";
 
 
 export const addToken = (token) => ({

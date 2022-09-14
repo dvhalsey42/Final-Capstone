@@ -15,7 +15,7 @@ export const Recipes = (
         loading: false,
         recipes: action.payload,
       };
-  
+
     default:
       return state;
   }
