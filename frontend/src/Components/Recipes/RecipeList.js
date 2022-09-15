@@ -5,7 +5,8 @@ import {
   addIngredient,
   addToken,
   fetchIngredients,
-  fetchMyRecipes,
+  fetchRecipes,
+  createRecipe,
 } from "../../Redux/actionCreators";
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
@@ -13,42 +14,55 @@ import { Card, ListGroup, ListGroupItem, CloseButton } from "reactstrap";
 import NewRecipe from "../Recipes/NewRecipe";
 
 const mapDispatchToProps = (dispatch) => ({
-  addIngredient: () => dispatch(addIngredient()),
+  createRecipe: () => dispatch(createRecipe()),
   addToken: () => dispatch(addToken()),
-  fetchIngredients: () => dispatch(fetchIngredients()),
-  fetchMyRecipes: () => dispatch(fetchMyRecipes()),
+  fetchRecipes: () => dispatch(fetchRecipes()),
 });
 
 // MAPPING TO THE ACTION METHODS IN THE REDUX
 class RecipeList extends Component {
   constructor(props) {
     super(props);
-    this.state = { recipes: [] };
-    this.removeIngredient = this.removeIngredient.bind(this);
+    this.state = { 
+      recipes: [],
+      mealRecipes: [],
+    };
+    this.removeRecipe = this.removeRecipe.bind(this);
   }
 
   // SIGNNALS DATA TO RENDER WHEN COMPONENT MOUNTS
   componentDidMount() {
-    this.handleFetchIngredients();
-    this.removeIngredient();
+    this.handleFetchRecipes();
+    this.removeRecipe(); 
   }
 
   // FETCH INGREDIENTS LOGIC
-  handleFetchRecipes = async () => {
+  handleFetchRecipes = async () => { 
     const recipesWithToken = await axios.get(baseUrl + "/myrecipes");
 
-    await this.props.dispatch(fetchMyRecipes(recipesWithToken.data));
+    await this.props.dispatch(fetchRecipes(recipesWithToken.data));
 
-    this.setState({ ingredients: recipesWithToken.data });
+    this.setState({ recipes: recipesWithToken.data });
 
-    console.log(recipesWithToken.data);
+    // console.log(recipesWithToken.data);
   };
+
+  handleAddRecipeToMeal = (recipe) => {
+    var newRecipeList = this.state.mealRecipes;
+    newRecipeList.push(recipe);
+    this.setState({
+      ...this.state,
+      mealRecipes: newRecipeList,
+    });
+    this.props.parentCallback(newRecipeList);
+    console.log(this.state);
+  }
 
   // REMOVE LOGIC- THIS STILL NEEDS AN API CALL ENDPOINT FROM BACK-END
   removeRecipe(recipe_name) {
     this.setState({
       recipes: this.state.recipes.filter(
-        (ingredient) => ingredient !== recipe_name,
+        (recipe) => recipe !== recipe_name,
       ),
     });
   }
@@ -62,7 +76,7 @@ class RecipeList extends Component {
             width: "15rem",
           }}
         >
-          <h2>Ingredients</h2>
+          <h2>Recipes</h2>
           <ListGroup className="row-cols-lg-auto g-3 mb-5 ">
             {this.state.recipes.map((recipe) => {
               return (
@@ -71,10 +85,17 @@ class RecipeList extends Component {
                   {recipe.recipe_name}
                   <button
                     onClick={() => {
-                      this.removeIngredient(recipe);
+                      this.removeRecipe(recipe);
                     }}
                   >
                     x
+                  </button>
+                  <button
+                    onClick={() => {
+                      this.handleAddRecipeToMeal(recipe);
+                    }}
+                    > 
+                    +
                   </button>
                 </ListGroupItem>
               );

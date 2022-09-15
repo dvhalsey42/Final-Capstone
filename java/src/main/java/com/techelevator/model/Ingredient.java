@@ -7,7 +7,6 @@ public class Ingredient {
     private int ingredient_id;
     @NotNull
     private String ingredient_name;
-    @NotNull
     private String category;
 
     public Ingredient() { }
