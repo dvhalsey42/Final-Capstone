@@ -16,5 +16,7 @@ public interface PantryDao {
 
     boolean addIngredient(int pantryId, int ingredientId);
 
+    boolean addIngredientToPantry(int userId, Pantry pantry);
+
     boolean deletePantryItem(int pantryId, int itemId);
 }

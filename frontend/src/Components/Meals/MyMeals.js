@@ -40,6 +40,8 @@ class MyMeals extends Component {
     this.setState({mealRecipes: childData})
   }
 
+  
+
   handleLogout = () => {
     this.props.addToken("");
     this.props.deleteUser();
