@@ -198,7 +198,7 @@ class Main extends Component {
           <Route
             path="/mymeals"
             component={
-              this.props.token.token !== undefined ? () => <MyMeals /> : null
+              this.props.token.token !== undefined ? () => <MyMeals user= {this.props.user.id}/> : null
             }
           />
           <Route
