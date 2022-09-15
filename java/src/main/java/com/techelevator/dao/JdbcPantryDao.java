@@ -83,6 +83,18 @@ public class JdbcPantryDao implements PantryDao{
     }
 
     @Override
+    public boolean addIngredientToPantry(int userId, Pantry pantry) {
+        String sql = "INSERT INTO pantries_ingredients(pantry_id, ingredient_id) VALUES (?,?)";
+        int pantryId = getPantryByUserId(userId).getPantry_id();
+        List<Ingredient> ingredients = pantry.getIngredientList();
+        for (Ingredient ingredient : ingredients) {
+            jdbcTemplate.update(sql, pantryId, ingredient.getIngredient_id());
+        }
+
+        return true;
+    }
+
+    @Override
     public boolean deletePantryItem(int pantryId, int itemId) {
         String sql = "DELETE FROM pantries_ingredients WHERE pantry_id = ? AND ingredient_id = ?";
         jdbcTemplate.update(sql, pantryId, itemId);

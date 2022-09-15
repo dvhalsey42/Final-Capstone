@@ -28,6 +28,11 @@ public class PantryController {
     @PostMapping("/pantry/add")
     public boolean addIngredient(@Valid @RequestBody int pantryId, int ingredientId){return pantryDao.addIngredient(pantryId, ingredientId);}
 
+    @PostMapping("/pantry/addIngredient/{userId}")
+    public boolean addIngredientToPantry(@PathVariable int userId, @Valid @RequestBody Pantry pantry) {
+        return pantryDao.addIngredientToPantry(userId, pantry);
+    }
+
     @RequestMapping(path="/mypantry/{pantryId}", method= RequestMethod.GET)
     public List<Ingredient> getPantryIngredients(@PathVariable int pantryId){return pantryDao.getPantryIngredients(pantryId);}
 
