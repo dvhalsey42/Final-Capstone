@@ -5,7 +5,7 @@ import {User} from './user'
 import { Ingredient } from './ingredient'
 import { Ingredients } from './ingredients'
 import {Recipe} from './recipe'
-import { PantryIngredient } from './pantry_ingredient'
+import { Pantry } from './pantry'
 import { Meal } from './meal'
 import { Recipes } from './recipes'
 
@@ -18,7 +18,7 @@ export const ConfigureStore = () => {
         ingredients: Ingredients,
         recipe: Recipe,
         recipes: Recipes,
-        pantry_ingredient: PantryIngredient,
+        pantry: Pantry,
         meal: Meal,
       }),
       compose(

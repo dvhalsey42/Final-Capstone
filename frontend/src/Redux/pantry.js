@@ -1,14 +1,15 @@
 import * as ActionTypes from "./actionTypes";
 
-export const PantryIngredient = (
+export const Pantry = (
   state = {
     pantry_id: "",
     ingredient_id: "",
+    ingredients: [],
   },
   action
 ) => {
   switch (action.type) {
-    case ActionTypes.ADD_PANTRY_INGREDIENT:
+    case ActionTypes.ADD_INGREDIENT_TO_PANTRY:
       return {
         ...state,
         ingredient_id: action.payload.ingredient_id,
@@ -18,7 +19,7 @@ export const PantryIngredient = (
     case ActionTypes.FETCH_PANTRY_INGREDIENTS:
       return {
         ...state,
-        pantry_ingredients: action.payload.pantry_ingredients,
+        ingredients: action.payload,
       };
 
     case ActionTypes.DELETE_PANTRY_INGREDIENT:

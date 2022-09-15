@@ -31,9 +31,9 @@ export const deleteIngredient = (ingredient) => ({
   payload: this.ingredient_name,
 });
 
-export const addPantryIngredient = (pantry_ingredient) => ({
-  type: ActionTypes.ADD_PANTRY_INGREDIENT,
-  payload: pantry_ingredient,
+export const addIngredientToPantry = (ingredient) => ({
+  type: ActionTypes.ADD_INGREDIENT_TO_PANTRY,
+  payload: this.ingredient_name,
 });
 
 export const fetchPantryIngredients = (pantry_ingredients) => ({
@@ -48,7 +48,6 @@ export const deletePantryIngredient = (pantry_ingredient) => ({
 
 export const createRecipe = (recipe) => ({
   type: ActionTypes.CREATE_RECIPE,
-  
   payload: recipe,
 });
 

@@ -58,15 +58,16 @@ public class JdbcPantryDao implements PantryDao{
     @Override
     public List<Ingredient> getPantryIngredients(int pantryId) {
         List<Ingredient> ingredients = new ArrayList<>();
-        String sql = "SELECT * FROM ingredients " +
-                "JOIN pantries_ingredients USING ingredient_id" +
-                "WHERE pantry_id = ?";
+        String sql = "SELECT * FROM ingredients JOIN pantries_ingredients " +
+                " ON ingredients.ingredient_id = pantries_ingredients.ingredient_id WHERE pantry_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, pantryId);
         while(results.next()){
             ingredients.add(mapRowToIngredient(results));
         }
         return ingredients;
     }
+
+
 
     @Override
     public boolean addIngredient(int pantryId, int ingredientId) {

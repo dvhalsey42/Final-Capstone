@@ -31,6 +31,7 @@ const mapStateToProps = (state) => {
   return {
     token: state.token,
     user: state.user,
+    pantry: state.pantry,
     recipe: state.recipe,
     recipes: state.recipes,
     meal: state.meal,
@@ -48,6 +49,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchIngredients: () => { dispatch(fetchIngredients())},
   createRecipe: () => {dispatch(createRecipe())},
   addIngredientToRecipe: () => {dispatch(addIngredientToRecipe())},
+  
 });
 
 
