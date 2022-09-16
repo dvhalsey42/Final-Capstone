@@ -30,7 +30,7 @@ const Home = () => {
           <Card
             className="pantry-card"
             style={{
-              backgroundImage: `url(${greenpantry})`,
+              
               width: "30rem",
             }}
           >
@@ -45,25 +45,6 @@ const Home = () => {
                 staple ingredients you always have in your kitchen
               </CardText>
               <Pantry></Pantry>
-            </CardBody>
-          </Card>
-        </div>
-        <div className="recipe">
-          <Card
-            className="recipe-card"
-            style={{
-              backgroundImage: `url(${greenpantry})`,
-              width: "30rem",
-            }}
-          >
-            <CardBody className="text-center pt-5">
-              <CardTitle tag="h5" className="pantry-card-title">
-                Your Recipes
-              </CardTitle>
-              <CardSubtitle className="pantry-card-subtitle" tag="h6">
-                What's on today's menu?
-              </CardSubtitle>
-              <CardText>check your recipe library</CardText>
             </CardBody>
           </Card>
         </div>

@@ -1,5 +1,6 @@
 package com.techelevator.controller;
 
+import com.techelevator.DTO.AddIngredientDTO;
 import com.techelevator.dao.PantryDao;
 import com.techelevator.dao.RecipeDao;
 import com.techelevator.model.Pantry;
@@ -26,7 +27,7 @@ public class PantryController {
     //public boolean createPantry(@Valid @RequestBody int userId){ return pantryDao.createPantry(userId); }
 
     @PostMapping("/pantry/add")
-    public boolean addIngredient(@Valid @RequestBody int pantryId, int ingredientId){return pantryDao.addIngredient(pantryId, ingredientId);}
+    public boolean addIngredient(@Valid @RequestBody AddIngredientDTO addIngredientDTO){return pantryDao.addIngredient(addIngredientDTO.getPantryId(), addIngredientDTO.getIngredientId());}
 
     @PostMapping("/pantry/addIngredient/{userId}")
     public boolean addIngredientToPantry(@PathVariable int userId, @Valid @RequestBody Pantry pantry) {
@@ -40,4 +41,5 @@ public class PantryController {
     public boolean deletePantryItem(@PathVariable int pantryId, @PathVariable int itemId) {
         return pantryDao.deletePantryItem(pantryId, itemId);
     }
+
 }

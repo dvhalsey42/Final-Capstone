@@ -21,6 +21,7 @@ import "../Recipes/MyRecipes.css";
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
 import IngredientList from "../Ingredients/IngredientList";
+import RecipeList from "./RecipeList";
 
 
 
@@ -154,6 +155,28 @@ class MyRecipes extends Component {
               </Form>
             </Card>
           </div>
+
+          <div style={{width: "20rem",}}>
+            <Card className="border-dark align-items-center">
+              <RecipeList parentCallback={this.handleCallback} />
+              <Form onSubmit={this.handleAddRecipe}>
+                { /* Figure out way to allow recipe lookup or recipe addition here*/ }
+                <Input 
+                  type="text"
+                  id="recipe"
+                  name="recipe_name"
+                  className="form-control"
+                  placeholder="Recipe"
+                  v-model="recipe.recipe_name"
+                  onChange={this.handleInputChange}
+                  required
+                />
+                <Button type="submit">Add to List</Button>
+              </Form>
+            </Card>
+          </div>
+
+
         </div>
         <footer className="text-center pt-5">
           <Link to="/home">Home | </Link>
