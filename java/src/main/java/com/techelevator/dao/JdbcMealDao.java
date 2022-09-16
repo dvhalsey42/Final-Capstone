@@ -25,7 +25,7 @@ public class JdbcMealDao implements MealDao{
 
     public List<Meal> getMyMeals(int userId) {
         List<Meal> meals = new ArrayList<Meal>();
-        String sql = "SELECT * FROM Meal WHERE user_id = ?";
+        String sql = "SELECT * FROM meals WHERE user_id = ?";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
             while(results.next()){
@@ -40,7 +40,7 @@ public class JdbcMealDao implements MealDao{
 
     public Meal getMealByMealId(int mealId){
         Meal meal = new Meal();
-        String sql = "SELECT * FROM Meal WHERE meal_id = ?";
+        String sql = "SELECT * FROM meals WHERE meal_id = ?";
         try{
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, mealId);
             if(results.next()){

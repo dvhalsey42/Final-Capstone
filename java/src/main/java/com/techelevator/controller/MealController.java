@@ -20,8 +20,8 @@ public class MealController {
     }
 
 
-    @GetMapping("/mymeals")
-    public List<Meal> getMyMeals(int userId) {
+    @GetMapping("/mymeals/get/{userId}")
+    public List<Meal> getMyMeals(@PathVariable int userId) {
         return mealDao.getMyMeals(userId);
     }
 
