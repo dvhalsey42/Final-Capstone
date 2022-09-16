@@ -77,9 +77,9 @@ class Main extends Component {
     return (
       <div>
         <Navbar xs={12} sm={3} md={2} lg={1}>
-          <NavbarBrand>
+          <Link to ="/home">
             <img className="logo" src={logo} alt="logo"></img>
-          </NavbarBrand>
+          </Link>
           {this.props.token.token !== undefined ? (
             <div className="top-section">
               <Col className=" bg-light border">
