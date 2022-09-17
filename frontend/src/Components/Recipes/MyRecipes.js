@@ -84,6 +84,33 @@ class MyRecipes extends Component {
   };
 
   render() {
+
+    const mystyle = {
+      color: "rgb(204,85,0)",
+      padding: "10px",
+      width: "20rem",
+      fontFamily: "cursive"
+    };
+
+    const footerStyle = {
+      backgroundColor: "#f0eae1",
+      borderTop: "1px solid #E7E7E7",
+      textAlign: "center",
+      padding: "20px",
+      position: "fixed",
+      left: "0",
+      bottom: "0",
+      height: "60px",
+      width: "100%"
+    };
+    const StyledButton ={
+      backgroundColor: "#FAC668",
+      width: 200,
+      height: "3rem",
+      border:"none",
+      color: "#556b2f",
+        };
+
     return (
       <div className="row">
         <div className="recipe-layout">
@@ -91,13 +118,15 @@ class MyRecipes extends Component {
             <Card
               body
               className="text-start my-2"
+              id="newRec"
               style={{
-                width: "20rem",
+                backgroundColor: "f0eae1"
+                //width: "20rem",
               }}
             >
-              <CardTitle tag="h5">Create Your Recipe</CardTitle>
-              <Form onSubmit={this.handleCreateRecipe}>
-                <FormGroup>
+              <CardTitle style={mystyle} id="h5">Create Your Recipe</CardTitle>
+              <Form  onSubmit={this.handleCreateRecipe}>
+                <FormGroup style={{color:"#92ab75"}}>
                   <Label for="recipe_name">Recipe Name</Label>
                   <Input
                     name="recipe_name"
@@ -105,7 +134,7 @@ class MyRecipes extends Component {
                     onChange={this.handleInputChange}
                   />
                 </FormGroup>
-                <FormGroup>
+                <FormGroup style={{color:"#92ab75"}}>
                   <Label for="instructions">Cooking Instructions</Label>
                   <Input
                     id="recipeText"
@@ -115,30 +144,29 @@ class MyRecipes extends Component {
                   />
                 </FormGroup>
                 <FormGroup tag="fieldset">
-                  <Label>What Kind of Recipe Is This?</Label>
+                  <Label style={{color:"#92ab75"}}>What Kind of Recipe Is This?</Label>
                   <FormGroup check>
                     <Input name="radio1" type="radio" />{" "}
-                    <Label check>Main</Label>
+                    <Label check style={{color:"#92ab75"}}>Main</Label>
                   </FormGroup>
                   <FormGroup check>
                     <Input name="radio1" type="radio" />{" "}
-                    <Label check>Side</Label>
+                    <Label check style={{color:"#92ab75"}}>Side</Label>
                   </FormGroup>
                   <FormGroup check>
                     <Input name="radio1" type="radio" />{" "}
-                    <Label check>Dessert</Label>
+                    <Label check style={{color:"#92ab75"}}>Dessert</Label>
                   </FormGroup>
                 </FormGroup>
-                <Button>Submit</Button>
+                <Button style={StyledButton}>Submit</Button>
               </Form>
             </Card>
           </div>
           <div
-            style={{
-              width: "20rem",
-            }}
+            style={mystyle}
+            
           >
-            <Card className="border-dark align-items-center">
+            <Card id="ingList" className="border-dark align-items-center">
               <IngredientList />
               <Form onSubmit={this.handleAddIngredient}>
                 <Input
@@ -151,13 +179,13 @@ class MyRecipes extends Component {
                   onChange={this.handleInputChange}
                   required
                 />
-                <Button type="submit">Add To List</Button>
+                <Button type="submit" style={StyledButton}>Add To List</Button>
               </Form>
             </Card>
           </div>
 
-          <div style={{width: "20rem",}}>
-            <Card className="border-dark align-items-center">
+          <div style={mystyle}>
+            <Card id="recList" className="border-dark align-items-center">
               <RecipeList parentCallback={this.handleCallback} />
               <Form onSubmit={this.handleAddRecipe}>
                 { /* Figure out way to allow recipe lookup or recipe addition here*/ }
@@ -171,16 +199,16 @@ class MyRecipes extends Component {
                   onChange={this.handleInputChange}
                   required
                 />
-                <Button type="submit">Add to List</Button>
+                <Button type="submit" style={StyledButton}>Add to List</Button>
               </Form>
             </Card>
           </div>
 
 
         </div>
-        <footer className="text-center pt-5">
-          <Link to="/home">Home | </Link>
-          <Link to="/login" onClick={this.handleLogout}>
+        <footer className="text-center pt-5" style={footerStyle}>
+          <Link to="/home" style={{color:"#556b2f"}}>Home | </Link>
+          <Link to="/login" onClick={this.handleLogout}  style={{color:"#556b2f"} }>
             Logout
           </Link>
         </footer>
