@@ -78,7 +78,7 @@ class Main extends Component {
       <div>
         <Navbar xs={12} sm={3} md={2} lg={1}>
           <Link to ="/home">
-            <img className="logo" src={logo} alt="logo"></img>
+            <img className="logo" src={logo} alt="logo" width={"300"} height={"150"}></img>
           </Link>
           {this.props.token.token !== undefined ? (
             <div className="top-section">
@@ -103,7 +103,7 @@ class Main extends Component {
                       </NavItem>
                     </DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem>Reset</DropdownItem>
+                    <DropdownItem style={{color:"#92ab75"}}>Reset</DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </Col>
@@ -130,7 +130,7 @@ class Main extends Component {
                       </NavItem>
                     </DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem>Reset</DropdownItem>
+                    <DropdownItem style={{color:"#92ab75"}}>Reset</DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </Col>
@@ -161,14 +161,14 @@ class Main extends Component {
                       </NavItem>
                     </DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem>Reset</DropdownItem>
+                    <DropdownItem style={{color:"#92ab75"}}>Reset</DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </Col>
               <Redirect to="/home" />
             </div>
           ) : (
-            <Link to="/login">Home | </Link>
+            <Link to="/login" style={{color:"#556b2f"}}>Home | </Link>
           )}
         </Navbar>
 {/* below is where you can edit/add the rounting of front-end endpoints to their components */}

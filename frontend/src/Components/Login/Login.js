@@ -43,10 +43,18 @@ class Login extends Component {
   };
 
   render() {
+
+    const StyledButton ={
+  backgroundColor: "#f0eae1",
+  width: 400,
+  height: "3rem",
+  border:"none",
+  color: "#556b2f",
+    };
     return (
       <div>
         <div className="login-form">
-          <h1 className="text-center pt-5">Let's Eat</h1>
+          <h1 className="text-center pt-5" style={{color:"#556b2f"}}>Let's Eat</h1>
           <div className="row justify-content-center align-items-center">
             <label className="sr-only">Username</label>
 
@@ -75,11 +83,11 @@ class Login extends Component {
           </div>
 
           <div className="row">
-            <Link className="register-link" to="/register">
+            <Link className="register-link" to="/register" style={{color:"#556b2f"}} id="register">
               Need an account?
             </Link>
             {"  "}
-            <button type="submit" onClick={this.handleLogin}>
+            <button type="submit" onClick={this.handleLogin} style={StyledButton}>
               Sign In
             </button>
           </div>

@@ -19,6 +19,18 @@ const Home = () => {
     this.props.deleteUser();
   };
 
+  const footerStyle = {
+    backgroundColor: "#f0eae1",
+    borderTop: "1px solid #E7E7E7",
+    textAlign: "center",
+    padding: "20px",
+    position: "fixed",
+    left: "0",
+    bottom: "0",
+    height: "60px",
+    width: "100%"
+  };
+
   return (
     <div className="row">
       <div className="text-center pt-5">
@@ -50,13 +62,14 @@ const Home = () => {
         </div>
       </div>
 
-      <footer className="text-center pt-5">
-        <Link to="/home">Home | </Link>
-        <Link to="/login" onClick={handleLogout}>
+      <footer className="text-center pt-5" style={footerStyle}>
+        <Link to="/home" style={{color:"#556b2f"}}>Home | </Link>
+        <Link to="/login" onClick={handleLogout} style={{color:"#556b2f"}}>
           Logout
         </Link>
       </footer>
     </div>
+  
   );
 };
 
