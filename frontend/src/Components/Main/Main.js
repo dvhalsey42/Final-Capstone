@@ -23,7 +23,7 @@ import "../Main/Main.css";
 import Recipe from "../Recipes/MyRecipes";
 import MyMealPlans from "../MealPlans/MyMealPlan";
 import MyMeals from "../Meals/MyMeals";
-import logo from "../images/DummyLogo 2.png";
+import logo from "../images/transparentlogo.png";
 import Ingredient from "../Ingredients/Ingredient";
 import MyRecipes from "../Recipes/MyRecipes";
 
