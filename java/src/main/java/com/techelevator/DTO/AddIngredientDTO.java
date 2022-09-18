@@ -1,11 +1,23 @@
 package com.techelevator.DTO;
 
+import com.techelevator.model.Ingredient;
+
+import java.util.List;
+
 public class AddIngredientDTO {
 
     private int pantryId;
-    private int ingredientId;
+    private List<Ingredient> ingredients;
 
-   public AddIngredientDTO() {};
+    public AddIngredientDTO() {};
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
 
     public int getPantryId() {
         return pantryId;
@@ -15,11 +27,5 @@ public class AddIngredientDTO {
         this.pantryId = pantryId;
     }
 
-    public int getIngredientId() {
-        return ingredientId;
-    }
 
-    public void setIngredientId(int ingredientId) {
-        this.ingredientId = ingredientId;
-    }
 }

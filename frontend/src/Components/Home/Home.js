@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import {
   Card,
   CardBody,
@@ -11,14 +11,36 @@ import "../Home/Home.css";
 import Pantry from "../Pantry/Pantry";
 import greenpantry from "../images/greenpantry.png";
 import RecipeList from "../Recipes/NewRecipe";
+import { Component } from "react";
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+    user: state.user,
+    pantry: state.pantry,
+    recipe: state.recipe,
+    recipes: state.recipes,
+    meal: state.meal,
+  };
+};
 
 
-const Home = () => {
-  const handleLogout = () => {
+
+class Home extends Component {
+ constructor(props) {
+    super(props);
+    this.state = {
+      user: this.props.user,
+    };
+ }
+
+  handleLogout = () => {
     this.props.addToken("");
     this.props.deleteUser();
   };
 
+  render() {
   return (
     <div className="row">
       <div className="text-center pt-5">
@@ -44,7 +66,7 @@ const Home = () => {
               <CardText>
                 staple ingredients you always have in your kitchen
               </CardText>
-              <Pantry></Pantry>
+              <Pantry ></Pantry>
             </CardBody>
           </Card>
         </div>
@@ -52,12 +74,14 @@ const Home = () => {
 
       <footer className="text-center pt-5">
         <Link to="/home">Home | </Link>
-        <Link to="/login" onClick={handleLogout}>
+        <Link to="/login" onClick={this.handleLogout}>
           Logout
         </Link>
       </footer>
     </div>
   );
+          }
 };
 
-export default Home;
+
+export default withRouter(connect(mapStateToProps)(Home));

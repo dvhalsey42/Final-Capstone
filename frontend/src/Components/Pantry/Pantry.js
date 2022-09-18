@@ -2,9 +2,14 @@ import { useState, Component } from "react";
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
 import { Form, Label, Col, Button, Input, Row } from "reactstrap";
-import { addIngredient, addToken, fetchIngredients } from "../../Redux/actionCreators";
+import {
+  addIngredient,
+  addToken,
+  fetchIngredients,
+} from "../../Redux/actionCreators";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import IngredientList from "../Ingredients/IngredientList";
 
 // MAPPING TO THE ACTION METHODS IN THE REDUX
 const mapDispatchToProps = (dispatch) => ({
@@ -13,23 +18,35 @@ const mapDispatchToProps = (dispatch) => ({
   fetchIngredients: () => dispatch(fetchIngredients()),
 });
 
-
 class Pantry extends Component {
 
-// ASK ABOUT HOW TO MODEL THE DATA OBJECT FOR JOIN TABLES
+
+  // ASK ABOUT HOW TO MODEL THE DATA OBJECT FOR JOIN TABLES
   handleAddPantryIngredient = async () => {
     const data = {
-      ingredient_id: "",
-      ingredient_name: this.state.ingredient_name,
-      category: "",
+      user_id: "",
+      ingredients: [],
     };
 
-    const addIngredient = await axios.post(
-      baseUrl + "/pantry/add",
-      data
+    const addIngredient = await axios.post(baseUrl + "/pantry/add", data);
+
+    await this.props.dispatch(addIngredient(data.ingredients));
+  };
+
+  handleFetchIngredients = async () => {
+    const ingredientsWithToken = await axios.get(
+      baseUrl + "/mypantry/{pantryId}"
     );
 
-    await this.props.dispatch(addIngredient(data.ingredient_name));
+    await this.props.dispatch(fetchIngredients(ingredientsWithToken.data));
+
+    this.setState({ ingredients: ingredientsWithToken.data });
+
+    console.log(ingredientsWithToken.data);
+  };
+
+  handleCallback = (childData) => {
+    this.setState({ ingredients: childData });
   };
 
   handleInputChange = (event) => {
@@ -40,57 +57,42 @@ class Pantry extends Component {
   };
 
   render() {
-  return (
-    <div>
-      <div className="mb-3 mx-auto">
-        <button
-          className="toggle"
-          style={{ backgroundColor: "#F0EAE1", textDecorationColor: "#92AB75" }}
-        >
-          My Pantry
-        </button>
-            <button
-              className="toggle"
-              style={{
-                backgroundColor: "#F0EAE1",
-                textDecorationColor: "#92AB75",
-              }}
-            >
-              Add More Staples
-            </button>
-           
-              <div className="content">
-                <Form>
-                  <Row className="row-cols-lg-auto g-3 align-items-center">
-                    <Col>
-                      <Label className="visually-hidden" for="ingredient">
-                        Ingredient
-                      </Label>
-                      <Input
-                        type="text"
-                        id="ingredient"
-                        name="ingredient_name"
-                        class="form-control"
-                        placeholder="Ingredient"
-                        v-model="ingredient.ingredient_name"
-                        onChange={this.handleInputChange}
-                        required
-                      />
-                    </Col>
-                    <Col>
-                      <Button type="submit" onClick={this.handleAddPantryIngredient}>
-                        Submit
-                      </Button>
-                    </Col>
-                  </Row>
-                </Form>
-              </div>
-          
+    return (
+      <div>
+        <div className="mb-3 mx-auto">
+          <IngredientList />
+          <div className="content">
+            <Form>
+              <Row className="row-cols-lg-auto g-3 align-items-center">
+                <Col>
+                  <Label className="visually-hidden" for="ingredient">
+                    Ingredient
+                  </Label>
+                  <Input
+                    type="text"
+                    id="ingredient"
+                    name="ingredient_name"
+                    class="form-control"
+                    placeholder="Ingredient"
+                    v-model="ingredient.ingredient_name"
+                    onChange={this.handleInputChange}
+                    required
+                  />
+                </Col>
+                <Col>
+                  <Button
+                    type="submit"
+                    onClick={this.handleAddPantryIngredient}
+                  >
+                    Submit
+                  </Button>
+                </Col>
+              </Row>
+            </Form>
           </div>
-      
+        </div>
       </div>
-    
-  );
- }
+    );
+  }
 }
 export default withRouter(connect(mapDispatchToProps)(Pantry));

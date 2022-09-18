@@ -4,7 +4,7 @@ import { useState } from "react";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Home from "../Home/Home";
-import { addToken, deleteUser, fetchIngredients,createRecipe, addIngredientToRecipe } from "../../Redux/actionCreators";
+import { addToken, deleteUser, fetchIngredients,createRecipe, addIngredientToRecipe, addIngredientToPantry, fetchPantryIngredients } from "../../Redux/actionCreators";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {
@@ -16,11 +16,9 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Row,
   Col,
 } from "reactstrap";
 import "../Main/Main.css";
-import Recipe from "../Recipes/MyRecipes";
 import MyMealPlans from "../MealPlans/MyMealPlan";
 import MyMeals from "../Meals/MyMeals";
 import logo from "../images/DummyLogo 2.png";
@@ -49,7 +47,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchIngredients: () => { dispatch(fetchIngredients())},
   createRecipe: () => {dispatch(createRecipe())},
   addIngredientToRecipe: () => {dispatch(addIngredientToRecipe())},
-  
+  addIngredientToPantry: () => {dispatch(addIngredientToPantry())},
+  fetchPantryIngredients: () => {dispatch(fetchPantryIngredients())},
 });
 
 
@@ -178,7 +177,7 @@ class Main extends Component {
           <Route
             path="/home"
             component={
-              this.props.token.token !== undefined ? () => <Home /> : null
+              this.props.token.token !== undefined ? () => <Home user={this.props.user.id} /> : null
             }
           />
           <Route
