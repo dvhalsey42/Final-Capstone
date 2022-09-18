@@ -27,6 +27,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchIngredients: () => dispatch(fetchIngredients()),
 });
 
+
+
 // PARENT COMPONENT THAT CARRIES OUT BASIC CRUD & RECIEVES INGREDIENTLIST AS CHILD
 class Ingredient extends Component {
   constructor(props) {
@@ -45,6 +47,8 @@ class Ingredient extends Component {
     this.props.deleteUser();
   };
 
+  
+
   // ADD INGREDIENT LOGIC
   handleAddIngredient = async (e) => {
     e.preventDefault();
@@ -62,21 +66,22 @@ class Ingredient extends Component {
     await this.props.dispatch(ingredientWithToken(this.data.ingredient_name));
   };
 
-  // INGREDIENT INPUT 
+  // INGREDIENT INPUT
   handleInputChange = (event) => {
     event.preventDefault();
+
     this.setState({
       [event.target.name]: event.target.value,
     });
   };
 
-  
-  
+
+ 
+
   render() {
     return (
       <div
         style={{
-         
           width: "20rem",
         }}
       >
@@ -93,9 +98,7 @@ class Ingredient extends Component {
               onChange={this.handleInputChange}
               required
             />
-            <Button type="submit" >
-              Add To List
-            </Button>
+            <Button type="submit">Add To List</Button>
           </Form>
         </Card>
       </div>
