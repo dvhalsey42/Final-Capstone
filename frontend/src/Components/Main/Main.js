@@ -21,7 +21,7 @@ import {
 import "../Main/Main.css";
 import MyMealPlans from "../MealPlans/MyMealPlan";
 import MyMeals from "../Meals/MyMeals";
-import logo from "../images/DummyLogo 2.png";
+import logo from "../images/transparentlogo.png";
 import Ingredient from "../Ingredients/Ingredient";
 import MyRecipes from "../Recipes/MyRecipes";
 
@@ -76,9 +76,9 @@ class Main extends Component {
     return (
       <div>
         <Navbar xs={12} sm={3} md={2} lg={1}>
-          <NavbarBrand>
-            <img className="logo" src={logo} alt="logo"></img>
-          </NavbarBrand>
+          <Link to ="/home">
+            <img className="logo" src={logo} alt="logo" width={"300"} height={"150"}></img>
+          </Link>
           {this.props.token.token !== undefined ? (
             <div className="top-section">
               <Col className=" bg-light border">
@@ -102,7 +102,7 @@ class Main extends Component {
                       </NavItem>
                     </DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem>Reset</DropdownItem>
+                    <DropdownItem style={{color:"#92ab75"}}>Reset</DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </Col>
@@ -129,7 +129,7 @@ class Main extends Component {
                       </NavItem>
                     </DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem>Reset</DropdownItem>
+                    <DropdownItem style={{color:"#92ab75"}}>Reset</DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </Col>
@@ -160,14 +160,14 @@ class Main extends Component {
                       </NavItem>
                     </DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem>Reset</DropdownItem>
+                    <DropdownItem style={{color:"#92ab75"}}>Reset</DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </Col>
               <Redirect to="/home" />
             </div>
           ) : (
-            <Link to="/login">Home | </Link>
+            <Link to="/login" style={{color:"#556b2f"}}>Home | </Link>
           )}
         </Navbar>
 {/* below is where you can edit/add the rounting of front-end endpoints to their components */}
@@ -190,7 +190,7 @@ class Main extends Component {
             path="/mymealplans"
             component={
               this.props.token.token !== undefined
-                ? () => <MyMealPlans />
+                ? () => <MyMealPlans user={this.props.user.id}/>
                 : null
             }
           />

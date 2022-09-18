@@ -40,6 +40,8 @@ class MyMeals extends Component {
     this.setState({mealRecipes: childData})
   }
 
+  
+
   handleLogout = () => {
     this.props.addToken("");
     this.props.deleteUser();
@@ -72,7 +74,21 @@ class MyMeals extends Component {
     });
   };
 
+  
+
   render() {
+
+    const footerStyle = {
+      backgroundColor: "#f0eae1",
+      borderTop: "1px solid #E7E7E7",
+      textAlign: "center",
+      padding: "20px",
+      position: "fixed",
+      left: "0",
+      bottom: "0",
+      height: "60px",
+      width: "100%"
+    };
     return (
       <div className="row">
         <div className="meal-layout">
@@ -117,9 +133,9 @@ class MyMeals extends Component {
         </div>
         
 
-        <footer className="text-center pt-5">
-          <Link to="/home">Home | </Link>
-          <Link to="/login" onClick={this.handleLogout}>
+        <footer className="text-center pt-5" style={footerStyle}>
+          <Link to="/home" style={{color:"#556b2f"}}>Home | </Link>
+          <Link to="/login" onClick={this.handleLogout} style={{color:"#556b2f"}}>
             Logout
           </Link>
         </footer>

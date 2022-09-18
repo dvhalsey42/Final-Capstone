@@ -40,7 +40,22 @@ class Home extends Component {
     this.props.deleteUser();
   };
 
+<<<<<<< HEAD
   render() {
+=======
+  const footerStyle = {
+    backgroundColor: "#f0eae1",
+    borderTop: "1px solid #E7E7E7",
+    textAlign: "center",
+    padding: "20px",
+    position: "fixed",
+    left: "0",
+    bottom: "0",
+    height: "60px",
+    width: "100%"
+  };
+
+>>>>>>> d31be288e63392e6bb53542011d9ddd5fe837af1
   return (
     <div className="row">
       <div className="text-center pt-5">
@@ -72,13 +87,20 @@ class Home extends Component {
         </div>
       </div>
 
+<<<<<<< HEAD
       <footer className="text-center pt-5">
         <Link to="/home">Home | </Link>
         <Link to="/login" onClick={this.handleLogout}>
+=======
+      <footer className="text-center pt-5" style={footerStyle}>
+        <Link to="/home" style={{color:"#556b2f"}}>Home | </Link>
+        <Link to="/login" onClick={handleLogout} style={{color:"#556b2f"}}>
+>>>>>>> d31be288e63392e6bb53542011d9ddd5fe837af1
           Logout
         </Link>
       </footer>
     </div>
+  
   );
           }
 };
