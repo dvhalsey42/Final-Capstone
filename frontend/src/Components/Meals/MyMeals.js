@@ -22,6 +22,7 @@ import RecipeList from "../Recipes/RecipeList";
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
 import "../Meals/MyMeals.css"
+import MealList from "./MealList";
 
 class MyMeals extends Component {
   constructor(props) {
@@ -129,7 +130,28 @@ class MyMeals extends Component {
                 <Button type="submit">Add to List</Button>
               </Form>
             </Card>
+
+            
           </div>
+          <div style={{width: "20rem",}}>
+            <Card className="border-dark align-items-center">
+              <MealList parentCallback={this.handleCallback} />
+              <Form>
+                <Input 
+                  type="text"
+                  id="meals"
+                  name="meal_name"
+                  className="form-control"
+                  placeholder="Meal"
+                  v-model="meal.meal_name"
+                  onChange={this.handleInputChange}
+                  required
+                />                
+                <Button type="submit">Add to List</Button>
+              </Form>
+            </Card>
+          </div>
+
         </div>
         
 
