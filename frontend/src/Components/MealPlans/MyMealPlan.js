@@ -101,10 +101,9 @@ class MyMealPlans extends Component {
                 <Button>Submit</Button>
               </Form>
             </Card>
-
-            
-        
           </div>
+
+
           <div style={{width: "20rem",}}>
             <Card className="border-dark align-items-center">
               <MealList user_id = {this.props.user} parentCallback={this.handleCallback} />
@@ -125,6 +124,24 @@ class MyMealPlans extends Component {
             </Card>
           </div>
         </div>
+
+        <Card className="border-dark align-items-center">
+    <MealList parentCallback={this.handleCallback} />
+    <Form onSubmit={this.handleAddMeal}>
+                { /* Figure out way to allow recipe lookup or recipe addition here*/ }
+    <Input 
+        type="text"
+        id="meal"
+        name="meal_name"
+        className="form-control"
+        placeholder="Meal"
+        v-model="meal.meal_name"
+        onChange={this.handleInputChange}
+        required
+    />
+    <Button type="submit">Add to List</Button>
+    </Form>
+</Card>
         
 
         <footer className="text-center pt-5" style={footerStyle}>
