@@ -1,4 +1,7 @@
-body {
+body, html {
+  font-family: 'Cabin', sans-serif;
+font-family: 'Reem Kufi Ink', sans-serif;
+color: #556B30;
   margin: 0;
 }
 

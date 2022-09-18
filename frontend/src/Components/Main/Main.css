@@ -1,5 +1,6 @@
 .logo {
   max-width: 100rem;
+  margin-right: 45rem;
 }
 
 .menu,
@@ -18,11 +19,9 @@
 
 .top-section {
   display: flex;
-  margin-right: 50px;
 }
 
-nav{
-  width: 60%;
+nav {
+  width: 20%;
   font-size: larger;
 }
-

@@ -26,8 +26,8 @@ public class PantryController {
     //@PostMapping("/pantry/create")
     //public boolean createPantry(@Valid @RequestBody int userId){ return pantryDao.createPantry(userId); }
 
-    @PostMapping("/pantry/add")
-    public boolean addIngredient(@Valid @RequestBody AddIngredientDTO addIngredientDTO){return pantryDao.addIngredient(addIngredientDTO.getPantryId(), addIngredientDTO.getIngredientId());}
+//    @PostMapping("/pantry/add")
+//    public boolean addIngredient(@Valid @RequestBody AddIngredientDTO addIngredientDTO){return addIngredientDTO.getPantryId();}
 
     @PostMapping("/pantry/addIngredient/{userId}")
     public boolean addIngredientToPantry(@PathVariable int userId, @Valid @RequestBody Pantry pantry) {
@@ -37,7 +37,7 @@ public class PantryController {
     @RequestMapping(path="/mypantry/{pantryId}", method= RequestMethod.GET)
     public List<Ingredient> getPantryIngredients(@PathVariable int pantryId){return pantryDao.getPantryIngredients(pantryId);}
 
-    @DeleteMapping("/mypantry/{pantryId}/delete/{itemId}")
+    @DeleteMapping("/mypantry/delete")
     public boolean deletePantryItem(@PathVariable int pantryId, @PathVariable int itemId) {
         return pantryDao.deletePantryItem(pantryId, itemId);
     }

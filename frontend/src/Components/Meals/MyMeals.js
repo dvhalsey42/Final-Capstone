@@ -32,7 +32,6 @@ class MyMeals extends Component {
       user_id: this.props.user,
       meal_name: "",
       recipes: [],
-      mealRecipes: [],
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -40,7 +39,6 @@ class MyMeals extends Component {
   handleCallback = (childData) => {
     this.setState({mealRecipes: childData})
   }
-
   
 
   handleLogout = () => {

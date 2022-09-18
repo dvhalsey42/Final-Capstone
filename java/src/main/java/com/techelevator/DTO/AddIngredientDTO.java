@@ -1,25 +1,26 @@
 package com.techelevator.DTO;
 
+import com.techelevator.model.Ingredient;
+
+import java.util.List;
+
 public class AddIngredientDTO {
 
+    private int userId;
     private int pantryId;
-    private int ingredientId;
+    private List<Ingredient> ingredients;
 
-   public AddIngredientDTO() {};
+    public AddIngredientDTO() {};
 
-    public int getPantryId() {
-        return pantryId;
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 
-    public void setPantryId(int pantryId) {
-        this.pantryId = pantryId;
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
-    public int getIngredientId() {
-        return ingredientId;
-    }
 
-    public void setIngredientId(int ingredientId) {
-        this.ingredientId = ingredientId;
-    }
+
+
 }

@@ -42,21 +42,23 @@ class IngredientList extends Component {
     console.log(ingredientsWithToken.data);
   };
 
-  handleAddIngredientToRecipe =  (ingredient) => {
+  handleAddIngredientToRecipe = (ingredient) => {
+    var newIngredientList = this.state.ingredients;
+    newIngredientList.push(ingredient);
     this.setState({
       ...this.state,
-      ingredients: this.ingredient.push,
+      ingredients: newIngredientList,
     });
-    
+    this.props.parentCallback(newIngredientList);
     console.log(this.state);
-  }
+  };
 
   // REMOVE LOGIC- THIS STILL NEEDS AN API CALL ENDPOINT FROM BACK-END
   removeIngredient(ingredient_name) {
     this.setState({
       ingredients: this.state.ingredients.filter(
         (ingredient) => ingredient !== ingredient_name
-      )
+      ),
     });
   }
 
@@ -88,7 +90,7 @@ class IngredientList extends Component {
                       this.handleAddIngredientToRecipe(ingredient);
                     }}
                   >
-                    + to recipe
+                    +
                   </button>
                 </ListGroupItem>
               );

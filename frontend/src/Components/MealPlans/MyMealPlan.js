@@ -3,7 +3,7 @@ import {
   addIngredient,
   addToken,
   fetchIngredients,
-  createMeal
+  createMeal,
 } from "../../Redux/actionCreators";
 import {
   Form,
@@ -21,7 +21,7 @@ import NewRecipe from "../Recipes/NewRecipe";
 import RecipeList from "../Recipes/RecipeList";
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
-import "../Meals/MyMeals.css"
+import "../Meals/MyMeals.css";
 import MealList from "../Meals/MealList";
 
 
@@ -39,13 +39,13 @@ class MyMealPlans extends Component {
   }
 
   handleCallback = (childData) => {
-    this.setState({meals : childData})
-  }
+    this.setState({ meals: childData });
+  };
 
   handleLogout = () => {
     this.props.addToken("");
     this.props.deleteUser();
-  }
+  };
 
   handleCreateMealPlan = async (e) => {
     e.preventDefault();
@@ -54,12 +54,9 @@ class MyMealPlans extends Component {
       user_id: this.state.user_id,
       meal_plan_name: this.state.meal_plan_name,
       meals: this.state.meals,
-    }
+    };
 
-    await axios.post(
-      baseUrl + "/mealplan/create",
-      data
-    );
+    await axios.post(baseUrl + "/mealplan/create", data);
   };
 
   handleInputChange = (event) => {
@@ -71,7 +68,6 @@ class MyMealPlans extends Component {
   };
 
   render() {
-
     const footerStyle = {
       backgroundColor: "#f0eae1",
       borderTop: "1px solid #E7E7E7",
@@ -81,7 +77,7 @@ class MyMealPlans extends Component {
       left: "0",
       bottom: "0",
       height: "60px",
-      width: "100%"
+      width: "100%",
     };
     return (
       <div className="row">
@@ -92,23 +88,24 @@ class MyMealPlans extends Component {
               <Form onSubmit={this.handleCreateMealPlan}>
                 <FormGroup>
                   <Label for="meal_plan_name">Meal Plan Name</Label>
-                  <Input 
-                    name="meal_plan_name" 
-                    placeholder="Meal Plan Name" 
-                    onChange={this.handleInputChange}>
-                  </Input>
+                  <Input
+                    name="meal_plan_name"
+                    placeholder="Meal Plan Name"
+                    onChange={this.handleInputChange}
+                  ></Input>
                 </FormGroup>
                 <Button>Submit</Button>
               </Form>
             </Card>
-
-            
-        
           </div>
-          <div style={{width: "20rem",}}>
+
+          <div style={{ width: "20rem" }}>
             <Card className="border-dark align-items-center">
-              <MealList user_id = {this.props.user} parentCallback={this.handleCallback} />
-              { /*<Form onSubmit={this.handleAddRecipe}>
+              <MealList
+                user_id={this.props.user}
+                parentCallback={this.handleCallback}
+              />
+              {/*<Form onSubmit={this.handleAddRecipe}>
                 Figure out way to allow recipe lookup or recipe addition here
                 <Input 
                   type="text"
@@ -125,22 +122,41 @@ class MyMealPlans extends Component {
             </Card>
           </div>
         </div>
-        
+
+        <Card className="border-dark align-items-center">
+          <MealList parentCallback={this.handleCallback} />
+         
+          <Form onSubmit={this.handleAddMeal}>
+            {/* Figure out way to allow recipe lookup or recipe addition here*/}
+            <Input
+              type="text"
+              id="meal"
+              name="meal_name"
+              className="form-control"
+              placeholder="Meal"
+              v-model="meal.meal_name"
+              onChange={this.handleInputChange}
+              required
+            />
+            <Button type="submit">Add to List</Button>
+          </Form>
+        </Card>
 
         <footer className="text-center pt-5" style={footerStyle}>
-          <Link to="/home" style={{color:"#556b2f"}}>Home | </Link>
-          <Link to="/login" onClick={this.handleLogout} style={{color:"#556b2f"}}>
+          <Link to="/home" style={{ color: "#556b2f" }}>
+            Home |{" "}
+          </Link>
+          <Link
+            to="/login"
+            onClick={this.handleLogout}
+            style={{ color: "#556b2f" }}
+          >
             Logout
           </Link>
         </footer>
       </div>
     );
   }
-
-
-
 }
 
-
 export default withRouter(connect()(MyMealPlans));
-
