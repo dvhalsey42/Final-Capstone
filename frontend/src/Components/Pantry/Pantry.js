@@ -19,12 +19,24 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class Pantry extends Component {
+  constructor(props) {
+    super(props);
 
+    this.state = {
+     pantry_id: "",
+    user_id: this.props.user,
+    ingredients: [],
+    };
+    
+  }
+
+ 
 
   // ASK ABOUT HOW TO MODEL THE DATA OBJECT FOR JOIN TABLES
   handleAddPantryIngredient = async () => {
     const data = {
-      user_id: "",
+      
+      user_id: this.state.user_id,
       ingredients: [],
     };
 
@@ -35,7 +47,7 @@ class Pantry extends Component {
 
   handleFetchIngredients = async () => {
     const ingredientsWithToken = await axios.get(
-      baseUrl + "/mypantry/{pantryId}"
+      baseUrl + "/pantry/addIngredient/{userId}"
     );
 
     await this.props.dispatch(fetchIngredients(ingredientsWithToken.data));

@@ -7,6 +7,7 @@ import { baseUrl } from "../../Shared/baseUrl";
 import axios from "axios";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import "../Login/Login.css";
+import logo from "../images/transparentlogo.png"
 
 const mapDispatchToProps = (dispatch) => ({
   addToken: () => dispatch(addToken()),
@@ -54,7 +55,10 @@ class Login extends Component {
     return (
       <div>
         <div className="login-form">
-          <h1 className="text-center pt-5" style={{color:"#556b2f"}}>Let's Eat</h1>
+          <div className="text-center pt-5">
+            <h1 style={{ color: "#556b2f" }}>Let's Eat</h1>
+            <p>PLAN PREP ENJOY</p>
+          </div>
           <div className="row justify-content-center align-items-center">
             <label className="sr-only">Username</label>
 
@@ -83,11 +87,20 @@ class Login extends Component {
           </div>
 
           <div className="row">
-            <Link className="register-link" to="/register" style={{color:"#556b2f"}} id="register">
+            <Link
+              className="register-link"
+              to="/register"
+              style={{ color: "#556b2f" }}
+              id="register"
+            >
               Need an account?
             </Link>
             {"  "}
-            <button type="submit" onClick={this.handleLogin} style={StyledButton}>
+            <button
+              type="submit"
+              onClick={this.handleLogin}
+              
+            >
               Sign In
             </button>
           </div>

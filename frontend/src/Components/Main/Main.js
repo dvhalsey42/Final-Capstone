@@ -24,6 +24,7 @@ import MyMeals from "../Meals/MyMeals";
 import logo from "../images/transparentlogo.png";
 import Ingredient from "../Ingredients/Ingredient";
 import MyRecipes from "../Recipes/MyRecipes";
+import LandingPage from "../Non-Protected/LandingPage";
 
 const mapStateToProps = (state) => {
   return {
@@ -76,128 +77,100 @@ class Main extends Component {
     return (
       <div>
         <Navbar xs={12} sm={3} md={2} lg={1}>
-          <Link to ="/home">
-            <img className="logo" src={logo} alt="logo" width={"300"} height={"150"}></img>
-          </Link>
-          {this.props.token.token !== undefined ? (
-            <div className="top-section">
-              <Col className=" bg-light border">
-                <UncontrolledDropdown>
-                  <DropdownToggle nav caret className="menu">
-                    Recipes
-                  </DropdownToggle>
-                  <DropdownMenu right className="sub-menu">
-                    <DropdownItem className="sub-item">
-                      <NavItem className="links">
-                        <NavLink className="links" tag={Link} to="/myrecipes">
-                          Create New Recipe
-                        </NavLink>
-                      </NavItem>
-                    </DropdownItem>
-                    <DropdownItem className="sub-item">
-                      <NavItem>
-                        <NavLink className="links" tag={Link} to="/myrecipes">
-                          Recipe Library
-                        </NavLink>
-                      </NavItem>
-                    </DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem style={{color:"#92ab75"}}>Reset</DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              </Col>
-              <Col className="tabs bg-light border">
-                <UncontrolledDropdown>
-                  <DropdownToggle nav caret className="menu">
-                    Meals
-                  </DropdownToggle>
-                  <DropdownMenu right className="sub-menu">
-                    <DropdownItem className="sub-item">
-                      <NavItem>
-                        <NavItem>
-                          <NavLink className="links" tag={Link} to="/mymeals">
-                            My Meals
+          <div className="top-section">
+            <Link to="/home" className="logo">
+              <img src={logo} alt="logo" width={"230"} height={"225"}></img>
+            </Link>
+
+            {this.props.token.token !== undefined ? (
+              <div>
+                <Col className="bg-light border">
+                  <UncontrolledDropdown className="">
+                    <DropdownToggle nav caret className="menu">
+                      MENU
+                    </DropdownToggle>
+                    <DropdownMenu right className="sub-menu">
+                      <DropdownItem className="sub-item">
+                        <NavItem className="links">
+                          <NavLink className="links" tag={Link} to="/myrecipes">
+                            Recipes
                           </NavLink>
                         </NavItem>
-                      </NavItem>
-                    </DropdownItem>
-                    <DropdownItem className="sub-item">
-                      <NavItem>
-                        <NavLink className="links" tag={Link} to="/mymeals">
-                          Create New Meal
-                        </NavLink>
-                      </NavItem>
-                    </DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem style={{color:"#92ab75"}}>Reset</DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              </Col>
-              <Col className="tabs bg-light border">
-                <UncontrolledDropdown>
-                  <DropdownToggle nav caret className="menu">
-                    Meal Plans
-                  </DropdownToggle>
-                  <DropdownMenu right className="sub-menu">
-                    <DropdownItem className="sub-item">
-                      <NavItem>
+                      </DropdownItem>
+                      <DropdownItem className="sub-item">
+                        <NavItem>
+                          <NavLink className="links" tag={Link} to="/mymeals">
+                            Meals
+                          </NavLink>
+                        </NavItem>
+                      </DropdownItem>
+                      <DropdownItem className="sub-item">
                         <NavItem>
                           <NavLink
                             className="links"
                             tag={Link}
                             to="/mymealplans"
                           >
-                            Saved Meal Plans
+                            Meal Plans
                           </NavLink>
                         </NavItem>
-                      </NavItem>
-                    </DropdownItem>
-                    <DropdownItem className="sub-item">
-                      <NavItem className="links">
-                        <NavLink className="links" tag={Link} to="/mymealplans">
-                          Create New Meal Plan
-                        </NavLink>
-                      </NavItem>
-                    </DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem style={{color:"#92ab75"}}>Reset</DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              </Col>
-              <Redirect to="/home" />
-            </div>
-          ) : (
-            <Link to="/login" style={{color:"#556b2f"}}>Home | </Link>
-          )}
+                      </DropdownItem>
+                      <DropdownItem className="sub-item">
+                        <NavItem>
+                          <NavLink className="links" tag={Link} to="/home">
+                            Home
+                          </NavLink>
+                        </NavItem>
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
+                </Col>
+                <Redirect to="/home" />
+              </div>
+            ) : (
+              <footer>
+                <Link to="/login" style={{ color: "#556b2f" }}>
+                  Login{" "}
+                </Link>
+              </footer>
+            )}
+          </div>
         </Navbar>
-{/* below is where you can edit/add the rounting of front-end endpoints to their components */}
+        {/* below is where you can edit/add the rounting of front-end endpoints to their components */}
         <Switch>
           <Route path="/login" component={() => <Login />} />
           <Route path="/register" component={() => <Register />} />
+          <Route path="/welcome" component={() => <LandingPage />} />
           <Route
             path="/home"
             component={
-              this.props.token.token !== undefined ? () => <Home user={this.props.user.id} /> : null
+              this.props.token.token !== undefined
+                ? () => <Home user={this.props.user.id} />
+                : null
             }
           />
           <Route
             path="/myrecipes"
             component={
-              this.props.token.token !== undefined ? () => <MyRecipes user= {this.props.user.id} /> : null
-            } 
+              this.props.token.token !== undefined
+                ? () => <MyRecipes user={this.props.user.id} />
+                : null
+            }
           />
           <Route
             path="/mymealplans"
             component={
               this.props.token.token !== undefined
-                ? () => <MyMealPlans user={this.props.user.id}/>
+                ? () => <MyMealPlans user={this.props.user.id} />
                 : null
             }
           />
           <Route
             path="/mymeals"
             component={
-              this.props.token.token !== undefined ? () => <MyMeals user= {this.props.user.id}/> : null
+              this.props.token.token !== undefined
+                ? () => <MyMeals user={this.props.user.id} />
+                : null
             }
           />
           <Route

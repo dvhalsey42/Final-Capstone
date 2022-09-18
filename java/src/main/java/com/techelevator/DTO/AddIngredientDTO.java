@@ -6,6 +6,7 @@ import java.util.List;
 
 public class AddIngredientDTO {
 
+    private int userId;
     private int pantryId;
     private List<Ingredient> ingredients;
 
@@ -19,13 +20,7 @@ public class AddIngredientDTO {
         this.ingredients = ingredients;
     }
 
-    public int getPantryId() {
-        return pantryId;
-    }
 
-    public void setPantryId(int pantryId) {
-        this.pantryId = pantryId;
-    }
 
 
 }

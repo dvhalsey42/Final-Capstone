@@ -22,8 +22,7 @@ import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
 import IngredientList from "../Ingredients/IngredientList";
 import RecipeList from "./RecipeList";
-
-
+import Pantry from "../Pantry/Pantry";
 
 class MyRecipes extends Component {
   constructor(props) {
@@ -49,8 +48,8 @@ class MyRecipes extends Component {
 
   handleAddIngredientToList;
 
-  handleCreateRecipe = async (e) => {
-    e.preventDefault();
+  handleCreateRecipe = async () => {
+    
     const data = {
       recipe_id: "",
       user_id: this.state.user_id,
@@ -59,11 +58,8 @@ class MyRecipes extends Component {
       ingredients: this.state.ingredients,
     };
 
-    // const recipeIngredientWithToken = 
-    await axios.post(
-      baseUrl + "/recipes/create",
-      data
-    );
+    // const recipeIngredientWithToken =
+    await axios.post(baseUrl + "/recipes/create", data);
 
     // await this.props.dispatch(
     //   recipeIngredientWithToken(
@@ -72,6 +68,7 @@ class MyRecipes extends Component {
     //     this.data.ingredients
     //   )
     // );
+  
   };
 
   // INGREDIENT INPUT
@@ -84,12 +81,11 @@ class MyRecipes extends Component {
   };
 
   render() {
-
     const mystyle = {
       color: "rgb(204,85,0)",
       padding: "10px",
       width: "20rem",
-      fontFamily: "cursive"
+      
     };
 
     const footerStyle = {
@@ -101,41 +97,78 @@ class MyRecipes extends Component {
       left: "0",
       bottom: "0",
       height: "60px",
-      width: "100%"
+      width: "100%",
     };
-    const StyledButton ={
+    const StyledButton = {
       backgroundColor: "#FAC668",
       width: 200,
       height: "3rem",
-      border:"none",
+      border: "none",
       color: "#556b2f",
-        };
+    };
 
     return (
       <div className="row">
+        <h1 className="text-center">Craft Your Recipes</h1>
         <div className="recipe-layout">
           <div className="new-recipe">
             <Card
               body
-              className="text-start my-2"
+              className="row text-start"
               id="newRec"
               style={{
-                backgroundColor: "f0eae1"
+                backgroundColor: "f0eae1",
                 //width: "20rem",
               }}
             >
-              <CardTitle style={mystyle} id="h5">Create Your Recipe</CardTitle>
-              <Form  onSubmit={this.handleCreateRecipe}>
-                <FormGroup style={{color:"#92ab75"}}>
-                  <Label for="recipe_name">Recipe Name</Label>
+              <CardTitle style={mystyle} id="h5">
+                Create Your Recipe
+              </CardTitle>
+
+              <Form onSubmit={this.handleCreateRecipe} className="">
+                <FormGroup style={{ color: "#92ab75", width: "100%" }}>
+                  <Label for="recipe_name">Name Your Recipe</Label>
                   <Input
                     name="recipe_name"
                     placeholder="recipe name"
                     onChange={this.handleInputChange}
                   />
                 </FormGroup>
-                <FormGroup style={{color:"#92ab75"}}>
-                  <Label for="instructions">Cooking Instructions</Label>
+                {/* <FormGroup>
+                  <Label>
+                    What Do You Have In Your Pantry Already For This Recipe?
+                  </Label>
+                  <Pantry />
+                </FormGroup> */}
+
+                <FormGroup>
+                  {" "}
+                  <div style={mystyle}>
+                    <Card
+                      id="ingList"
+                      className="border-dark align-items-center"
+                    >
+                      <IngredientList />
+                      <Form onSubmit={this.handleAddIngredient}>
+                        <Input
+                          type="text"
+                          id="ingredient"
+                          name="ingredient_name"
+                          class="form-control"
+                          placeholder="Ingredient"
+                          v-model="ingredient.ingredient_name"
+                          onChange={this.handleInputChange}
+                          required
+                        />
+                        <Button type="submit" style={StyledButton}>
+                          Add To List
+                        </Button>
+                      </Form>
+                    </Card>
+                  </div>
+                </FormGroup>
+                <FormGroup style={{ color: "#92ab75" }}>
+                  <Label for="instructions">How Do You Prepare It?</Label>
                   <Input
                     id="recipeText"
                     name="instructions_list"
@@ -143,72 +176,41 @@ class MyRecipes extends Component {
                     onChange={this.handleInputChange}
                   />
                 </FormGroup>
-                <FormGroup tag="fieldset">
-                  <Label style={{color:"#92ab75"}}>What Kind of Recipe Is This?</Label>
-                  <FormGroup check>
-                    <Input name="radio1" type="radio" />{" "}
-                    <Label check style={{color:"#92ab75"}}>Main</Label>
-                  </FormGroup>
-                  <FormGroup check>
-                    <Input name="radio1" type="radio" />{" "}
-                    <Label check style={{color:"#92ab75"}}>Side</Label>
-                  </FormGroup>
-                  <FormGroup check>
-                    <Input name="radio1" type="radio" />{" "}
-                    <Label check style={{color:"#92ab75"}}>Dessert</Label>
-                  </FormGroup>
-                </FormGroup>
                 <Button style={StyledButton}>Submit</Button>
               </Form>
             </Card>
           </div>
-          <div
-            style={mystyle}
-            
-          >
-            <Card id="ingList" className="border-dark align-items-center">
-              <IngredientList />
-              <Form onSubmit={this.handleAddIngredient}>
-                <Input
-                  type="text"
-                  id="ingredient"
-                  name="ingredient_name"
-                  class="form-control"
-                  placeholder="Ingredient"
-                  v-model="ingredient.ingredient_name"
-                  onChange={this.handleInputChange}
-                  required
-                />
-                <Button type="submit" style={StyledButton}>Add To List</Button>
-              </Form>
-            </Card>
-          </div>
+        </div>
 
-          <div style={mystyle}>
-            <Card id="recList" className="border-dark align-items-center">
-              <RecipeList parentCallback={this.handleCallback} />
-              <Form onSubmit={this.handleAddRecipe}>
-                { /* Figure out way to allow recipe lookup or recipe addition here*/ }
-                <Input 
-                  type="text"
-                  id="recipe"
-                  name="recipe_name"
-                  className="form-control"
-                  placeholder="Recipe"
-                  v-model="recipe.recipe_name"
-                  onChange={this.handleInputChange}
-                  required
-                />
-                <Button type="submit" style={StyledButton}>Add to List</Button>
-              </Form>
-            </Card>
-          </div>
-
-
+        <div style={mystyle}>
+          <Card id="recList" className="border-dark align-items-center">
+            <RecipeList parentCallback={this.handleCallback} />
+            <Form onSubmit={this.handleAddRecipe}>
+              <Input
+                type="text"
+                id="recipe"
+                name="recipe_name"
+                className="form-control"
+                placeholder="Recipe"
+                v-model="recipe.recipe_name"
+                onChange={this.handleInputChange}
+                required
+              />
+              <Button type="submit" style={StyledButton}>
+                Add to List
+              </Button>
+            </Form>
+          </Card>
         </div>
         <footer className="text-center pt-5" style={footerStyle}>
-          <Link to="/home" style={{color:"#556b2f"}}>Home | </Link>
-          <Link to="/login" onClick={this.handleLogout}  style={{color:"#556b2f"} }>
+          <Link to="/home" style={{ color: "#556b2f" }}>
+            Home |{" "}
+          </Link>
+          <Link
+            to="/login"
+            onClick={this.handleLogout}
+            style={{ color: "#556b2f" }}
+          >
             Logout
           </Link>
         </footer>
@@ -216,6 +218,4 @@ class MyRecipes extends Component {
     );
   }
 }
-export default withRouter(
-  connect()(MyRecipes)
-);
+export default withRouter(connect()(MyRecipes));

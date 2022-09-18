@@ -6,6 +6,8 @@ import {
   CardSubtitle,
   CardLink,
   CardText,
+  CardImg,
+  Button,
 } from "reactstrap";
 import "../Home/Home.css";
 import Pantry from "../Pantry/Pantry";
@@ -13,6 +15,8 @@ import greenpantry from "../images/greenpantry.png";
 import RecipeList from "../Recipes/NewRecipe";
 import { Component } from "react";
 import { connect } from "react-redux";
+import SP from "../images/12.png"
+import scallions from "../images/7.png"
 
 const mapStateToProps = (state) => {
   return {
@@ -40,10 +44,7 @@ class Home extends Component {
     this.props.deleteUser();
   };
 
-<<<<<<< HEAD
-  render() {
-=======
-  const footerStyle = {
+  footerStyle = {
     backgroundColor: "#f0eae1",
     borderTop: "1px solid #E7E7E7",
     textAlign: "center",
@@ -55,52 +56,31 @@ class Home extends Component {
     width: "100%"
   };
 
->>>>>>> d31be288e63392e6bb53542011d9ddd5fe837af1
+
+
+  render() {
   return (
     <div className="row">
       <div className="text-center pt-5">
         <h1>Let's Eat</h1>
         <p>PLAN PREP ENJOY</p>
       </div>
-      <div className="home-cards">
-        <div className="pantry">
-          <Card
-            className="pantry-card"
-            style={{
-              
-              width: "30rem",
-            }}
-          >
-            <CardBody className="text-center pt-5 ">
-              <CardTitle tag="h5" className="pantry-card-title">
-                Start With Staples
-              </CardTitle>
-              <CardSubtitle className="pantry-card-subtitle" tag="h6">
-                What's In Your Pantry?
-              </CardSubtitle>
-              <CardText>
-                staple ingredients you always have in your kitchen
-              </CardText>
-              <Pantry ></Pantry>
-            </CardBody>
-          </Card>
-        </div>
+      <div className="home-cards mt-5">
+        <h2>Start By Crafting Your Recipe</h2>
       </div>
-
-<<<<<<< HEAD
-      <footer className="text-center pt-5">
-        <Link to="/home">Home | </Link>
-        <Link to="/login" onClick={this.handleLogout}>
-=======
-      <footer className="text-center pt-5" style={footerStyle}>
-        <Link to="/home" style={{color:"#556b2f"}}>Home | </Link>
-        <Link to="/login" onClick={handleLogout} style={{color:"#556b2f"}}>
->>>>>>> d31be288e63392e6bb53542011d9ddd5fe837af1
+      <footer className="text-center pt-5" style={this.footerStyle}>
+        <Link to="/home" style={{ color: "#556b2f" }}>
+          Home |{" "}
+        </Link>
+        <Link
+          to="/login"
+          onClick={this.handleLogout}
+          style={{ color: "#556b2f" }}
+        >
           Logout
         </Link>
       </footer>
     </div>
-  
   );
           }
 };

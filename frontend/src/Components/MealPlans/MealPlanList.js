@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { fetchMeals } from "../../Redux/actionCreators";
+import { fetchMeals, fetchMealPlans } from "../../Redux/actionCreators";
 import { baseUrl } from "../../Shared/baseUrl";
 import { Card, ListGroup, ListGroupItem, CloseButton } from "reactstrap";
 import axios from "axios";
@@ -26,7 +26,7 @@ class MealPlanList extends Component {
         this.handleFetchMealPlans();
     }
 
-    handleFetchMealPlanss = async () => {
+    handleFetchMealPlans = async () => {
         var mealplansUrl = "/mymealplans";
         const mealPlansWithToken = await axios.get(baseUrl + mealplansUrl);
 
@@ -40,7 +40,7 @@ class MealPlanList extends Component {
         newMealPlanList.push(meal_plan);
         this.setState({
             ...this.state,
-            mealPlanList: newMealPLanList,
+            mealPlanList: this.state.newMealPLanList,
         });
         this.props.parentCallback(newMealPlanList);
         console.log(this.state);
