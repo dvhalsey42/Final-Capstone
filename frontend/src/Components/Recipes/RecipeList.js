@@ -65,8 +65,6 @@ class RecipeList extends Component {
   async removeRecipe(recipe) {
     console.log("Recipe: " + recipe.recipe_id + " " + recipe.recipe_name + " Removed");
     await axios.delete(baseUrl + "/myrecipes/" + recipe.recipe_id + "/delete").then(() => {this.handleFetchRecipes()});
-    // refetch recipes here for re-render
-    // this.handleFetchRecipes();
   }
 
   setSelectedRecipe(recipe) {
