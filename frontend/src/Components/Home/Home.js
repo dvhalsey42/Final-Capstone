@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 import scallions from "../images/7.2.png"
 import meal from "../images/9.2.png"
 import cal from "../images/cal.png"
-import Button from "reactstrap"
+import {Button} from "reactstrap"
+import IngredientList from "../Ingredients/IngredientList";
 
 const mapStateToProps = (state) => {
   return {
@@ -49,7 +50,7 @@ class Home extends Component {
 
   render() {
   return (
-    <div className="row pb-5">
+    <div className="row justify-content-center pb-5">
       <div className="text-center pt-5">
         <h1>Let's Eat</h1>
         <p>PLAN PREP ENJOY</p>
@@ -66,21 +67,21 @@ class Home extends Component {
           }}
         />
       </div>
-      <Button
-       
-        style={{
-          maxWidth: 250,
-          maxHeight: 300,
-          marginTop: 20,
-          marginBottom: 20,
-          background: "#556b30",
-          alignItems: "center",
-          marginLeft:670
       
-        }}
-      >
-        Start A Recipe
-      </Button>
+      <Link className="row justify-content-center pb-5" to="/myrecipes">
+        <Button
+          style={{
+            maxWidth: 250,
+            maxHeight: 300,
+            marginTop: 20,
+            marginBottom: 20,
+            background: "#556b30",
+            alignItems: "center",
+          }}
+        >
+          Start A Recipe
+        </Button>
+      </Link>
       <div className="text-center pt-5">
         <h2 className="mt-5">Create Meals To Enjoy</h2>
         <img
@@ -95,19 +96,19 @@ class Home extends Component {
           }}
         />
       </div>
-      <Button
-        className="text-center"
-        style={{
-          maxWidth: 250,
-          maxHeight: 300,
-          
-          marginBottom: 20,
-          background: "#556b30",
-          marginLeft:670
-        }}
-      >
-        Start A Meal
-      </Button>
+      <Link className="row justify-content-center pb-5" to="/mymeals">
+        <Button
+          className="text-center"
+          style={{
+            maxWidth: 250,
+            maxHeight: 300,
+            marginBottom: 20,
+            background: "#556b30",
+          }}
+        >
+          Start A Meal
+        </Button>
+      </Link>
       <div className="text-center pt-5">
         <h2 className="mt-5">Plan Your Meals With Ease</h2>
         <img
@@ -122,19 +123,19 @@ class Home extends Component {
           }}
         />
       </div>
-      <Button
-        className="text-center"
-        style={{
-          maxWidth: 250,
-          maxHeight: 300,
-          marginTop: 20,
-          marginBottom: 20,
-          background: "#556b30",
-          marginLeft:670
-        }}
-      >
-        Start A Meal Plan
-      </Button>
+      <Link className="row justify-content-center pb-5" to="/mymealplans">
+        <Button
+          style={{
+            maxWidth: 250,
+            maxHeight: 300,
+            marginTop: 20,
+            marginBottom: 20,
+            background: "#556b30",
+          }}
+        >
+          Start A Meal Plan
+        </Button>
+      </Link>
 
       <footer className="text-center pt-5" style={this.footerStyle}>
         <Link to="/home" style={{ color: "#556b2f" }}>

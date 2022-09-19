@@ -1,21 +1,16 @@
 import { withRouter, Link } from "react-router-dom";
 import {
-<<<<<<< HEAD
-=======
-  addIngredient,
-  addToken,
-  fetchIngredients,
-  createMeal,
   fetchMeals
 } from "../../Redux/actionCreators";
 import {
->>>>>>> 9706be0625bee5afd52e831f4987465faac7e36d
+
   Form,
   FormGroup,
   Label,
   Input,
   Card,
   CardTitle,
+  CardSubtitle,
   Button,
   ListGroup,
   ListGroupItem,
@@ -71,7 +66,6 @@ class MyMeals extends Component {
 
   };
 
- 
 
   handleInputChange = (event) => {
     event.preventDefault();
@@ -100,44 +94,43 @@ class MyMeals extends Component {
       <div className="row">
         <div className="meal-layout">
           <div className="new-meal">
-            <Card body className="text-start my-2">
+            <Card body className="text-start ">
               <CardTitle tag="h5">Create Your Meal</CardTitle>
+              <CardSubtitle className="">What's This Meal Called?</CardSubtitle>
               <Form onSubmit={this.handleCreateMeal}>
                 <FormGroup>
-                  <Label for="meal_name">Meal Name</Label>
-                  <Input 
-                    name="meal_name" 
-                    placeholder="Meal Name" 
-                    onChange={this.handleInputChange}>
-                  </Input>
+                  <Label for="meal_name"></Label>
+                  <Input
+                    name="meal_name"
+                    placeholder="Meal Name"
+                    onChange={this.handleInputChange}
+                  ></Input>
                 </FormGroup>
                 <FormGroup>
+                  <CardTitle tag="h5">Add Recipes</CardTitle>
+                  <CardSubtitle className="mb-5">
+                    Select Recipes From Your Recipe List To Create This Meal
+                  </CardSubtitle>
                   <Label for="recipes">Recipes</Label>
                   <ListGroup>
-                    {this.state.mealRecipes && (
-                    this.state.mealRecipes.map((recipe) => {
-                      return(
-                        <ListGroupItem>
-                          {recipe.recipe_name}
-                        </ListGroupItem>
-                      )
-                    }))
-                    }
+                    {this.state.mealRecipes &&
+                      this.state.mealRecipes.map((recipe) => {
+                        return (
+                          <ListGroupItem>{recipe.recipe_name}</ListGroupItem>
+                        );
+                      })}
                   </ListGroup>
                 </FormGroup>
                 <Button>Submit</Button>
               </Form>
             </Card>
-
-            
-        
           </div>
-          <div style={{width: "20rem",}}>
+          <div style={{ width: "20rem" }}>
             <Card className="border-dark align-items-center">
               <RecipeList parentCallback={this.handleCallback} />
               <Form onSubmit={this.handleAddRecipe}>
-                { /* Figure out way to allow recipe lookup or recipe addition here*/ }
-                <Input 
+                {/* Figure out way to allow recipe lookup or recipe addition here*/}
+                <Input
                   type="text"
                   id="recipe"
                   name="recipe_name"
@@ -150,34 +143,30 @@ class MyMeals extends Component {
                 <Button type="submit">Add to List</Button>
               </Form>
             </Card>
-
-            
           </div>
-          <div style={{width: "20rem",}}>
+          <div style={{ width: "20rem" }}>
             <Card className="border-dark align-items-center">
-              <MealList parentMeals={this.state.meals} user={this.props.user} parentCallback={this.handleCallback} />
-              <Form>
-                <Input 
-                  type="text"
-                  id="meals"
-                  name="meal_name"
-                  className="form-control"
-                  placeholder="Meal"
-                  v-model="meal.meal_name"
-                  onChange={this.handleInputChange}
-                  required
-                />                
-                <Button type="submit">Add to List</Button>
-              </Form>
+              <MealList
+                parentMeals={this.state.meals}
+                user={this.props.user}
+                parentCallback={this.handleCallback}
+              />
+              <Link to="/mymealplans">
+                <Button type="submit">Start A Meal Plan</Button>
+              </Link>
             </Card>
           </div>
-
         </div>
-        
 
         <footer className="text-center pt-5" style={footerStyle}>
-          <Link to="/home" style={{color:"#556b2f"}}>Home | </Link>
-          <Link to="/login" onClick={this.handleLogout} style={{color:"#556b2f"}}>
+          <Link to="/home" style={{ color: "#556b2f" }}>
+            Home |{" "}
+          </Link>
+          <Link
+            to="/login"
+            onClick={this.handleLogout}
+            style={{ color: "#556b2f" }}
+          >
             Logout
           </Link>
         </footer>

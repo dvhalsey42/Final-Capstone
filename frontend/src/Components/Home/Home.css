@@ -27,3 +27,7 @@ h1 {
   gap: 35px;
 }
 
+.home-buttons {
+  display: flex;
+  align-items: center;
+}

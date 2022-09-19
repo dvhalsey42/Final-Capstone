@@ -61,7 +61,7 @@ class RecipeList extends Component {
     console.log(this.state);
   }
 
-  // REMOVE LOGIC- THIS STILL NEEDS AN API CALL ENDPOINT FROM BACK-END
+  
   async removeRecipe(recipe) {
     console.log("Recipe: " + recipe.recipe_id + " " + recipe.recipe_name + " Removed");
     await axios.delete(baseUrl + "/myrecipes/" + recipe.recipe_id + "/delete").then(() => {this.handleFetchRecipes()});
@@ -84,7 +84,8 @@ class RecipeList extends Component {
             width: "15rem",
           }}
         >
-          <h2>Recipes</h2>
+          <h2>My Recipes</h2>
+          <p>Add Recipes To A Meal By Clicking the 🍽 </p>
           <ListGroup className="row-cols-lg-auto g-3 mb-5 ">
             {this.state.recipes.map((recipe) => {
               return (
@@ -120,7 +121,7 @@ class RecipeList extends Component {
                       this.handleAddRecipeToMeal(recipe);
                     }}
                     > 
-                    +
+                    🍽
                   </button>
                 </ListGroupItem>
               );

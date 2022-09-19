@@ -88,7 +88,7 @@ class Ingredient extends Component {
               type="text"
               id="ingredient"
               name="ingredient_name"
-              class="form-control"
+              className="form-control"
               placeholder="Ingredient"
               v-model="ingredient.ingredient_name"
               onChange={this.handleInputChange}
