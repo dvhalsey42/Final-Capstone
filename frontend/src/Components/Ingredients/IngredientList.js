@@ -8,7 +8,7 @@ import {
 } from "../../Redux/actionCreators";
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
-import { Card, ListGroup, ListGroupItem } from "reactstrap";
+import { Card, ListGroup, ListGroupItem, Form, Button, Input } from "reactstrap";
 
 
 
@@ -22,8 +22,11 @@ const mapDispatchToProps = (dispatch) => ({
 class IngredientList extends Component {
   constructor(props) {
     super(props);
-    this.state = { ingredients: [] };
-    this.removeIngredient = this.removeIngredient.bind(this);
+    this.state = {
+      ingredients: [],
+      recipeIngredients: [],
+      selectedIngredient: "",
+    };
   }
 
   newIngredientList = [];
@@ -31,7 +34,6 @@ class IngredientList extends Component {
   // SIGNNALS DATA TO RENDER WHEN COMPONENT MOUNTS
   componentDidMount() {
     this.handleFetchIngredients();
-    this.removeIngredient();
   }
 
   // FETCH INGREDIENTS LOGIC
@@ -45,6 +47,17 @@ class IngredientList extends Component {
     console.log(ingredientsWithToken.data);
   };
 
+  handleCallback = (ingredient) => {
+    var newIngredientList = [];
+    newIngredientList = this.state.recipeIngredients;
+    newIngredientList.push(ingredient);
+    this.setState({
+      ...this.state,
+     recipeIngredients: newIngredientList,
+    });
+    this.props.parentCallback(newIngredientList);
+  };
+
   handleAddIngredientToRecipe = (ingredient) => {
     var newIngredientList = this.state.ingredients;
     newIngredientList.push(ingredient);
@@ -56,24 +69,50 @@ class IngredientList extends Component {
     console.log(this.state);
   };
 
-  handleAdd = (ingredient) => {
-    this.newIngredientList.push(ingredient.ingredient_name);
-    console.log(this.newIngredientList);
-  };
-
-  addIngToRecipeClickHandler = (e) => {
-    e.preventDefault();
-    this.handleAdd(this.ingredient);
-  };
-
-  // REMOVE LOGIC- THIS STILL NEEDS AN API CALL ENDPOINT FROM BACK-END
-  removeIngredient(ingredient_name) {
+  setSelectedIngredient(ingredient) {
     this.setState({
-      ingredients: this.state.ingredients.filter(
-        (ingredient) => ingredient !== ingredient_name
-      ),
+      selectedIngredient: ingredient,
     });
   }
+
+  // ADD INGREDIENT LOGIC
+  handleAddIngredient = async (e) => {
+    e.preventDefault();
+    const data = {
+      ingredient_id: "",
+      ingredient_name: this.state.ingredient_name,
+      category: "",
+    };
+
+    const ingredientWithToken = await axios.post(
+      baseUrl + "/ingredients/create",
+      data
+    );
+
+    await this.props.dispatch(ingredientWithToken(this.data.ingredient_name));
+  };
+
+  // INGREDIENT INPUT
+  handleInputChange = (event) => {
+    event.preventDefault();
+
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  // async removeIngredient(ingredient) {
+  //   console.log(
+  //     "Ingredient: " +  ingredient.ingredient_name + " Removed"
+  //   );
+  //   await axios
+  //     .delete(baseUrl + "/myrecipes/" + ingredient.ingredient_id + "/delete")
+  //     .then(() => {
+  //       this.handleFetchRecipes();
+  //     });
+  //   // refetch recipes here for re-render
+  //   // this.handleFetchRecipes();
+  // }
 
   render() {
     return (
@@ -93,15 +132,15 @@ class IngredientList extends Component {
                   {/* this is where ingredient this is rendered */}
                   {ingredient.ingredient_name}
                   <button
-                    onClick={() => {
-                      this.removeIngredient(ingredient);
-                    }}
+                  // onClick={() => {
+                  //   this.removeIngredient(ingredient);
+                  // }}
                   >
                     x
                   </button>
                   <button
                     onClick={(e) => {
-                      this.addIngToRecipeClickHandler(ingredient);
+                      this.handleCallback(ingredient);
                     }}
                   >
                     +
@@ -110,15 +149,19 @@ class IngredientList extends Component {
               );
             })}
           </ListGroup>
-          <h2>Recipe Ingredients</h2>
-          {this.newIngredientList.map((ingredient) => {
-              return (
-                <ListGroupItem>
-                  {/* this is where ingredient this is rendered */}
-                  {ingredient}
-                   </ListGroupItem>
-              );
-                   })}
+          <Form onSubmit={this.handleAddIngredient}>
+            <Input
+              type="text"
+              id="ingredient"
+              name="ingredient_name"
+              className="form-control"
+              placeholder="Ingredient"
+              v-model="ingredient.ingredient_name"
+              onChange={this.handleInputChange}
+              required
+            />
+            <Button type="submit">Add To List</Button>
+          </Form>
         </Card>
       </div>
     );

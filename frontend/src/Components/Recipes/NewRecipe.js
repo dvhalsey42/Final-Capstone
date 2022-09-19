@@ -1,6 +1,6 @@
-import { Component, useState } from "react";
-import { Form, FormGroup, Label, Input, FormText, Button } from "reactstrap";
-import { withRouter, Link } from "react-router-dom";
+import { Component} from "react";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { withRouter } from "react-router-dom";
 import {
   addIngredient,
   addToken,
@@ -8,7 +8,7 @@ import {
   fetchIngredients,
 } from "../../Redux/actionCreators";
 import { connect } from "react-redux";
-import {Card, CardTitle, CardText } from "reactstrap"
+import {Card, CardTitle } from "reactstrap"
 
 const mapDispatchToProps = (dispatch) => ({
   addIngredient: () => dispatch(addIngredient()),
