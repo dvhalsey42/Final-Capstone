@@ -10,7 +10,10 @@ import {
 } from "../../Redux/actionCreators";
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
+
 import { Card, ListGroup, ListGroupItem, Button, UncontrolledPopover, PopoverHeader, PopoverBody } from "reactstrap";
+
+
 import NewRecipe from "../Recipes/NewRecipe";
 
 const mapDispatchToProps = (dispatch) => ({
@@ -26,6 +29,7 @@ class RecipeList extends Component {
     this.state = { 
       recipes: [],
       mealRecipes: [],
+      selectedRecipe: '',
     };
     this.removeRecipe = this.removeRecipe.bind(this);
   }
@@ -33,7 +37,6 @@ class RecipeList extends Component {
   // SIGNNALS DATA TO RENDER WHEN COMPONENT MOUNTS
   componentDidMount() {
     this.handleFetchRecipes();
-    this.removeRecipe(); 
   }
 
   // FETCH INGREDIENTS LOGIC
@@ -59,12 +62,17 @@ class RecipeList extends Component {
   }
 
   // REMOVE LOGIC- THIS STILL NEEDS AN API CALL ENDPOINT FROM BACK-END
-  removeRecipe(recipe_name) {
+  async removeRecipe(recipe) {
+    console.log("Recipe: " + recipe.recipe_id + " " + recipe.recipe_name + " Removed");
+    await axios.delete(baseUrl + "/myrecipes/" + recipe.recipe_id + "/delete").then(() => {this.handleFetchRecipes()});
+    // refetch recipes here for re-render
+    // this.handleFetchRecipes();
+  }
+
+  setSelectedRecipe(recipe) {
     this.setState({
-      recipes: this.state.recipes.filter(
-        (recipe) => recipe !== recipe_name,
-      ),
-    });
+      selectedRecipe: recipe,
+    })
   }
 
   render() {
@@ -82,24 +90,38 @@ class RecipeList extends Component {
               return (
                 <ListGroupItem>
                   {/* this is where recipe list is rendered */}
-                  
-                    {recipe.recipe_name}
-                    <button
-                      onClick={() => {
-                        this.removeRecipe(recipe);
-                      }}
-                    >
-                      x
-                    </button>
-                    <button
-                      onClick={() => {
-                        this.handleAddRecipeToMeal(recipe);
-                      }}
-                    >
-                      +
-                    </button>
-                
-      
+
+                  <Button id="ScheduleUpdateButton" type="button" onClick={() => {this.setSelectedRecipe(recipe)}}>
+                    {recipe.recipe_name}  
+                  </Button>
+                  <UncontrolledPopover placement="right" target="ScheduleUpdateButton" trigger="legacy" >
+                    <PopoverHeader>
+                      {this.state.selectedRecipe.recipe_name}
+                    </PopoverHeader>
+                    <PopoverBody>
+                      <h5>Instructions</h5>
+                      {this.state.selectedRecipe.instructions_list}
+                      <h5>Ingredients</h5> {/* CURRENTLY NO WAY TO READ CURRENT RECIPIES INGREDIENTS, FIGURE IT OUT BOZO */}
+                      { /* console.log(this.state.selectedRecipe.ingredients) */}
+                      <Button onClick={() => {}}>Edit</Button>
+                      <Button onClick={() => {this.removeRecipe(this.state.selectedRecipe); document.body.click()}}>Delete</Button>
+                    </PopoverBody>
+                  </UncontrolledPopover>
+
+                  <button
+                    onClick={() => {
+                      this.removeRecipe(recipe);
+                    }}
+                  >
+                    x
+                  </button>
+                  <button
+                    onClick={() => {
+                      this.handleAddRecipeToMeal(recipe);
+                    }}
+                    > 
+                    +
+                  </button>
                 </ListGroupItem>
               );
             })}

@@ -162,6 +162,8 @@ public class JdbcRecipeDao implements RecipeDao {
         if (getRecipeById(id) == null) return false;
         String sql = "DELETE FROM recipe_ingredients WHERE recipe_id = ?";
         jdbcTemplate.update(sql, id);
+        sql = "DELETE FROM meal_recipes WHERE recipe_id = ?";
+        jdbcTemplate.update(sql, id);
         sql = "DELETE FROM recipes WHERE recipe_id = ?";
         jdbcTemplate.update(sql, id);
         return true;
