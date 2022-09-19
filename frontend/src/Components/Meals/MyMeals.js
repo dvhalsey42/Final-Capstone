@@ -133,7 +133,7 @@ class MyMeals extends Component {
           </div>
           <div style={{width: "20rem",}}>
             <Card className="border-dark align-items-center">
-              <MealList parentCallback={this.handleCallback} />
+              <MealList user={this.props.user} parentCallback={this.handleCallback} />
               <Form>
                 <Input 
                   type="text"

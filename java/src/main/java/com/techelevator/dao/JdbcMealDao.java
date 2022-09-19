@@ -26,6 +26,7 @@ public class JdbcMealDao implements MealDao{
     public List<Meal> getMyMeals(int userId) {
         List<Meal> meals = new ArrayList<Meal>();
         String sql = "SELECT * FROM meals WHERE user_id = ?";
+        String sqlForRecipes = "select * from meal_recipes join recipes on recipes.recipe_id = meal_recipes.recipe_id";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
             while(results.next()){
