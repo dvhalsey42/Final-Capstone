@@ -1,11 +1,4 @@
 import { withRouter, Link } from "react-router-dom";
-import {
-  addIngredient,
-  addToken,
-  fetchIngredients,
-  createRecipe,
-  addIngredientToRecipe,
-} from "../../Redux/actionCreators";
 import { connect } from "react-redux";
 import { Component } from "react";
 import {
@@ -22,7 +15,7 @@ import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
 import IngredientList from "../Ingredients/IngredientList";
 import RecipeList from "./RecipeList";
-import Pantry from "../Pantry/Pantry";
+
 
 class MyRecipes extends Component {
   constructor(props) {

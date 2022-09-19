@@ -1,9 +1,9 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { fetchMeals, fetchMealPlans } from "../../Redux/actionCreators";
+import { fetchMealPlans } from "../../Redux/actionCreators";
 import { baseUrl } from "../../Shared/baseUrl";
-import { Card, ListGroup, ListGroupItem, CloseButton } from "reactstrap";
+import { Card, ListGroup, ListGroupItem } from "reactstrap";
 import axios from "axios";
 
 const mapDispatchToProps = (dispatch) => ({

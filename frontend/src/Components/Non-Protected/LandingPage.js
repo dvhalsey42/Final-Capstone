@@ -2,7 +2,7 @@ import { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToken } from "../../Redux/actionCreators";
-import {List, Button} from "reactstrap";
+import {List} from "reactstrap";
 import "../Non-Protected/LandingPage.css"
 import mealpic from "../images/8.png"
 import Login from "../Login/Login";

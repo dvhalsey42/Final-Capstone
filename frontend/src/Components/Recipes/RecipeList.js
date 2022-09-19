@@ -2,9 +2,9 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {
-  addIngredient,
+ 
   addToken,
-  fetchIngredients,
+  
   fetchRecipes,
   createRecipe,
 } from "../../Redux/actionCreators";
@@ -14,7 +14,7 @@ import { baseUrl } from "../../Shared/baseUrl";
 import { Card, ListGroup, ListGroupItem, Button, UncontrolledPopover, PopoverHeader, PopoverBody } from "reactstrap";
 
 
-import NewRecipe from "../Recipes/NewRecipe";
+
 
 const mapDispatchToProps = (dispatch) => ({
   createRecipe: () => dispatch(createRecipe()),

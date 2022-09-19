@@ -1,11 +1,5 @@
 import { withRouter, Link } from "react-router-dom";
 import {
-  addIngredient,
-  addToken,
-  fetchIngredients,
-  createMeal
-} from "../../Redux/actionCreators";
-import {
   Form,
   FormGroup,
   Label,
@@ -15,9 +9,7 @@ import {
   Button,
 } from "reactstrap";
 import { connect } from "react-redux";
-import Ingredient from "../Ingredients/Ingredient";
 import { Component } from "react";
-import NewRecipe from "../Recipes/NewRecipe";
 import RecipeList from "../Recipes/RecipeList";
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";

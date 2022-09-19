@@ -1,6 +1,5 @@
 import { Component } from "react";
 import { Switch, Route, Redirect, Link } from "react-router-dom";
-import { useState } from "react";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Home from "../Home/Home";
@@ -8,7 +7,6 @@ import { addToken, deleteUser, fetchIngredients,createRecipe, addIngredientToRec
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {
-  NavbarBrand,
   Navbar,
   NavItem,
   NavLink,

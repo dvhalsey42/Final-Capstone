@@ -1,24 +1,11 @@
 import { Link, withRouter } from "react-router-dom";
-import {
-  Card,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardLink,
-  CardText,
-  CardImg,
-  Button,
-} from "reactstrap";
 import "../Home/Home.css";
-import Pantry from "../Pantry/Pantry";
-import greenpantry from "../images/greenpantry.png";
-import RecipeList from "../Recipes/NewRecipe";
 import { Component } from "react";
 import { connect } from "react-redux";
-import SP from "../images/12.png"
 import scallions from "../images/7.2.png"
 import meal from "../images/9.2.png"
 import cal from "../images/cal.png"
+import Button from "reactstrap"
 
 const mapStateToProps = (state) => {
   return {

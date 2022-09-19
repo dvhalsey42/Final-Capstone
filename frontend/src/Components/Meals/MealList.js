@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { fetchMeals } from "../../Redux/actionCreators";
 import { baseUrl } from "../../Shared/baseUrl";
-import { Card, ListGroup, ListGroupItem, CloseButton, Button, UncontrolledPopover, PopoverHeader, PopoverBody } from "reactstrap";
+import { Card, ListGroup, ListGroupItem, Button, UncontrolledPopover, PopoverHeader, PopoverBody } from "reactstrap";
 import axios from "axios";
 
 const mapDispatchToProps = (dispatch) => ({
