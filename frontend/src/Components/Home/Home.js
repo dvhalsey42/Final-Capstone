@@ -16,7 +16,9 @@ import RecipeList from "../Recipes/NewRecipe";
 import { Component } from "react";
 import { connect } from "react-redux";
 import SP from "../images/12.png"
-import scallions from "../images/7.png"
+import scallions from "../images/7.2.png"
+import meal from "../images/9.2.png"
+import cal from "../images/cal.png"
 
 const mapStateToProps = (state) => {
   return {
@@ -60,15 +62,90 @@ class Home extends Component {
 
   render() {
   return (
-    <div className="row">
+    <div className="row pb-5">
       <div className="text-center pt-5">
         <h1>Let's Eat</h1>
         <p>PLAN PREP ENJOY</p>
+        <h2 className="mt-5">Start By Crafting Your Recipe</h2>
+        <img
+          className="scallion"
+          src={scallions}
+          alt="SP"
+          style={{
+            maxWidth: 250,
+            maxHeight: 300,
+            marginTop: 20,
+            marginBottom: 20,
+          }}
+        />
       </div>
-      <div className="home-cards mt-5">
-      <img src={SP} alt="SP" style={{width:100, left:5, bottom:0}}/>
-        <h2>Start By Crafting Your Recipe</h2> 
+      <Button
+       
+        style={{
+          maxWidth: 250,
+          maxHeight: 300,
+          marginTop: 20,
+          marginBottom: 20,
+          background: "#556b30",
+          alignItems: "center",
+        }}
+      >
+        Start A Recipe
+      </Button>
+      <div className="text-center pt-5">
+        <h2 className="mt-5">Create Meals To Enjoy</h2>
+        <img
+          className=" text-center meal"
+          src={meal}
+          alt="meal"
+          style={{
+            maxWidth: 250,
+            maxHeight: 300,
+            marginTop: 20,
+            marginBottom: 20,
+          }}
+        />
       </div>
+      <Button
+        className="text-center"
+        style={{
+          maxWidth: 250,
+          maxHeight: 300,
+          
+          marginBottom: 20,
+          background: "#556b30",
+        }}
+      >
+        Start A Meal
+      </Button>
+      <div className="text-center pt-5">
+        <h2 className="mt-5">Plan Your Meals With Ease</h2>
+        <img
+          className="scallion"
+          src={cal}
+          alt="calendar"
+          style={{
+            maxWidth: 250,
+            maxHeight: 300,
+            marginTop: 20,
+            marginBottom: 20,
+          }}
+        />
+      </div>
+      <Button
+        className="text-center"
+        style={{
+          maxWidth: 250,
+          maxHeight: 300,
+          marginTop: 20,
+       
+          paddingBottom: 20,
+          background: "#556b30",
+        }}
+      >
+        Start A Meal Plan
+      </Button>
+
       <footer className="text-center pt-5" style={this.footerStyle}>
         <Link to="/home" style={{ color: "#556b2f" }}>
           Home |{" "}

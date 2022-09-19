@@ -10,7 +10,7 @@ import {
 } from "../../Redux/actionCreators";
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
-import { Card, ListGroup, ListGroupItem, CloseButton } from "reactstrap";
+import { Card, ListGroup, ListGroupItem, Button, UncontrolledPopover, PopoverHeader, PopoverBody } from "reactstrap";
 import NewRecipe from "../Recipes/NewRecipe";
 
 const mapDispatchToProps = (dispatch) => ({
@@ -82,21 +82,24 @@ class RecipeList extends Component {
               return (
                 <ListGroupItem>
                   {/* this is where recipe list is rendered */}
-                  {recipe.recipe_name}
-                  <button
-                    onClick={() => {
-                      this.removeRecipe(recipe);
-                    }}
-                  >
-                    x
-                  </button>
-                  <button
-                    onClick={() => {
-                      this.handleAddRecipeToMeal(recipe);
-                    }}
-                    > 
-                    +
-                  </button>
+                  
+                    {recipe.recipe_name}
+                    <button
+                      onClick={() => {
+                        this.removeRecipe(recipe);
+                      }}
+                    >
+                      x
+                    </button>
+                    <button
+                      onClick={() => {
+                        this.handleAddRecipeToMeal(recipe);
+                      }}
+                    >
+                      +
+                    </button>
+                
+      
                 </ListGroupItem>
               );
             })}
