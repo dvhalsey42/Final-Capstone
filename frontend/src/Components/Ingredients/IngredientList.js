@@ -8,7 +8,8 @@ import {
 } from "../../Redux/actionCreators";
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
-import { Card, ListGroup, ListGroupItem, CloseButton } from "reactstrap";
+import { Card, ListGroup, ListGroupItem } from "reactstrap";
+
 
 
 const mapDispatchToProps = (dispatch) => ({
@@ -24,6 +25,8 @@ class IngredientList extends Component {
     this.state = { ingredients: [] };
     this.removeIngredient = this.removeIngredient.bind(this);
   }
+
+  newIngredientList = [];
 
   // SIGNNALS DATA TO RENDER WHEN COMPONENT MOUNTS
   componentDidMount() {
@@ -53,6 +56,16 @@ class IngredientList extends Component {
     console.log(this.state);
   };
 
+  handleAdd = (ingredient) => {
+    this.newIngredientList.push(ingredient.ingredient_name);
+    console.log(this.newIngredientList);
+  };
+
+  addIngToRecipeClickHandler = (e) => {
+    e.preventDefault();
+    this.handleAdd(this.ingredient);
+  };
+
   // REMOVE LOGIC- THIS STILL NEEDS AN API CALL ENDPOINT FROM BACK-END
   removeIngredient(ingredient_name) {
     this.setState({
@@ -68,7 +81,8 @@ class IngredientList extends Component {
         <Card
           className="pantry-card"
           style={{
-            width: "15rem",
+            maxHeight: 200,
+            overflow: "auto",
           }}
         >
           <h2>Ingredients</h2>
@@ -86,8 +100,8 @@ class IngredientList extends Component {
                     x
                   </button>
                   <button
-                    onClick={() => {
-                      this.handleAddIngredientToRecipe(ingredient);
+                    onClick={(e) => {
+                      this.addIngToRecipeClickHandler(ingredient);
                     }}
                   >
                     +
@@ -96,6 +110,15 @@ class IngredientList extends Component {
               );
             })}
           </ListGroup>
+          <h2>Recipe Ingredients</h2>
+          {this.newIngredientList.map((ingredient) => {
+              return (
+                <ListGroupItem>
+                  {/* this is where ingredient this is rendered */}
+                  {ingredient}
+                   </ListGroupItem>
+              );
+                   })}
         </Card>
       </div>
     );

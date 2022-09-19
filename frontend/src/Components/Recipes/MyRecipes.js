@@ -128,9 +128,9 @@ class MyRecipes extends Component {
               style={{
                 backgroundColor: "f0eae1",
                 //width: "20rem",
-              }}
+                width: 800}}
             >
-              <CardTitle style={mystyle} id="h5">
+              <CardTitle style={{mystyle}} id="h5">
                 Create Your Recipe
               </CardTitle>
 
@@ -155,7 +155,7 @@ class MyRecipes extends Component {
                   <div style={mystyle}>
                     <Card
                       id="ingList"
-                      className="border-dark align-items-center"
+                      className="align-items-center"
                     >
                       <IngredientList />
                       <Form onSubmit={this.handleAddIngredient}>
@@ -191,8 +191,8 @@ class MyRecipes extends Component {
           </div>
         </div>
 
-        <div style={mystyle}>
-          <Card id="recList" className="border-dark align-items-center">
+        <div style={{mystyle, right: 5, width:850}}>
+          <Card id="recList" className="align-items-center">
             <RecipeList parentCallback={this.handleCallback} />
             <Form onSubmit={this.handleAddRecipe}>
               <Input

@@ -8,6 +8,7 @@ import axios from "axios";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import "../Login/Login.css";
 import logo from "../images/transparentlogo.png"
+import recipePhoto from "../images/8.png"
 
 const mapDispatchToProps = (dispatch) => ({
   addToken: () => dispatch(addToken()),
@@ -53,7 +54,7 @@ class Login extends Component {
   color: "#556b2f",
     };
     return (
-      <div>
+    
         <div className="login-form">
           <div className="text-center pt-5">
             <h1 style={{ color: "#556b2f" }}>Let's Eat</h1>
@@ -85,7 +86,6 @@ class Login extends Component {
               required
             />
           </div>
-
           <div className="row">
             <Link
               className="register-link"
@@ -104,8 +104,8 @@ class Login extends Component {
               Sign In
             </button>
           </div>
-        </div>
-      </div>
+          </div>
+     
     );
   }
 }

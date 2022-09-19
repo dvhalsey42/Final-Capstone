@@ -10,7 +10,10 @@ import {
 } from "../../Redux/actionCreators";
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
-import { Card, ListGroup, ListGroupItem, CloseButton, Button, UncontrolledPopover, PopoverHeader, PopoverBody, Popover} from "reactstrap";
+
+import { Card, ListGroup, ListGroupItem, Button, UncontrolledPopover, PopoverHeader, PopoverBody } from "reactstrap";
+
+
 import NewRecipe from "../Recipes/NewRecipe";
 
 const mapDispatchToProps = (dispatch) => ({

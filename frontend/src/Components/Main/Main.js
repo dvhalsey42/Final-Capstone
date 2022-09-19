@@ -79,7 +79,7 @@ class Main extends Component {
         <Navbar xs={12} sm={3} md={2} lg={1}>
           <div className="top-section">
             <Link to="/home" className="logo">
-              <img src={logo} alt="logo" width={"230"} height={"225"}></img>
+              <img src={logo} alt="logo" width={"300"} height={"240"}></img>
             </Link>
 
             {this.props.token.token !== undefined ? (
