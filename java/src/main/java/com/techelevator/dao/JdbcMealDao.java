@@ -8,6 +8,8 @@ import io.jsonwebtoken.lang.Collections;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
+
+import javax.naming.NoPermissionException;
 import javax.sql.rowset.serial.SerialArray;
 import javax.sql.rowset.serial.SerialException;
 import javax.xml.transform.Result;
@@ -26,7 +28,7 @@ public class JdbcMealDao implements MealDao{
     public List<Meal> getMyMeals(int userId) {
         List<Meal> meals = new ArrayList<Meal>();
         String sql = "SELECT * FROM meals WHERE user_id = ?";
-        String sqlForRecipes = "select * from meal_recipes join recipes on recipes.recipe_id = meal_recipes.recipe_id";
+
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
             while(results.next()){
@@ -35,6 +37,9 @@ public class JdbcMealDao implements MealDao{
         }
         catch (Exception e) {
             System.err.println(e.getMessage());
+        }
+        for (Meal meal : meals) {
+            meal.setRecipes(getRecipesFromMealId(meal.getMeal_id()));
         }
         return meals;
     }
@@ -62,10 +67,14 @@ public class JdbcMealDao implements MealDao{
         newMeal_id = jdbcTemplate.queryForObject(sql, int.class, newMeal.getUser_id(), newMeal.getMeal_name());
 
         String sqlAddRecipes = "INSERT INTO meal_recipes (meal_id, recipe_id) VALUES (?,?)";
-        if (newMeal_id > 0 && newMeal.getRecipes().size() > 0) {
-            for (Recipe recipe : newMeal.getRecipes()) {
-                jdbcTemplate.update(sqlAddRecipes, newMeal_id, recipe.getRecipe_id());
+        try {
+            if (newMeal_id > 0 && newMeal.getRecipes().size() > 0) {
+                for (Recipe recipe : newMeal.getRecipes()) {
+                    jdbcTemplate.update(sqlAddRecipes, newMeal_id, recipe.getRecipe_id());
+                }
             }
+        } catch (NullPointerException e) {
+            //user didn't include any recipes
         }
 
         return newMeal_id > 0;
@@ -124,6 +133,16 @@ public class JdbcMealDao implements MealDao{
         return true;
     }
 
+    private List<Recipe> getRecipesFromMealId(int meal_id) {
+        String sql = "SELECT recipes.recipe_id, recipes.user_id, recipes.recipe_name, recipes.instructions_list FROM meals JOIN meal_recipes ON meals.meal_id = meal_recipes.meal_id JOIN recipes ON recipes.recipe_id = meal_recipes.recipe_id WHERE meals.meal_id = ?";
+        List<Recipe> recipes = new ArrayList<>();
+        SqlRowSet rs = jdbcTemplate.queryForRowSet(sql, meal_id);
+        while (rs.next()) {
+            recipes.add(mapRowToRecipe(rs));
+        }
+        return recipes;
+    }
+
     private boolean mealExists(int id) {
         String sql = "SELECT COUNT(1) FROM meals WHERE meal_id = ?";
         int i = jdbcTemplate.queryForObject(sql, int.class, id);
@@ -134,7 +153,7 @@ public class JdbcMealDao implements MealDao{
         Recipe recipe = new Recipe();
         recipe.setRecipe_id(rs.getInt("recipe_id"));
         recipe.setUser_id(rs.getInt("user_id"));
-        recipe.setRecipe_name("recipe_name");
+        recipe.setRecipe_name(rs.getString("recipe_name"));
         recipe.setInstructions_list(rs.getString("instructions_list"));
         recipe.setIngredients(getIngredientsByRecipeId(rs.getInt("recipe_id")));
 

@@ -6,9 +6,7 @@ import { baseUrl } from "../../Shared/baseUrl";
 import { Card, ListGroup, ListGroupItem, CloseButton, Button, UncontrolledPopover, PopoverHeader, PopoverBody } from "reactstrap";
 import axios from "axios";
 
-const mapDispatchToProps = (dispatch) => ({
-    fetchMeals: () => dispatch(fetchMeals()),
-});
+
 
 class MealList extends Component {
     constructor(props) {
@@ -33,18 +31,19 @@ class MealList extends Component {
 
         await this.props.dispatch(fetchMeals(mealsWithToken.data));
 
-        this.setState({ meals: mealsWithToken.data });
+        this.setState({ ...this.state, 
+            meals: mealsWithToken.data });
     }
 
     handleCallback = (meal) => {
-        var newMealList = this.state.mealList;
+        var newMealList = [];
+        newMealList = this.state.mealList;
         newMealList.push(meal);
         this.setState({
             ...this.state,
             mealList: newMealList,
         });
         this.props.parentCallback(newMealList);
-        console.log(this.state);
     }
 
     async removeMeal(meal) {
@@ -55,6 +54,10 @@ class MealList extends Component {
         this.setState({
             selectedMeal: meal,
         })
+    }
+
+    mealCard(meal) {
+        
     }
 
     render() {
@@ -80,7 +83,21 @@ class MealList extends Component {
                                     {this.state.selectedMeal.meal_name}
                                 </PopoverHeader>
                                 <PopoverBody>
-                                    {console.log(this.state.selectedMeal)}
+                                    <h5>Recipes</h5>
+                                    {this.state.selectedMeal && (
+                                        this.state.selectedMeal.recipes.map((recipe) => {
+                                            return (
+                                                <ListGroup>
+                                                    <ListGroupItem>
+                                                        {recipe.recipe_name}
+                                                        <p>Instructions List</p>
+                                                        {recipe.instructions_list}
+                                                    </ListGroupItem>
+                                                </ListGroup>
+                                            )
+                                        })
+                                        ) 
+                                    }
                                     <Button onClick={() => {}}>Edit</Button>
                                     <Button onClick={() => {this.removeMeal(this.state.selectedMeal); document.body.click()}}>Delete</Button>
                                 </PopoverBody>
@@ -109,4 +126,4 @@ class MealList extends Component {
     }
 }
 
-export default withRouter(connect(mapDispatchToProps)(MealList));
+export default withRouter(connect()(MealList));
