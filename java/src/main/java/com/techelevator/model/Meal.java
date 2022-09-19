@@ -55,6 +55,7 @@ public class Meal {
                 "meal_id=" + meal_id +
                 ", meal_name='" + meal_name + '\'' +
                 ", user_id='" + user_id + '\'' +
+                ", Recipes='" + recipes + '\'' +
                 '}';
     }
 
