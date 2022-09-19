@@ -71,6 +71,15 @@ class MyRecipes extends Component {
   
   };
 
+  handleDeleteRecipe = async () => {
+
+    const data = {
+      recipe_id: 0,
+    };
+
+    await axios.delete(baseUrl + "/myrecipes/" + data.recipe_id + "/delete");
+  }
+
   // INGREDIENT INPUT
   handleInputChange = (event) => {
     event.preventDefault();
