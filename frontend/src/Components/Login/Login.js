@@ -8,7 +8,7 @@ import axios from "axios";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import "../Login/Login.css";
 import logo from "../images/transparentlogo.png"
-import recipePhoto from "../images/recipe photo.jpg"
+import recipePhoto from "../images/8.png"
 
 const mapDispatchToProps = (dispatch) => ({
   addToken: () => dispatch(addToken()),
@@ -103,7 +103,6 @@ class Login extends Component {
             >
               Sign In
             </button>
-            <img src={recipePhoto} alt="recipePhoto"  style={{width: 600, height: 590, position: "absolute", top: 100, right: 50}}/>
           </div>
           </div>
      

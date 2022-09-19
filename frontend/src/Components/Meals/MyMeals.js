@@ -1,5 +1,15 @@
 import { withRouter, Link } from "react-router-dom";
 import {
+<<<<<<< HEAD
+=======
+  addIngredient,
+  addToken,
+  fetchIngredients,
+  createMeal,
+  fetchMeals
+} from "../../Redux/actionCreators";
+import {
+>>>>>>> 9706be0625bee5afd52e831f4987465faac7e36d
   Form,
   FormGroup,
   Label,
@@ -7,6 +17,8 @@ import {
   Card,
   CardTitle,
   Button,
+  ListGroup,
+  ListGroupItem,
 } from "reactstrap";
 import { connect } from "react-redux";
 import { Component } from "react";
@@ -16,6 +28,10 @@ import { baseUrl } from "../../Shared/baseUrl";
 import "../Meals/MyMeals.css"
 import MealList from "./MealList";
 
+const mapDispatchToProps = (dispatch) => ({
+  fetchMeals: () => dispatch(fetchMeals()),
+});
+
 class MyMeals extends Component {
   constructor(props) {
     super(props);
@@ -24,6 +40,7 @@ class MyMeals extends Component {
       user_id: this.props.user,
       meal_name: "",
       recipes: [],
+      meals: [],
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -31,7 +48,6 @@ class MyMeals extends Component {
   handleCallback = (childData) => {
     this.setState({mealRecipes: childData})
   }
-  
 
   handleLogout = () => {
     this.props.addToken("");
@@ -95,6 +111,20 @@ class MyMeals extends Component {
                     onChange={this.handleInputChange}>
                   </Input>
                 </FormGroup>
+                <FormGroup>
+                  <Label for="recipes">Recipes</Label>
+                  <ListGroup>
+                    {this.state.mealRecipes && (
+                    this.state.mealRecipes.map((recipe) => {
+                      return(
+                        <ListGroupItem>
+                          {recipe.recipe_name}
+                        </ListGroupItem>
+                      )
+                    }))
+                    }
+                  </ListGroup>
+                </FormGroup>
                 <Button>Submit</Button>
               </Form>
             </Card>
@@ -125,7 +155,7 @@ class MyMeals extends Component {
           </div>
           <div style={{width: "20rem",}}>
             <Card className="border-dark align-items-center">
-              <MealList user={this.props.user} parentCallback={this.handleCallback} />
+              <MealList parentMeals={this.state.meals} user={this.props.user} parentCallback={this.handleCallback} />
               <Form>
                 <Input 
                   type="text"
@@ -155,4 +185,4 @@ class MyMeals extends Component {
     );
   }
 }
-export default withRouter(connect()(MyMeals));
+export default withRouter(connect(mapDispatchToProps)(MyMeals));

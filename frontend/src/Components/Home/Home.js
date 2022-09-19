@@ -75,6 +75,8 @@ class Home extends Component {
           marginBottom: 20,
           background: "#556b30",
           alignItems: "center",
+          marginLeft:670
+      
         }}
       >
         Start A Recipe
@@ -101,6 +103,7 @@ class Home extends Component {
           
           marginBottom: 20,
           background: "#556b30",
+          marginLeft:670
         }}
       >
         Start A Meal
@@ -125,9 +128,9 @@ class Home extends Component {
           maxWidth: 250,
           maxHeight: 300,
           marginTop: 20,
-       
-          paddingBottom: 20,
+          marginBottom: 20,
           background: "#556b30",
+          marginLeft:670
         }}
       >
         Start A Meal Plan
