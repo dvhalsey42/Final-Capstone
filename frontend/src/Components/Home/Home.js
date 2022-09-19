@@ -6,7 +6,7 @@ import scallions from "../images/7.2.png"
 import meal from "../images/9.2.png"
 import cal from "../images/cal.png"
 import {Button} from "reactstrap"
-import IngredientList from "../Ingredients/IngredientList";
+
 
 const mapStateToProps = (state) => {
   return {
