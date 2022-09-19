@@ -1,18 +1,14 @@
-import { Component, useState } from "react";
+import { Component} from "react";
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
 import {
   Form,
   Card,
-  Col,
   Button,
-  Input,
-  Row,
-  ListGroup,
-  ListGroupItem,
+  Input, 
 } from "reactstrap";
 import { connect } from "react-redux";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import {
   addIngredient,
   addToken,
@@ -92,7 +88,7 @@ class Ingredient extends Component {
               type="text"
               id="ingredient"
               name="ingredient_name"
-              class="form-control"
+              className="form-control"
               placeholder="Ingredient"
               v-model="ingredient.ingredient_name"
               onChange={this.handleInputChange}
