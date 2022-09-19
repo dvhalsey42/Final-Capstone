@@ -7,7 +7,17 @@ import {
   Card,
   CardTitle,
   Button,
+  ListGroup,
+  ListGroupItem,
 } from "reactstrap";
+
+import {
+  addIngredient,
+  addToken,
+  fetchIngredients,
+  createMeal,
+  fetchMeals
+} from "../../Redux/actionCreators";
 import { connect } from "react-redux";
 
 import { Component } from "react";
@@ -16,6 +26,9 @@ import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
 import "../Meals/MyMeals.css";
 import MealList from "../Meals/MealList";
+import { Meal } from "../../Redux/meal";
+import MyMeals from "../Meals/MyMeals";
+import { Meals } from "../../Redux/meals";
 
 
 class MyMealPlans extends Component {
@@ -87,54 +100,46 @@ class MyMealPlans extends Component {
                     onChange={this.handleInputChange}
                   ></Input>
                 </FormGroup>
+                <FormGroup>
+                  <Label for="meals">Meals</Label>
+                  <ListGroup>
+                    {this.state.mealplan_meals && (
+                      this.state.mealplan_meals.map((meal) => {
+                        return (
+                          <ListGroupItem>
+                            {meal.meal_name}
+                          </ListGroupItem>
+                        )
+                      })
+                    )}
+                  </ListGroup>
+                </FormGroup>
                 <Button>Submit</Button>
               </Form>
             </Card>
           </div>
+        
 
-          <div style={{ width: "20rem" }}>
+          <div style={{width: "20rem",}}>
             <Card className="border-dark align-items-center">
-              <MealList
-                user_id={this.props.user}
-                parentCallback={this.handleCallback}
-              />
-              {/*<Form onSubmit={this.handleAddRecipe}>
-                Figure out way to allow recipe lookup or recipe addition here
+              <MealList parentMeals={this.state.meals} user={this.props.user} parentCallback={this.handleCallback} />
+              <Form>
                 <Input 
                   type="text"
-                  id="meal"
+                  id="meals"
                   name="meal_name"
                   className="form-control"
                   placeholder="Meal"
                   v-model="meal.meal_name"
                   onChange={this.handleInputChange}
                   required
-                />
+                />                
                 <Button type="submit">Add to List</Button>
-              </Form> </div> */}
+              </Form>
             </Card>
           </div>
-        </div>
 
-        <Card className="border-dark align-items-center" style={{width:800}}>
-          <MealList parentCallback={this.handleCallback} />
          
-          <Form onSubmit={this.handleAddMeal}>
-            {/* Figure out way to allow recipe lookup or recipe addition here*/}
-            <Input
-              type="text"
-              id="meal"
-              name="meal_name"
-              className="form-control"
-              placeholder="Meal"
-              v-model="meal.meal_name"
-              onChange={this.handleInputChange}
-              required
-            />
-            <Button type="submit">Add to List</Button>
-          </Form>
-        </Card>
-
         <footer className="text-center pt-5" style={footerStyle}>
           <Link to="/home" style={{ color: "#556b2f" }}>
             Home |{" "}
@@ -147,6 +152,7 @@ class MyMealPlans extends Component {
             Logout
           </Link>
         </footer>
+      </div>
       </div>
     );
   }

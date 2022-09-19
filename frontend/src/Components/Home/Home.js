@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 import scallions from "../images/7.2.png"
 import meal from "../images/9.2.png"
 import cal from "../images/cal.png"
-import Button from "reactstrap"
+import { Button } from "reactstrap";
+//import Button from "reactstrap"
 
 const mapStateToProps = (state) => {
   return {

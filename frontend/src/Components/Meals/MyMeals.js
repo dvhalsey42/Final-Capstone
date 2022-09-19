@@ -1,7 +1,5 @@
 import { withRouter, Link } from "react-router-dom";
 import {
-<<<<<<< HEAD
-=======
   addIngredient,
   addToken,
   fetchIngredients,
@@ -9,7 +7,6 @@ import {
   fetchMeals
 } from "../../Redux/actionCreators";
 import {
->>>>>>> 9706be0625bee5afd52e831f4987465faac7e36d
   Form,
   FormGroup,
   Label,
