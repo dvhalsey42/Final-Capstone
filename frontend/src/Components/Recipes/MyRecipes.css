@@ -5,6 +5,22 @@
 
 }
 
-#ingList, #recList, #newRec {
+#newRec {
   background-color: #f0eae1;
 }
+
+
+#ingList{
+  margin-left: 120%;
+  margin-top: 0%;
+  background-color: #f0eae1;
+}
+
+#recList{
+  background-color: #f0eae1;
+  margin: 30%;
+  margin-top: 5%;
+
+}
+
+

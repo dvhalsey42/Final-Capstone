@@ -66,7 +66,8 @@ class Home extends Component {
         <p>PLAN PREP ENJOY</p>
       </div>
       <div className="home-cards mt-5">
-        <h2>Start By Crafting Your Recipe</h2>
+      <img src={SP} alt="SP" style={{width:100, left:5, bottom:0}}/>
+        <h2>Start By Crafting Your Recipe</h2> 
       </div>
       <footer className="text-center pt-5" style={this.footerStyle}>
         <Link to="/home" style={{ color: "#556b2f" }}>

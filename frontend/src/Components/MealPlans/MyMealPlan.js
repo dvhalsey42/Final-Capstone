@@ -83,7 +83,7 @@ class MyMealPlans extends Component {
       <div className="row">
         <div className="mealplan-layout">
           <div className="new-mealplan">
-            <Card body className="text-start my-2">
+            <Card body className="text-start my-2" style={{width:800}}>
               <CardTitle tag="h5">Create Your Meal Plan</CardTitle>
               <Form onSubmit={this.handleCreateMealPlan}>
                 <FormGroup>
@@ -123,7 +123,7 @@ class MyMealPlans extends Component {
           </div>
         </div>
 
-        <Card className="border-dark align-items-center">
+        <Card className="border-dark align-items-center" style={{width:800}}>
           <MealList parentCallback={this.handleCallback} />
          
           <Form onSubmit={this.handleAddMeal}>
