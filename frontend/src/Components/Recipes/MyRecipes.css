@@ -1,26 +1,31 @@
-.recipe-layout {
+/* .recipe-layout {
   background-color: #f0eae1;
   display: flex;
   gap: 35px;
 
-}
+} */
 
-#newRec {
+/* #newRec {
   background-color: #f0eae1;
-}
+} */
 
 
-#ingList{
+/* #ingList{
   margin-left: 120%;
   margin-top: 0%;
   background-color: #f0eae1;
-}
+} */
 
 #recList{
   background-color: #f0eae1;
   margin: 30%;
   margin-top: 5%;
 
+}
+
+.container {
+   display: flex;
+  justify-content: center;
 }
 
 

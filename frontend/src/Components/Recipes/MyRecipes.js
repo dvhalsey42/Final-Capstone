@@ -11,8 +11,7 @@ import {
   Button,
   CardSubtitle,
  ListGroup,
- ListGroupItem
-
+ ListGroupItem,
 } from "reactstrap";
 import "../Recipes/MyRecipes.css";
 import axios from "axios";
@@ -86,7 +85,8 @@ class MyRecipes extends Component {
     const mystyle = {
       color: "rgb(204,85,0)",
       padding: "10px",
-      width: "20rem",
+      maxWidth: "50%",
+      border: "none",
     };
 
     const footerStyle = {
@@ -109,38 +109,39 @@ class MyRecipes extends Component {
     };
 
     return (
-      <div className="row">
-        <h1 className="text-center">Craft Your Recipes</h1>
-        <div className="recipe-layout">
-          <div className="new-recipe">
-            <Card
-              body
-              className="row text-start"
-              id="newRec"
-              style={{
-                backgroundColor: "f0eae1",
-                maxWidth: 800,
-              }}
-            >
-              <CardTitle style={{ mystyle }} id="h5">
-                Create Your Recipe
-              </CardTitle>
+      <div className="">
+        <h1 className="text-center mb-5">Craft Your Recipes</h1>
+        <h2 className="text-center mb-5">🧄 Create & Catalogue Recipes You Love 🍲</h2>
+        <div className="container">
+          <Card
+            body
+            className=""
+            id="newRec"
+            style={{
+              backgroundColor: "#F6F2F0",
+              border: "none",
+              maxWidth: "50%",
+            }}
+          >
+            {/* <CardTitle id="h5">Create Your Recipe</CardTitle> */}
 
-              <Form onSubmit={this.handleCreateRecipe} className="">
+            <Form onSubmit={this.handleCreateRecipe} className="">
+              <div className="">
                 <FormGroup style={{ color: "#92ab75", width: "100%" }}>
                   <Label for="recipe_name">Name Your Recipe</Label>
                   <Input
                     name="recipe_name"
                     placeholder="recipe name"
+                    style={{ maxWidth: 400 }}
                     onChange={this.handleInputChange}
                   />
                 </FormGroup>
                 <FormGroup>
                   <CardTitle tag="h5">Add Ingredients</CardTitle>
                   <CardSubtitle className="mb-5">
-                    Select Ingredients From Your IngredientList
+                    click the ➕ to add ingredients to this recipe 
+                    from your ingredient list  ➡️
                   </CardSubtitle>
-                  <Label for="Instructions">Cooking Instructions</Label>
                   <ListGroup>
                     {this.state.recipeIngredients &&
                       this.state.recipeIngredients.map((ingredient) => {
@@ -152,26 +153,26 @@ class MyRecipes extends Component {
                       })}
                   </ListGroup>
                 </FormGroup>
-
                 <FormGroup style={{ color: "#92ab75" }}>
                   <Label for="instructions">How Do You Prepare It?</Label>
                   <Input
+                  className="mb-5"
                     id="recipeText"
                     name="instructions_list"
+                    style={{ maxWidth: 400, maxHeight: 600 }}
                     type="textarea"
                     onChange={this.handleInputChange}
                   />
                 </FormGroup>
-                <Button style={StyledButton}>Submit</Button>
-              </Form>
-            </Card>
-          </div>
-        </div>
-        <div style={{ mystyle, right: 5, width: 850 }}>
+              </div>
+              <Button style={StyledButton}>Save My Recipe</Button>
+            </Form>
+          </Card>
+
           <IngredientList parentCallback={this.handleCallback} />
         </div>
 
-        <div style={{ mystyle, right: 5, width: 850 }}>
+        <div >
           <Card id="recList" className="align-items-center">
             <RecipeList parentCallback={this.handleCallback} />
             <Form onSubmit={this.handleAddRecipe}>

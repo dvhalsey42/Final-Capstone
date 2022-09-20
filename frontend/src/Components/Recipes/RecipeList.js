@@ -76,43 +76,60 @@ class RecipeList extends Component {
     return (
       <div className="align-items-center">
         <Card
-          className="pantry-card"
           style={{
-            width: "15rem",
+            maxWidth: "100%"
           }}
         >
           <h2>My Recipes</h2>
-          <p>Add Recipes To A Meal By Clicking the 🍽 </p>
-          <ListGroup className="row-cols-lg-auto g-3 mb-5 ">
+          <p>Add Recipes To A Meal By Clicking the ➕ </p>
+          <ListGroup className=" ">
             {this.state.recipes.map((recipe) => {
               return (
                 <ListGroupItem>
                   {/* this is where recipe list is rendered */}
 
-                  <Button id="ScheduleUpdateButton" type="button" onClick={() => {this.setSelectedRecipe(recipe)}}>
-                    {recipe.recipe_name}  
+                  <Button
+                    id="ScheduleUpdateButton"
+                    type="button"
+                    onClick={() => {
+                      this.setSelectedRecipe(recipe);
+                    }}
+                  >
+                    {recipe.recipe_name}
                   </Button>
-                  <UncontrolledPopover placement="right" target="ScheduleUpdateButton" trigger="legacy" >
+                  <UncontrolledPopover
+                    placement="right"
+                    target="ScheduleUpdateButton"
+                    trigger="legacy"
+                  >
                     <PopoverHeader>
                       {this.state.selectedRecipe.recipe_name}
                     </PopoverHeader>
                     <PopoverBody>
                       <h5>Instructions</h5>
                       {this.state.selectedRecipe.instructions_list}
-                      <h5>Ingredients</h5> 
-                      {this.state.selectedRecipe && (
-                        this.state.selectedRecipe.ingredients.map((ingredient) => {
-                          return (
-                            <ListGroup>
-                              <ListGroupItem>
-                                {ingredient.ingredient_name}
-                              </ListGroupItem>
-                            </ListGroup>
-                          )
-                        })
-                      )}
+                      <h5>Ingredients</h5>
+                      {this.state.selectedRecipe &&
+                        this.state.selectedRecipe.ingredients.map(
+                          (ingredient) => {
+                            return (
+                              <ListGroup>
+                                <ListGroupItem>
+                                  {ingredient.ingredient_name}
+                                </ListGroupItem>
+                              </ListGroup>
+                            );
+                          }
+                        )}
                       <Button onClick={() => {}}>Edit</Button>
-                      <Button onClick={() => {this.removeRecipe(this.state.selectedRecipe); document.body.click()}}>Delete</Button>
+                      <Button
+                        onClick={() => {
+                          this.removeRecipe(this.state.selectedRecipe);
+                          document.body.click();
+                        }}
+                      >
+                        Delete
+                      </Button>
                     </PopoverBody>
                   </UncontrolledPopover>
 
@@ -120,15 +137,27 @@ class RecipeList extends Component {
                     onClick={() => {
                       this.removeRecipe(recipe);
                     }}
+                    style={{
+                      width: 40,
+                      height: 30,
+                      background: "#FFFFFF",
+                      border: "#FFFFFF",
+                    }}
                   >
-                    x
+                    ✖️
                   </button>
                   <button
                     onClick={() => {
                       this.handleAddRecipeToMeal(recipe);
                     }}
-                    > 
-                    🍽
+                    style={{
+                      width: 40,
+                      height: 30,
+                      background: "#FFFFFF",
+                      border: "#FFFFFF",
+                    }}
+                  >
+                   ➕
                   </button>
                 </ListGroupItem>
               );
