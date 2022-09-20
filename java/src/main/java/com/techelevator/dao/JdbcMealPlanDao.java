@@ -185,7 +185,7 @@ public class JdbcMealPlanDao implements MealPlanDao {
         Recipe recipe = new Recipe();
         recipe.setRecipe_id(rs.getInt("recipe_id"));
         recipe.setUser_id(rs.getInt("user_id"));
-        recipe.setRecipe_name("recipe_name");
+        recipe.setRecipe_name(rs.getString("recipe_name"));
         recipe.setInstructions_list(rs.getString("instructions_list"));
         recipe.setIngredients(getIngredientsByRecipeId(rs.getInt("recipe_id")));
 
@@ -258,7 +258,7 @@ public class JdbcMealPlanDao implements MealPlanDao {
         meal.setMeal_id(rs.getInt("meal_id"));
         meal.setUser_id(rs.getInt("user_id"));
         meal.setMeal_name(rs.getString("meal_name"));
-
+        meal.setRecipes(getRecipesFromMealId(rs.getInt("meal_id")));
         return meal;
     }
 }

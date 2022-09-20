@@ -84,12 +84,12 @@ class IngredientList extends Component {
       category: "",
     };
 
-    const ingredientWithToken = await axios.post(
+    await axios.post(
       baseUrl + "/ingredients/create",
       data
-    );
+    ).then(() => {this.handleFetchIngredients()});
 
-    await this.props.dispatch(ingredientWithToken(this.data.ingredient_name));
+    //await this.props.dispatch(ingredientWithToken(ingredientWithToken));
   };
 
   // INGREDIENT INPUT

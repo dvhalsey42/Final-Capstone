@@ -26,6 +26,10 @@ class MealPlanList extends Component {
         this.handleFetchMealPlans();
     }
 
+    componentDidUpdate() {
+        this.handleFetchMealPlans();
+    }
+
     handleFetchMealPlans = async () => {
         var mealplansUrl = "/mymealplans";
         const mealPlansWithToken = await axios.get(baseUrl + mealplansUrl);
@@ -87,6 +91,18 @@ class MealPlanList extends Component {
                                             <ListGroup>
                                                 <ListGroupItem>
                                                     {meal.meal_name}
+                                                    <h5>Recipes</h5>
+                                                    {meal.recipes && (
+                                                        meal.recipes.map((recipe) => {
+                                                            return (
+                                                                <ListGroup>
+                                                                    <ListGroupItem>
+                                                                        {recipe.recipe_name}
+                                                                    </ListGroupItem>
+                                                                </ListGroup>
+                                                            )
+                                                        })
+                                                    )}
                                                 </ListGroupItem>
                                             </ListGroup>
                                         )

@@ -7,7 +7,6 @@ import { Card, ListGroup, ListGroupItem, Button, UncontrolledPopover, PopoverHea
 import axios from "axios";
 
 
-
 class MealList extends Component {
     constructor(props) {
         super(props);
@@ -17,11 +16,16 @@ class MealList extends Component {
             mealList: [],
             user_id: this.props.user,
             selectedMeal: '',
+            newMeals: [],
         };
         this.removeMeal = this.removeMeal.bind(this);
-    }
+    }    
 
     componentDidMount() {
+        this.handleFetchMeals();
+    }
+
+    componentDidUpdate() {
         this.handleFetchMeals();
     }
 
@@ -46,6 +50,8 @@ class MealList extends Component {
         this.props.parentCallback(newMealList);
     }
 
+
+
     async removeMeal(meal) {
         await axios.delete(baseUrl + "/mymeal/" + meal.meal_id + "/delete").then(() => {this.handleFetchMeals()});
     }
@@ -54,10 +60,6 @@ class MealList extends Component {
         this.setState({
             selectedMeal: meal,
         })
-    }
-
-    mealCard(meal) {
-        
     }
 
     render() {
