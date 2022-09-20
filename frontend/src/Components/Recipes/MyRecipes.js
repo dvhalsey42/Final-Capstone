@@ -53,7 +53,7 @@ class MyRecipes extends Component {
       instructions_list: this.state.instructions_list,
       ingredients: this.state.recipeIngredients,
     };
-    console.log(this.state);
+
     await axios.post(baseUrl + "/recipes/create", data).then(() => {this.onCounter()});
 
   };

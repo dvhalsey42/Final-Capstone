@@ -26,10 +26,10 @@ const mapDispatchToProps = (dispatch) => ({
 class RecipeList extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       recipes: [],
       mealRecipes: [],
-      selectedRecipe: '',
+      selectedRecipe: "",
     };
     this.handleFetchRecipes = this.handleFetchRecipes.bind(this);
     this.removeRecipe = this.removeRecipe.bind(this);
@@ -41,7 +41,7 @@ class RecipeList extends Component {
   }
 
   // FETCH INGREDIENTS LOGIC
-  handleFetchRecipes = async () => { 
+  handleFetchRecipes = async () => {
     const recipesWithToken = await axios.get(baseUrl + "/myrecipes");
 
     await this.props.dispatch(fetchRecipes(recipesWithToken.data));
@@ -60,17 +60,20 @@ class RecipeList extends Component {
     });
     this.props.parentCallback(newRecipeList);
     console.log(this.state);
-  }
+  };
 
-  
   async removeRecipe(recipe) {
-    await axios.delete(baseUrl + "/myrecipes/" + recipe.recipe_id + "/delete").then(() => {this.handleFetchRecipes()});
+    await axios
+      .delete(baseUrl + "/myrecipes/" + recipe.recipe_id + "/delete")
+      .then(() => {
+        this.handleFetchRecipes();
+      });
   }
 
   setSelectedRecipe(recipe) {
     this.setState({
       selectedRecipe: recipe,
-    })
+    });
   }
 
    StyledButton = {
@@ -86,7 +89,7 @@ class RecipeList extends Component {
       <div className="align-items-center mt-5">
         <Card
           style={{
-            maxWidth: "100%"
+            maxWidth: "100%",
           }}
         >
           <h2>My Recipes</h2>
