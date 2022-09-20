@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import scallions from "../images/7.2.png"
 import meal from "../images/9.2.png"
 import cal from "../images/cal.png"
+import mainlogo from "../images/transparentlogo.png"
 import {Button} from "reactstrap"
 
 
@@ -50,9 +51,20 @@ class Home extends Component {
 
   render() {
   return (
+    
     <div className="row justify-content-center pb-5">
       <div className="text-center pt-5">
-        <h1>Let's Eat</h1>
+      <img 
+        className="logo"
+        src={mainlogo}
+        alt="Lets Eat Logo"
+        style={{
+            maxWidth: 500,
+            maxHeight: 300,
+            marginTop: 5,
+            marginBottom: -30,
+            marginInlineEnd: 20
+        }}/>
         <p>PLAN PREP ENJOY</p>
         <h2 className="mt-5">Start By Crafting Your Recipe</h2>
         <img

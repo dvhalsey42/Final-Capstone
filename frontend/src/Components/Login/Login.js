@@ -57,7 +57,17 @@ class Login extends Component {
     
         <div className="login-form">
           <div className="text-center pt-5">
-            <h1 style={{ color: "#556b2f" }}>Let's Eat</h1>
+          <img 
+        className="logo"
+        src={logo}
+        alt="Lets Eat Logo"
+        style={{
+            maxWidth: 500,
+            maxHeight: 300,
+            marginTop: 5,
+            marginBottom: -30,
+            marginInlineEnd: 20
+        }}/>
             <p>PLAN PREP ENJOY</p>
           </div>
           <div className="row justify-content-center align-items-center">
