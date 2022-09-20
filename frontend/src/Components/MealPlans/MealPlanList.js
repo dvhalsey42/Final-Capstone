@@ -18,6 +18,7 @@ class MealPlanList extends Component {
             meal_plans: [],
             mealPlanList: [],
             selectedMealPlan: '',
+            selectedRecipe: '',
             user_id: this.props.user,
         };
     }
@@ -57,6 +58,12 @@ class MealPlanList extends Component {
         })
     }
 
+    setSelectedRecipe(recipe) {
+        this.setState({
+            selectedRecipe: recipe,
+        })
+    }
+
     render() {
         return (
             <div className="align-items-center">
@@ -93,7 +100,30 @@ class MealPlanList extends Component {
                                                             return (
                                                                 <ListGroup>
                                                                     <ListGroupItem>
-                                                                        {recipe.recipe_name}
+                                                                        <Button id="MealPlanRecipeButton" type="button" onClick={() => {this.setSelectedRecipe(recipe)}}>
+                                                                            {recipe.recipe_name}
+                                                                        </Button>
+                                                                        <UncontrolledPopover placement="bottom" target="MealPlanRecipeButton" trigger="legacy">
+                                                                            <PopoverHeader>
+                                                                                {this.state.selectedRecipe.recipe_name}
+                                                                            </PopoverHeader>
+                                                                            <PopoverBody>
+                                                                                <h5>Instructions List</h5>
+                                                                                {this.state.selectedRecipe.instructions_list}
+                                                                                <h5>Ingredients</h5>
+                                                                                {this.state.selectedRecipe.ingredients && (
+                                                                                    this.state.selectedRecipe.ingredients.map((ingredient) => {
+                                                                                        return(
+                                                                                            <ListGroup>
+                                                                                                <ListGroupItem>
+                                                                                                    {ingredient.ingredient_name}
+                                                                                                </ListGroupItem>
+                                                                                            </ListGroup>
+                                                                                        )
+                                                                                    })
+                                                                                )}
+                                                                            </PopoverBody>
+                                                                        </UncontrolledPopover>
                                                                     </ListGroupItem>
                                                                 </ListGroup>
                                                             )
