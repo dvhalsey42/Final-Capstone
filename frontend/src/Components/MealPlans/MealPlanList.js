@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { fetchMealPlans } from "../../Redux/actionCreators";
 import { baseUrl } from "../../Shared/baseUrl";
-import { Card, ListGroup, ListGroupItem } from "reactstrap";
+import { Card, ListGroup, ListGroupItem, Button, UncontrolledPopover, PopoverHeader, PopoverBody } from "reactstrap";
 import axios from "axios";
 
 const mapDispatchToProps = (dispatch) => ({
@@ -15,11 +15,11 @@ class MealPlanList extends Component {
         super(props);
         
         this.state = { 
-            meals: [], 
-            mealList: [],
+            meal_plans: [],
+            mealPlanList: [],
+            selectedMealPlan: '',
             user_id: this.props.user,
         };
-        this.removeMeal = this.removeMeal.bind(this);
     }
 
     componentDidMount() {
@@ -46,12 +46,15 @@ class MealPlanList extends Component {
         console.log(this.state);
     }
 
-    removeMealPlan(meal_plan_name) {
+    async removeMealPlan(meal_plan) {
+        console.log(meal_plan);
+        await axios.delete(baseUrl + "/mymealplan/" + meal_plan.plan_id + "/delete").then(() => {this.handleFetchMealPlans()});
+    }
+
+    setSelectedMealPlan(mealPlan) {
         this.setState({
-            meal_plans: this.state.meal_plans.filter(
-                (meal_plan) => meal_plan !== meal_plan_name
-            )
-        });
+            selectedMealPlan: mealPlan,
+        })
     }
 
     render() {
@@ -69,7 +72,30 @@ class MealPlanList extends Component {
                     return (
                         <ListGroupItem>
                         {/* this is where ingredient this is rendered */}
-                        {meal_plan.meal_plan_name}
+                        <Button id="MealPlanButton" type="button" onClick={() => {this.setSelectedMealPlan(meal_plan)}}>
+                            {meal_plan.meal_plan_name}
+                        </Button>
+                        <UncontrolledPopover placement="right" target="MealPlanButton" trigger="legacy">
+                            <PopoverHeader>
+                                {this.state.selectedMealPlan.meal_plan_name}
+                            </PopoverHeader>
+                            <PopoverBody>
+                                <h5>Meals</h5>
+                                {this.state.selectedMealPlan && (
+                                    this.state.selectedMealPlan.meals.map((meal) => {
+                                        return (
+                                            <ListGroup>
+                                                <ListGroupItem>
+                                                    {meal.meal_name}
+                                                </ListGroupItem>
+                                            </ListGroup>
+                                        )
+                                    })
+                                )}
+                                <Button onClick={() => {}}>Edit</Button>
+                                <Button onClick={() => {this.removeMealPlan(this.state.selectedMealPlan); document.body.click()}}>Delete</Button>
+                            </PopoverBody>
+                        </UncontrolledPopover>
                         <button
                             onClick={() => {
                             this.removeMealPlan(meal_plan);

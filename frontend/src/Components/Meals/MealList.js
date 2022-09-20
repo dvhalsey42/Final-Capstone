@@ -111,7 +111,8 @@ class MealList extends Component {
                         </button>
                         <button
                             onClick={() => {
-                            this.handleAddMealToRecipe(meal);
+                            // this.handleAddMealToRecipe(meal);
+                            this.handleCallback(meal);
                             }}
                         >
                             +

@@ -18,7 +18,7 @@ import {
   createMeal,
   fetchMeals
 } from "../../Redux/actionCreators";
-import { connect } from "react-redux";
+import { connect } from "react-redux"; 
 
 import { Component } from "react";
 
@@ -29,6 +29,8 @@ import MealList from "../Meals/MealList";
 import { Meal } from "../../Redux/meal";
 import MyMeals from "../Meals/MyMeals";
 import { Meals } from "../../Redux/meals";
+import MealPlanList from "./MealPlanList";
+import "../MealPlans/MealPlans.css"
 
 
 class MyMealPlans extends Component {
@@ -45,7 +47,7 @@ class MyMealPlans extends Component {
   }
 
   handleCallback = (childData) => {
-    this.setState({ meals: childData });
+    this.setState({ mealplan_meals: childData });
   };
 
   handleLogout = () => {
@@ -59,9 +61,9 @@ class MyMealPlans extends Component {
       meal_plan_id: 0,
       user_id: this.state.user_id,
       meal_plan_name: this.state.meal_plan_name,
-      meals: this.state.meals,
+      meals: this.state.mealplan_meals,
     };
-
+    console.log(data);
     await axios.post(baseUrl + "/mealplan/create", data);
   };
 
@@ -89,7 +91,7 @@ class MyMealPlans extends Component {
       <div className="row">
         <div className="mealplan-layout">
           <div className="new-mealplan">
-            <Card body className="text-start my-2" style={{width:800}}>
+            <Card body className="text-start my-2">
               <CardTitle tag="h5">Create Your Meal Plan</CardTitle>
               <Form onSubmit={this.handleCreateMealPlan}>
                 <FormGroup>
@@ -137,6 +139,10 @@ class MyMealPlans extends Component {
                 <Button type="submit">Add to List</Button>
               </Form>
             </Card>
+          </div>
+
+          <div style={{width:"20rem",}}>
+            <MealPlanList />
           </div>
 
          

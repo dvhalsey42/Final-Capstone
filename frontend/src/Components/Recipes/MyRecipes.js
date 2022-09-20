@@ -47,7 +47,8 @@ class MyRecipes extends Component {
 
   handleAddIngredientToList;
 
-  handleCreateRecipe = async () => {
+  handleCreateRecipe = async (e) => {
+    e.preventDefault();
     const data = {
       recipe_id: "",
       user_id: this.state.user_id,
