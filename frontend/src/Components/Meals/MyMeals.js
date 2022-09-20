@@ -36,6 +36,7 @@ class MyMeals extends Component {
       meal_name: "",
       recipes: [],
       meals: [],
+      newMeals: [],
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -63,7 +64,10 @@ class MyMeals extends Component {
       baseUrl + "/mymeal/create",
       data
     );
-
+    this.setState({
+      ...this.state,
+      newMeals: this.state.newMeals + data,
+    })
   };
 
 
@@ -137,6 +141,7 @@ class MyMeals extends Component {
                 parentMeals={this.state.meals}
                 user={this.props.user}
                 parentCallback={this.handleCallback}
+                newMeals={this.state.newMeals}
               />
               <Link to="/mymealplans">
                 <Button type="submit">Start A Meal Plan</Button>

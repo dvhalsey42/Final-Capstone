@@ -39,6 +39,10 @@ class RecipeList extends Component {
     this.handleFetchRecipes();
   }
 
+  componentDidUpdate() {
+    this.handleFetchRecipes();
+  }
+
   // FETCH INGREDIENTS LOGIC
   handleFetchRecipes = async () => { 
     const recipesWithToken = await axios.get(baseUrl + "/myrecipes");
