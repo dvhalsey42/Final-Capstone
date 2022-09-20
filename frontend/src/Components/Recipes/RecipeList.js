@@ -76,16 +76,25 @@ class RecipeList extends Component {
     })
   }
 
+   StyledButton = {
+      backgroundColor: "#FAC668",
+      width: 200,
+      height: "3rem",
+      border: "none",
+      color: "#556b2f",
+    };
+
+
   render() {
     return (
-      <div className="align-items-center">
+      <div className="align-items-center mt-5">
         <Card
           style={{
             maxWidth: "100%"
           }}
         >
           <h2>My Recipes</h2>
-          <p>Add Recipes To A Meal By Clicking the ➕ </p>
+          <p>click each recipe to view, edit, or delete</p>
           <ListGroup className=" ">
             {this.state.recipes.map((recipe) => {
               return (
@@ -93,6 +102,7 @@ class RecipeList extends Component {
                   {/* this is where recipe list is rendered */}
 
                   <Button
+                    style={this.StyledButton}
                     id="ScheduleUpdateButton"
                     type="button"
                     onClick={() => {
@@ -105,6 +115,7 @@ class RecipeList extends Component {
                     placement="right"
                     target="ScheduleUpdateButton"
                     trigger="legacy"
+                    style={{ width: 200, background: "#F6F2F0" }}
                   >
                     <PopoverHeader>
                       {this.state.selectedRecipe.recipe_name}
@@ -125,14 +136,30 @@ class RecipeList extends Component {
                             );
                           }
                         )}
-                      <Button onClick={() => {}}>Edit</Button>
                       <Button
+                        style={{
+                          width: 40,
+                          height: 30,
+                          background: "#F6F2F0",
+                          border: "#F6F2F0",
+                        }}
+                        onClick={() => {}}
+                      >
+                        ✍️
+                      </Button>
+                      <Button
+                        style={{
+                          width: 40,
+                          height: 30,
+                          background: "#F6F2F0",
+                          border: "#F6F2F0",
+                        }}
                         onClick={() => {
                           this.removeRecipe(this.state.selectedRecipe);
                           document.body.click();
                         }}
                       >
-                        Delete
+                        ✖️
                       </Button>
                     </PopoverBody>
                   </UncontrolledPopover>
@@ -161,7 +188,7 @@ class RecipeList extends Component {
                       border: "#FFFFFF",
                     }}
                   >
-                   ➕
+                    ➕
                   </button>
                 </ListGroupItem>
               );

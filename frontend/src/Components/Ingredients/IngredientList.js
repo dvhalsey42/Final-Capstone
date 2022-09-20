@@ -75,6 +75,17 @@ class IngredientList extends Component {
     });
   }
 
+  handleDeleteIngredientFromRecipe = (ingredient) => {
+    var newIngredientList = this.state.ingredients;
+    newIngredientList.filter(ingredient);
+    this.setState({
+      ...this.state,
+      ingredients: newIngredientList,
+    });
+    this.props.parentCallback(newIngredientList);
+    console.log(this.state);
+  }
+
   // ADD INGREDIENT LOGIC
   handleAddIngredient = async (e) => {
     e.preventDefault();
@@ -145,7 +156,7 @@ class IngredientList extends Component {
                   >
                     ➕
                   </Button>
-                  <Button
+                  {/* <Button
                     style={{
                       width: 40,
                       height: 30,
@@ -158,7 +169,7 @@ class IngredientList extends Component {
                     className="text-center"
                   >
                     ✖️
-                  </Button>
+                  </Button> */}
                 </ListGroupItem>
               );
             })}

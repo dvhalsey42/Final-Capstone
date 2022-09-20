@@ -46,13 +46,13 @@ class Login extends Component {
 
   render() {
 
-    const StyledButton ={
-  backgroundColor: "#f0eae1",
-  width: 400,
-  height: "3rem",
-  border:"none",
-  color: "#556b2f",
-    };
+   const StyledButton = {
+     backgroundColor: "#FAC668",
+     width: 200,
+     height: "3rem",
+     border: "none",
+     color: "#556b2f",
+   };
     return (
     
         <div className="login-form">
@@ -107,6 +107,7 @@ class Login extends Component {
             </Link>
             {"  "}
             <button
+           style={StyledButton}
               type="submit"
               onClick={this.handleLogin}
               
