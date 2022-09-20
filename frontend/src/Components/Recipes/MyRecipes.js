@@ -30,6 +30,7 @@ class MyRecipes extends Component {
       recipe_name: "",
       instructions_list: "",
       ingredients: [],
+      counter: 0,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -43,6 +44,10 @@ class MyRecipes extends Component {
     this.props.deleteUser();
   };
 
+  onCounter =() => {
+    this.setState({counter: this.state.counter + 1})
+  }
+
   handleAddIngredientToList;
 
   handleCreateRecipe = async (e) => {
@@ -55,7 +60,7 @@ class MyRecipes extends Component {
       ingredients: this.state.recipeIngredients,
     };
 
-    await axios.post(baseUrl + "/recipes/create", data);
+    await axios.post(baseUrl + "/recipes/create", data).then(() => {this.onCounter()});
 
   };
 
@@ -191,7 +196,7 @@ class MyRecipes extends Component {
 
         <div>
           <Card id="recList" className="align-items-center">
-            <RecipeList parentCallback={this.handleCallback} />
+            <RecipeList parentCallback={this.handleCallback} key={this.state.counter}/>
             <Link to="/mymeals" className="mt-5 mb-5">
               <Button style={StyledButton}>Start Creating Meals</Button>
             </Link>

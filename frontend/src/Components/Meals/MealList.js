@@ -50,8 +50,6 @@ class MealList extends Component {
         this.props.parentCallback(newMealList);
     }
 
-
-
     async removeMeal(meal) {
         await axios.delete(baseUrl + "/mymeal/" + meal.meal_id + "/delete").then(() => {this.handleFetchMeals()});
     }
