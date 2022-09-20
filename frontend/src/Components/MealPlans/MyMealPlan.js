@@ -10,14 +10,6 @@ import {
   ListGroup,
   ListGroupItem,
 } from "reactstrap";
-
-import {
-  addIngredient,
-  addToken,
-  fetchIngredients,
-  createMeal,
-  fetchMeals
-} from "../../Redux/actionCreators";
 import { connect } from "react-redux"; 
 
 import { Component } from "react";
@@ -26,9 +18,6 @@ import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
 import "../Meals/MyMeals.css";
 import MealList from "../Meals/MealList";
-import { Meal } from "../../Redux/meal";
-import MyMeals from "../Meals/MyMeals";
-import { Meals } from "../../Redux/meals";
 import MealPlanList from "./MealPlanList";
 import "../MealPlans/MealPlans.css"
 

@@ -4,7 +4,6 @@ import { Component } from "react";
 import {
   Form,
   FormGroup,
-  Label,
   Input,
   Card,
   CardTitle,
@@ -111,7 +110,9 @@ class MyRecipes extends Component {
     return (
       <div className="">
         <h1 className="text-center mb-5">Craft Your Recipes</h1>
-        <h2 className="text-center mb-5">🧄 Create & Catalogue Recipes You Love 🍲</h2>
+        <h2 className="text-center mb-5">
+          🧄 Create & Catalogue Recipes You Love 🍲
+        </h2>
         <div className="container">
           <Card
             body
@@ -128,7 +129,9 @@ class MyRecipes extends Component {
             <Form onSubmit={this.handleCreateRecipe} className="">
               <div className="">
                 <FormGroup style={{ color: "#92ab75", width: "100%" }}>
-                  <Label for="recipe_name">Name Your Recipe</Label>
+                  <CardTitle tag="h5" for="recipe_name">
+                    Name Your Recipe
+                  </CardTitle>
                   <Input
                     name="recipe_name"
                     placeholder="recipe name"
@@ -139,8 +142,7 @@ class MyRecipes extends Component {
                 <FormGroup>
                   <CardTitle tag="h5">Add Ingredients</CardTitle>
                   <CardSubtitle className="mb-5">
-                    click the ➕ to add ingredients to this recipe 
-                    from your ingredient list  ➡️
+                    click the ➕ to add ingredients from your ingredient list ➡️
                   </CardSubtitle>
                   <ListGroup>
                     {this.state.recipeIngredients &&
@@ -148,19 +150,34 @@ class MyRecipes extends Component {
                         return (
                           <ListGroupItem>
                             {ingredient.ingredient_name}
+                            <Button
+                              style={{
+                                width: 40,
+                                height: 30,
+                                background: "#FFFFFF",
+                                border: "#FFFFFF",
+                              }}
+                              className="text-center"
+                            >
+                              ✖️
+                            </Button>
                           </ListGroupItem>
                         );
                       })}
+                   
                   </ListGroup>
                 </FormGroup>
                 <FormGroup style={{ color: "#92ab75" }}>
-                  <Label for="instructions">How Do You Prepare It?</Label>
+                  <CardTitle tag="h5" for="instructions">
+                    How Do You Prepare It?
+                  </CardTitle>
                   <Input
-                  className="mb-5"
+                    className="mb-5"
                     id="recipeText"
                     name="instructions_list"
                     style={{ maxWidth: 400, maxHeight: 600 }}
                     type="textarea"
+                    placeholder="cooking instructions"
                     onChange={this.handleInputChange}
                   />
                 </FormGroup>
@@ -172,24 +189,12 @@ class MyRecipes extends Component {
           <IngredientList parentCallback={this.handleCallback} />
         </div>
 
-        <div >
+        <div>
           <Card id="recList" className="align-items-center">
             <RecipeList parentCallback={this.handleCallback} />
-            <Form onSubmit={this.handleAddRecipe}>
-              <Input
-                type="text"
-                id="recipe"
-                name="recipe_name"
-                className="form-control"
-                placeholder="Recipe"
-                v-model="recipe.recipe_name"
-                onChange={this.handleInputChange}
-                required
-              />
-              <Button type="submit" style={StyledButton}>
-                Add to List
-              </Button>
-            </Form>
+            <Link to="/mymeals" className="mt-5 mb-5">
+              <Button style={StyledButton}>Start Creating Meals</Button>
+            </Link>
           </Card>
         </div>
         <footer className="text-center pt-5" style={footerStyle}>

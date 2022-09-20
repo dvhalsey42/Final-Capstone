@@ -23,6 +23,7 @@ import logo from "../images/transparentlogo.png";
 import Ingredient from "../Ingredients/Ingredient";
 import MyRecipes from "../Recipes/MyRecipes";
 import LandingPage from "../Non-Protected/LandingPage";
+import Account from "../Account/Account.js"
 
 const mapStateToProps = (state) => {
   return {
@@ -115,8 +116,8 @@ class Main extends Component {
                       </DropdownItem>
                       <DropdownItem className="sub-item">
                         <NavItem>
-                          <NavLink className="links" tag={Link} to="/home">
-                            Home
+                          <NavLink className="links" tag={Link} to="/myaccount">
+                            Account
                           </NavLink>
                         </NavItem>
                       </DropdownItem>
@@ -175,6 +176,14 @@ class Main extends Component {
             path="/myingredients"
             component={
               this.props.token.token !== undefined ? () => <Ingredient /> : null
+            }
+          />
+          <Route
+            path="/myaccount"
+            component={
+              this.props.token.token !== undefined
+                ? () => <Account user={this.props.user.id} username={this.props.user.username} password={this.props.user.password}/>
+                : null
             }
           />
           <Redirect to="/login" />
