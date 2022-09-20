@@ -120,7 +120,8 @@ class IngredientList extends Component {
         <Card
           className="pantry-card"
           style={{
-            maxHeight: 200,
+            maxHeight: 400,
+            maxWidth: 300,
             overflow: "auto",
           }}
         >
@@ -131,20 +132,33 @@ class IngredientList extends Component {
                 <ListGroupItem>
                   {/* this is where ingredient this is rendered */}
                   {ingredient.ingredient_name}
-                  <button
-                  // onClick={() => {
-                  //   this.removeIngredient(ingredient);
-                  // }}
-                  >
-                    x
-                  </button>
-                  <button
+                  <Button
+                    style={{
+                      width: 40,
+                      height: 30,
+                      background: "#FFFFFF",
+                      border: "#FFFFFF",
+                    }}
                     onClick={(e) => {
                       this.handleCallback(ingredient);
                     }}
                   >
-                    +
-                  </button>
+                    ➕
+                  </Button>
+                  <Button
+                    style={{
+                      width: 40,
+                      height: 30,
+                      background: "#FFFFFF",
+                      border: "#FFFFFF",
+                    }}
+                    // onClick={() => {
+                    //   this.removeIngredient(ingredient);
+                    // }}
+                    className="text-center"
+                  >
+                    ✖️
+                  </Button>
                 </ListGroupItem>
               );
             })}

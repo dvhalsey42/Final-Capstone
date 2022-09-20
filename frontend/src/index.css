@@ -10,3 +10,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+a:hover {
+color:rgb(204,85,0)
+}
