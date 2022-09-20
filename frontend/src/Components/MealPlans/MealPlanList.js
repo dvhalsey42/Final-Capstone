@@ -26,10 +26,6 @@ class MealPlanList extends Component {
         this.handleFetchMealPlans();
     }
 
-    componentDidUpdate() {
-        this.handleFetchMealPlans();
-    }
-
     handleFetchMealPlans = async () => {
         var mealplansUrl = "/mymealplans";
         const mealPlansWithToken = await axios.get(baseUrl + mealplansUrl);

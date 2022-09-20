@@ -25,10 +25,6 @@ class MealList extends Component {
         this.handleFetchMeals();
     }
 
-    componentDidUpdate() {
-        this.handleFetchMeals();
-    }
-
     handleFetchMeals = async () => {
         var mealsUrl = "/mymeals/get/"+this.state.user_id;
         const mealsWithToken = await axios.get(baseUrl + mealsUrl);

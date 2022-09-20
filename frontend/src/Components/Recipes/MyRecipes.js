@@ -1,6 +1,6 @@
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { Component } from "react";
+import React, { Component } from "react";
 import {
   Form,
   FormGroup,
@@ -35,20 +35,14 @@ class MyRecipes extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.handleCreateRecipe();
-  // }
-
   handleLogout = () => {
     this.props.addToken("");
     this.props.deleteUser();
   };
 
-  onCounter =() => {
+  onCounter = () => {
     this.setState({counter: this.state.counter + 1})
   }
-
-  handleAddIngredientToList;
 
   handleCreateRecipe = async (e) => {
     e.preventDefault();
@@ -111,7 +105,6 @@ class MyRecipes extends Component {
       border: "none",
       color: "#556b2f",
     };
-
     return (
       <div className="">
         <h1 className="text-center mb-5">Craft Your Recipes</h1>

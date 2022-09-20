@@ -31,6 +31,7 @@ class RecipeList extends Component {
       mealRecipes: [],
       selectedRecipe: "",
     };
+    this.handleFetchRecipes = this.handleFetchRecipes.bind(this);
     this.removeRecipe = this.removeRecipe.bind(this);
   }
 
@@ -38,8 +39,6 @@ class RecipeList extends Component {
   componentDidMount() {
     this.handleFetchRecipes();
   }
-
- 
 
   // FETCH INGREDIENTS LOGIC
   handleFetchRecipes = async () => {
@@ -77,13 +76,13 @@ class RecipeList extends Component {
     });
   }
 
-  StyledButton = {
-    backgroundColor: "#FAC668",
-    width: 200,
-    height: "3rem",
-    border: "none",
-    color: "#556b2f",
-  };
+   StyledButton = {
+      backgroundColor: "#FAC668",
+      width: 200,
+      height: "3rem",
+      border: "none",
+      color: "#556b2f",
+    };
 
   render() {
     return (
