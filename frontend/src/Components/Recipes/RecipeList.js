@@ -31,15 +31,12 @@ class RecipeList extends Component {
       mealRecipes: [],
       selectedRecipe: '',
     };
+    this.handleFetchRecipes = this.handleFetchRecipes.bind(this);
     this.removeRecipe = this.removeRecipe.bind(this);
   }
 
   // SIGNNALS DATA TO RENDER WHEN COMPONENT MOUNTS
   componentDidMount() {
-    this.handleFetchRecipes();
-  }
-
-  componentDidUpdate() {
     this.handleFetchRecipes();
   }
 
@@ -83,7 +80,6 @@ class RecipeList extends Component {
       border: "none",
       color: "#556b2f",
     };
-
 
   render() {
     return (

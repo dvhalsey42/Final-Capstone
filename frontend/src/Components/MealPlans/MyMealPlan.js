@@ -31,6 +31,7 @@ class MyMealPlans extends Component {
       user_id: this.props.user,
       meals: [],
       mealplan_meals: [],
+      counter: 0,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -44,6 +45,10 @@ class MyMealPlans extends Component {
     this.props.deleteUser();
   };
 
+  onCounter = () => {
+    this.setState({counter: this.state.counter + 1})
+  }
+
   handleCreateMealPlan = async (e) => {
     e.preventDefault();
     const data = {
@@ -53,7 +58,7 @@ class MyMealPlans extends Component {
       meals: this.state.mealplan_meals,
     };
     console.log(data);
-    await axios.post(baseUrl + "/mealplan/create", data);
+    await axios.post(baseUrl + "/mealplan/create", data).then(() => {this.onCounter()});
   };
 
   handleInputChange = (event) => {
@@ -131,7 +136,7 @@ class MyMealPlans extends Component {
           </div>
 
           <div style={{width:"20rem",}}>
-            <MealPlanList />
+            <MealPlanList key={this.state.counter}/>
           </div>
 
          

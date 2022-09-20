@@ -37,6 +37,7 @@ class MyMeals extends Component {
       recipes: [],
       meals: [],
       newMeals: [],
+      counter: 0,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -49,6 +50,10 @@ class MyMeals extends Component {
     this.props.addToken("");
     this.props.deleteUser();
   };
+
+  onCounter = () => {
+    this.setState({counter: this.state.counter + 1})
+  }
 
   handleCreateMeal = async (e) => {
     e.preventDefault();
@@ -63,7 +68,7 @@ class MyMeals extends Component {
     await axios.post(
       baseUrl + "/mymeal/create",
       data
-    );
+    ).then(() => {this.onCounter()});
     this.setState({
       ...this.state,
       newMeals: this.state.newMeals + data,
@@ -78,8 +83,6 @@ class MyMeals extends Component {
       [event.target.name]: event.target.value,
     });
   };
-
-  
 
   render() {
 
@@ -138,6 +141,7 @@ class MyMeals extends Component {
           <div style={{ width: "20rem" }}>
             <Card className="border-dark align-items-center">
               <MealList
+                key={this.state.counter}
                 parentMeals={this.state.meals}
                 user={this.props.user}
                 parentCallback={this.handleCallback}

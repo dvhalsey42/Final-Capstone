@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.RecipeDao;
 import com.techelevator.model.Ingredient;
 import com.techelevator.model.Recipe;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

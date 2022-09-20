@@ -5,10 +5,12 @@ import com.techelevator.model.Recipe;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.*;
 import java.util.*;
 
+@Transactional
 @Service
 public class JdbcRecipeDao implements RecipeDao {
 
@@ -71,7 +73,7 @@ public class JdbcRecipeDao implements RecipeDao {
             recipe = mapToRecipe(rs);
         }
 
-        sql = "SELECT * FROM recipe_ingredients WHERE recipe_id = ?";
+        sql = "SELECT * FROM recipe_ingredients join ingredients on ingredients.ingredient_id = recipe_ingredients.ingredient_id WHERE recipe_id = ?";
         SqlRowSet ingRs = jdbcTemplate.queryForRowSet(sql, id);
         List<Ingredient> ingredients = new ArrayList<>();
         while (ingRs.next()) {
