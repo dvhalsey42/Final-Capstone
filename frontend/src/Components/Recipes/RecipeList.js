@@ -63,7 +63,6 @@ class RecipeList extends Component {
 
   
   async removeRecipe(recipe) {
-    console.log("Recipe: " + recipe.recipe_id + " " + recipe.recipe_name + " Removed");
     await axios.delete(baseUrl + "/myrecipes/" + recipe.recipe_id + "/delete").then(() => {this.handleFetchRecipes()});
   }
 
@@ -100,8 +99,18 @@ class RecipeList extends Component {
                     <PopoverBody>
                       <h5>Instructions</h5>
                       {this.state.selectedRecipe.instructions_list}
-                      <h5>Ingredients</h5> {/* CURRENTLY NO WAY TO READ CURRENT RECIPIES INGREDIENTS, FIGURE IT OUT BOZO */}
-                      { /* console.log(this.state.selectedRecipe.ingredients) */}
+                      <h5>Ingredients</h5> 
+                      {this.state.selectedRecipe && (
+                        this.state.selectedRecipe.ingredients.map((ingredient) => {
+                          return (
+                            <ListGroup>
+                              <ListGroupItem>
+                                {ingredient.ingredient_name}
+                              </ListGroupItem>
+                            </ListGroup>
+                          )
+                        })
+                      )}
                       <Button onClick={() => {}}>Edit</Button>
                       <Button onClick={() => {this.removeRecipe(this.state.selectedRecipe); document.body.click()}}>Delete</Button>
                     </PopoverBody>
