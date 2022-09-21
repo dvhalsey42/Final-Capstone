@@ -24,7 +24,7 @@ import Ingredient from "../Ingredients/Ingredient";
 import MyRecipes from "../Recipes/MyRecipes";
 import LandingPage from "../Non-Protected/LandingPage";
 import Account from "../Account/Account.js"
-import banner from "../images/banner.png";
+import ViewRecipes from "../Non-Protected/ViewRecipes";
 
 const mapStateToProps = (state) => {
   return {
@@ -83,7 +83,7 @@ class Main extends Component {
 
           {this.props.token.token !== undefined ? (
             <div>
-              <UncontrolledDropdown className="">
+              <UncontrolledDropdown className="border dark">
                 <DropdownToggle nav caret className="menu">
                   MENU
                 </DropdownToggle>
@@ -122,8 +122,8 @@ class Main extends Component {
               <Redirect to="/home" />
             </div>
           ) : (
-            <footer>
-              <Link to="/login" style={{ color: "#556b2f" }}>
+            <footer className="nav-footer">
+              <Link to="/login" style={{ color: "#F6F2F0" }}>
                 Login{" "}
               </Link>
             </footer>
@@ -134,6 +134,7 @@ class Main extends Component {
           <Route path="/login" component={() => <Login />} />
           <Route path="/register" component={() => <Register />} />
           <Route path="/welcome" component={() => <LandingPage />} />
+          <Route path="/viewrecipes" component={() => <ViewRecipes />} />
           <Route
             path="/home"
             component={

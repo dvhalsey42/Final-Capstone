@@ -3,7 +3,7 @@
 .menu,
 .submenu {
   list-style-type: none;
-  color:black;
+  color:#F0EAE1;
 }
 
 .submenu {
@@ -24,11 +24,11 @@
  width: 100%;
 }
 
-.main-page {
-  background-color: blue;
-}
-
 nav {
   width: 20%;
   font-size: larger;
+}
+
+.nav-footer {
+  color: #F0EAE1;
 }

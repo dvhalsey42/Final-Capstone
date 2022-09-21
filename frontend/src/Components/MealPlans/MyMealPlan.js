@@ -90,7 +90,10 @@ class MyMealPlans extends Component {
     };
     return (
       <div className="row">
-        <h1 className="text-center mb-5" style={{ fontSize: "3rem" }}>🧄 Plan your meals and prep for the week 🍲</h1>
+        <h1 className="text-center mb-5 mt-5" >Plan The Perfect Meals</h1>
+        <h2 className="text-center mb-5">
+          🗓 Plan your meals and prep for the week 🍽
+        </h2>
         <div className="mealplan-layout">
           <div className="new-mealplan">
             <Card body className="text-start my-2">
@@ -107,28 +110,26 @@ class MyMealPlans extends Component {
                 <FormGroup>
                   <Label for="meals">Meals</Label>
                   <ListGroup>
-                    {this.state.mealplan_meals && (
+                    {this.state.mealplan_meals &&
                       this.state.mealplan_meals.map((meal) => {
-                        return (
-                          <ListGroupItem>
-                            {meal.meal_name}
-                          </ListGroupItem>
-                        )
-                      })
-                    )}
+                        return <ListGroupItem>{meal.meal_name}</ListGroupItem>;
+                      })}
                   </ListGroup>
                 </FormGroup>
                 <Button style={StyledButton}>Submit</Button>
               </Form>
             </Card>
           </div>
-        
 
-          <div style={{width: "20rem",}}>
+          <div style={{ width: "20rem" }}>
             <Card className="align-items-center">
-              <MealList parentMeals={this.state.meals} user={this.props.user} parentCallback={this.handleCallback} />
+              <MealList
+                parentMeals={this.state.meals}
+                user={this.props.user}
+                parentCallback={this.handleCallback}
+              />
               <Form>
-                <Input 
+                <Input
                   type="text"
                   id="meals"
                   name="meal_name"
@@ -137,30 +138,31 @@ class MyMealPlans extends Component {
                   v-model="meal.meal_name"
                   onChange={this.handleInputChange}
                   required
-                />                
-                <Button type="submit" style={StyledButton}>Add to List</Button>
+                />
+                <Button type="submit" style={StyledButton}>
+                  Add to List
+                </Button>
               </Form>
             </Card>
           </div>
 
-          <div style={{width:"20rem",}}>
-            <MealPlanList key={this.state.counter}/>
+          <div style={{ width: "20rem" }}>
+            <MealPlanList key={this.state.counter} />
           </div>
 
-         
-        <footer className="text-center pt-5" style={footerStyle}>
-          <Link to="/home" style={{ color: "#556b2f" }}>
-            Home |{" "}
-          </Link>
-          <Link
-            to="/login"
-            onClick={this.handleLogout}
-            style={{ color: "#556b2f" }}
-          >
-            Logout
-          </Link>
-        </footer>
-      </div>
+          <footer className="text-center pt-5" style={footerStyle}>
+            <Link to="/home" style={{ color: "#556b2f" }}>
+              Home |{" "}
+            </Link>
+            <Link
+              to="/login"
+              onClick={this.handleLogout}
+              style={{ color: "#556b2f" }}
+            >
+              Logout
+            </Link>
+          </footer>
+        </div>
       </div>
     );
   }
