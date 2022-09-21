@@ -187,6 +187,7 @@ class MyRecipes extends Component {
         <div >
           <Card id="recList" className="recipe-card align-items-center mb-5">
             <RecipeList
+              plusButton={false}
               parentCallback={this.handleCallback}
               key={this.state.counter}
             />

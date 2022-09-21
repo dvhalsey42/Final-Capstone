@@ -296,33 +296,21 @@ class RecipeList extends Component {
                           <Button color="secondary" onClick={this.toggleSecondary}>Cancel</Button>
                         </ModalFooter>
                   </Modal>
-
-                  <button
-                    onClick={() => {
-                      this.removeRecipe(recipe);
-                    }}
-                    style={{
-                      width: 40,
-                      height: 30,
-                      background: "#FFFFFF",
-                      border: "#FFFFFF",
-                    }}
-                  >
-                    ✖️
-                  </button>
-                  <button
-                    onClick={() => {
-                      this.handleAddRecipeToMeal(recipe);
-                    }}
-                    style={{
-                      width: 40,
-                      height: 30,
-                      background: "#FFFFFF",
-                      border: "#FFFFFF",
-                    }}
-                  >
-                    ➕
-                  </button>
+                  {this.props.plusButton === true && 
+                    <button
+                      onClick={() => {
+                        this.handleAddRecipeToMeal(recipe);
+                      }}
+                      style={{
+                        width: 40,
+                        height: 30,
+                        background: "#FFFFFF",
+                        border: "#FFFFFF",
+                      }}
+                    >
+                      ➕
+                    </button>
+                  }
                 </ListGroupItem>
               );
             })}
