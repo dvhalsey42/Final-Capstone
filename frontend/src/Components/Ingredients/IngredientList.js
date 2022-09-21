@@ -126,6 +126,14 @@ class IngredientList extends Component {
   // }
 
   render() {
+
+    const StyledButton = {
+      backgroundColor: "#FAC668",
+      width: 120,
+      height: "3rem",
+      border: "none",
+      color: "#556b2f",
+    };
     return (
       <div className="align-items-center">
         <Card
@@ -142,20 +150,18 @@ class IngredientList extends Component {
               return (
                 <ListGroupItem>
                   {/* this is where ingredient this is rendered */}
-                  {ingredient.ingredient_name}
+                  
                   <Button
-                    style={{
-                      width: 40,
-                      height: 30,
-                      background: "#FFFFFF",
-                      border: "#FFFFFF",
-                    }}
+                    style={StyledButton}> {ingredient.ingredient_name}</Button>
+                    <button
                     onClick={(e) => {
                       this.handleCallback(ingredient);
                     }}
                   >
                     ➕
-                  </Button>
+                    </button>
+                  
+                  
                   {/* <Button
                     style={{
                       width: 40,
@@ -185,7 +191,7 @@ class IngredientList extends Component {
               onChange={this.handleInputChange}
               required
             />
-            <Button type="submit">Add To List</Button>
+            <Button type="submit" style={StyledButton} placement="center">Add To List</Button>
           </Form>
         </Card>
       </div>

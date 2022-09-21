@@ -157,7 +157,7 @@ class MyRecipes extends Component {
                               }}
                               className="text-center"
                             >
-                              ✖️
+                            
                             </Button>
                           </ListGroupItem>
                         );

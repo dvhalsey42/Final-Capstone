@@ -57,6 +57,15 @@ class MealList extends Component {
     }
 
     render() {
+
+        const StyledButton = {
+            backgroundColor: "#FAC668",
+            width: 100,
+            height: "3rem",
+            border: "none",
+            color: "#556b2f",
+          };
+
         return (
             <div className="align-items-center">
                 <Card
@@ -71,7 +80,7 @@ class MealList extends Component {
                     return (
                         <ListGroupItem>
                         {/* this is where ingredient this is rendered */}
-                            <Button id="MealButton" type="button" onClick={() => {this.setSelectedMeal(meal)}}>
+                            <Button style={StyledButton}  id="MealButton" type="button" onClick={() => {this.setSelectedMeal(meal)}}>
                                 {meal.meal_name}
                             </Button>
                             <UncontrolledPopover placement="right" target="MealButton" trigger="legacy">
@@ -103,7 +112,7 @@ class MealList extends Component {
                             this.removeMeal(meal);
                             }}
                         >
-                            x
+                            ✖️
                         </button>
                         <button
                             onClick={() => {
@@ -111,7 +120,7 @@ class MealList extends Component {
                             this.handleCallback(meal);
                             }}
                         >
-                            +
+                            ✖️
                         </button>
                         </ListGroupItem>
                     );
