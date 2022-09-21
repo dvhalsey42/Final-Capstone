@@ -3,3 +3,7 @@
     background-color: #556B30;
     align-items: center;
 }
+
+.recipe-view-table {
+    max-width: 350px;
+}
