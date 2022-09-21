@@ -11,7 +11,8 @@ import {
 import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
 
-import { Card, ListGroup, ListGroupItem, Button, UncontrolledPopover, PopoverHeader, PopoverBody } from "reactstrap";
+import { Card, ListGroup, ListGroupItem, Button, UncontrolledPopover, PopoverHeader, PopoverBody, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input, Label } from "reactstrap";
+import IngredientList from "../Ingredients/IngredientList";
 
 
 
@@ -30,6 +31,9 @@ class RecipeList extends Component {
       recipes: [],
       mealRecipes: [],
       selectedRecipe: "",
+      selectedIngredient: '',
+      modal: false,
+      modalSecondary: false,
     };
     this.handleFetchRecipes = this.handleFetchRecipes.bind(this);
     this.removeRecipe = this.removeRecipe.bind(this);
@@ -76,13 +80,29 @@ class RecipeList extends Component {
     });
   }
 
-   StyledButton = {
+  setSelectedIngredient(ingredient) {
+    console.log(ingredient);
+    this.setState({
+      selectedIngredient: ingredient,
+    })
+  }
+
+  removeIngredientFromRecipe(ingredient) {
+    console.log(ingredient);
+  }
+
+  toggle = () => { this.setState({modal: !this.state.modal}) }
+
+  toggleSecondary = () => { this.setState({modalSecondary: !this.state.modalSecondary})}
+
+    StyledButton = {
       backgroundColor: "#FAC668",
       width: 200,
       height: "3rem",
       border: "none",
       color: "#556b2f",
     };
+
 
   render() {
     return (
@@ -142,10 +162,11 @@ class RecipeList extends Component {
                           background: "#F6F2F0",
                           border: "#F6F2F0",
                         }}
-                        onClick={() => {}}
+                        onClick={() => {document.body.click(); this.toggle()}}
                       >
                         ✍️
                       </Button>
+                      {' '}
                       <Button
                         style={{
                           width: 40,
@@ -162,6 +183,57 @@ class RecipeList extends Component {
                       </Button>
                     </PopoverBody>
                   </UncontrolledPopover>
+
+                  <Modal isOpen={this.state.modal} toggle={this.toggle} >
+                    <ModalHeader toggle={this.toggle}> {this.state.selectedRecipe.recipe_name} </ModalHeader>
+                    <ModalBody>
+                      <Form>
+                        <FormGroup>
+                          <Label for="instructions">Instructions</Label>
+                          <Input id="instructions" name="text" type="textarea" defaultValue={this.state.selectedRecipe.instructions_list} />
+                        </FormGroup>
+                      </Form>
+                      {' '}
+                      <h5>Ingredients</h5>
+                      {this.state.selectedRecipe.ingredients && (
+                        this.state.selectedRecipe.ingredients.map((ingredient) => {
+                          return(
+                            <ListGroup>
+                              <ListGroupItem>
+                                  <Button id="modalPopover" type="button" onClick={() => {this.setSelectedIngredient(ingredient)}}>
+                                    {ingredient.ingredient_name}
+                                  </Button>
+                                  <UncontrolledPopover flip target="modalPopover" trigger="legacy">
+                                    <PopoverHeader>
+                                      {this.state.selectedIngredient.ingredient_name}
+                                    </PopoverHeader>
+                                    <PopoverBody>
+                                      <Button color="primary" onClick={this.toggleSecondary}>Replace</Button>
+                                      <Button color="danger">Remove</Button>
+                                      <Button color="secondary">Cancel</Button>
+                                    </PopoverBody>
+                                  </UncontrolledPopover>
+                              </ListGroupItem>
+                            </ListGroup>
+                          )
+                        })
+                      )}
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button color="primary" onClick={this.toggle}>Submit</Button>
+                      <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                    </ModalFooter>
+                  </Modal>
+
+                  <Modal isOpen={this.state.modalSecondary} toggle={this.toggleSecondary}>
+                        <ModalHeader trigger={this.toggleSecondary}>Replace {this.state.selectedIngredient.ingredient_name} with ?</ModalHeader>
+                        <ModalBody>
+                          <IngredientList />
+                        </ModalBody>
+                        <ModalFooter>
+                          <Button color="secondary" onClick={this.toggleSecondary}>Cancel</Button>
+                        </ModalFooter>
+                  </Modal>
 
                   <button
                     onClick={() => {
