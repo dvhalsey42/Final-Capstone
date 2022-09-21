@@ -267,7 +267,7 @@ class MealList extends Component {
                       Replace {this.state.selectedRecipe.recipe_name} with ?
                   </ModalHeader>
                   <ModalBody>
-                      <RecipeList parentCallback={this.handleRecipeCallback} />
+                      <RecipeList parentCallback={this.handleRecipeCallback} plusButton={true} />
                   </ModalBody>
                   <ModalFooter>
                     <Button color="secondary" onClick={() => {this.toggleSecondaryModal();}}>Cancel</Button>
