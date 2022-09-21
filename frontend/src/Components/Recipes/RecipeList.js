@@ -55,7 +55,6 @@ class RecipeList extends Component {
 
     this.setState({ recipes: recipesWithToken.data });
 
-    // console.log(recipesWithToken.data);
   };
 
   handleAddRecipeToMeal = (recipe) => {

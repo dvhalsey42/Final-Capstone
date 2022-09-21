@@ -54,7 +54,6 @@ class MealPlanList extends Component {
             mealPlanList: this.state.newMealPLanList,
         });
         this.props.parentCallback(newMealPlanList);
-        console.log(this.state);
     }
 
     handleMealCallback(mealArr) {
@@ -79,12 +78,10 @@ class MealPlanList extends Component {
     }
 
     async removeMealPlan(meal_plan) {
-        console.log(meal_plan);
         await axios.delete(baseUrl + "/mymealplan/" + meal_plan.plan_id + "/delete").then(() => {this.handleFetchMealPlans()});
     }
 
     async submitEditedMealPlan(meal_plan) {
-      console.log(meal_plan);
       if (this.state.meal_plan_name !== '') {
         meal_plan.meal_plan_name = this.state.meal_plan_name;
       }
