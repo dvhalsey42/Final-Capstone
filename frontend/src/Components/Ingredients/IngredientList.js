@@ -44,7 +44,6 @@ class IngredientList extends Component {
 
     this.setState({ ingredients: ingredientsWithToken.data });
 
-    console.log(ingredientsWithToken.data);
   };
 
   handleCallback = (ingredient) => {
@@ -66,7 +65,6 @@ class IngredientList extends Component {
       ingredients: newIngredientList,
     });
     this.props.parentCallback(newIngredientList);
-    console.log(this.state);
   };
 
   setSelectedIngredient(ingredient) {
@@ -83,7 +81,6 @@ class IngredientList extends Component {
       ingredients: newIngredientList,
     });
     this.props.parentCallback(newIngredientList);
-    console.log(this.state);
   }
 
   // ADD INGREDIENT LOGIC

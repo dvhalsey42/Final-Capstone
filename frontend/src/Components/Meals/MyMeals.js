@@ -63,7 +63,6 @@ class MyMeals extends Component {
       meal_name: this.state.meal_name,
       recipes: this.state.mealRecipes,
     } 
-    // console.log(this.state.mealRecipes);
 
     await axios.post(
       baseUrl + "/mymeal/create",

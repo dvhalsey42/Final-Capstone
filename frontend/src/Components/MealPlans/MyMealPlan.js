@@ -57,7 +57,6 @@ class MyMealPlans extends Component {
       meal_plan_name: this.state.meal_plan_name,
       meals: this.state.mealplan_meals,
     };
-    console.log(data);
     await axios.post(baseUrl + "/mealplan/create", data).then(() => {this.onCounter()});
   };
 
