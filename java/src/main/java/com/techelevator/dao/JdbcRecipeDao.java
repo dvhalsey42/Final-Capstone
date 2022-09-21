@@ -127,15 +127,18 @@ public class JdbcRecipeDao implements RecipeDao {
             ingredients.add(ingredient);
         }
 
-        String removerSql = "DELETE FROM recipe_ingredients WHERE recipe_id = ? AND ingredient_id = ?";
-        for (int i = 0; i < updatedRecipe.getIngredients().size(); i++) {
-            for (int a = 0; a < ingredients.size(); a++) {
-                if (updatedRecipe.getIngredients().get(i).getIngredient_id() == ingredients.get(a).getIngredient_id()) {
-                    // remove ingredient from database
-                    jdbcTemplate.update(removerSql, id, updatedRecipe.getIngredients().get(i).getIngredient_id());
-                }
-            }
-        }
+        String deleteSql = "DELETE FROM recipe_ingredients WHERE recipe_id = ?";
+        jdbcTemplate.update(deleteSql, id);
+
+//        String removerSql = "DELETE FROM recipe_ingredients WHERE recipe_id = ? AND ingredient_id = ?";
+//        for (int i = 0; i < updatedRecipe.getIngredients().size(); i++) {
+//            for (int a = 0; a < ingredients.size(); a++) {
+//                if (updatedRecipe.getIngredients().get(i).getIngredient_id() == ingredients.get(a).getIngredient_id()) {
+//                    // remove ingredient from database
+//                    jdbcTemplate.update(removerSql, id, updatedRecipe.getIngredients().get(i).getIngredient_id());
+//                }
+//            }
+//        }
 
         String sqlForJoiner = "INSERT INTO recipe_ingredients (recipe_id, ingredient_id) VALUES (?,?)";
         for (Ingredient ingredient : updatedRecipe.getIngredients()) {

@@ -33,10 +33,14 @@ class RecipeList extends Component {
       recipes: [],
       mealRecipes: [],
       selectedRecipe: "",
+      backupRecipe: '',
       selectedIngredient: '',
+      instructions_list: '',
+      recipe_name: '',
       modal: false,
       modalSecondary: false,
     };
+    this.handleCallback = this.handleCallback.bind(this);
     this.handleFetchRecipes = this.handleFetchRecipes.bind(this);
     this.removeRecipe = this.removeRecipe.bind(this);
   }
@@ -65,8 +69,29 @@ class RecipeList extends Component {
       mealRecipes: newRecipeList,
     });
     this.props.parentCallback(newRecipeList);
-    console.log(this.state);
   };
+
+  handleCallback(ingredientArr) {
+    if (this.state.selectedIngredient !== '') {
+      var currentRecipe = this.state.selectedRecipe;
+      const index = this.state.selectedRecipe.ingredients.findIndex((ing) => ing === this.state.selectedIngredient);
+      currentRecipe.ingredients[index] = ingredientArr[0]; 
+      this.setState({
+        selectedRecipe: currentRecipe
+      })
+    } else {
+      //user wanted to add a new ingredient
+      var currentRecipe = this.state.selectedRecipe;
+      currentRecipe.ingredients.push(ingredientArr[0]);
+      this.setState({
+        selectedRecipe: currentRecipe
+      })
+    }
+    this.setState({
+      selectedIngredient: ''
+    })
+    this.toggleSecondary();
+  }
 
   async removeRecipe(recipe) {
     await axios
@@ -76,26 +101,58 @@ class RecipeList extends Component {
       });
   }
 
+  async submitEditedRecipe(recipe) {
+    if (this.state.recipe_name !== '') {
+      recipe.recipe_name = this.state.recipe_name;
+    }
+    
+    if (this.state.instructions_list !== '') { 
+      recipe.instructions_list = this.state.instructions_list;
+    }
+    await axios.post(baseUrl + "/myrecipes/" + recipe.recipe_id + "/update", recipe).then(() => {this.handleFetchRecipes()})
+    this.setState({
+      selectedRecipe: '',
+    })
+  }
+
   setSelectedRecipe(recipe) {
     this.setState({
       selectedRecipe: recipe,
+      backupRecipe: recipe,
     });
+  }
+  restoreRecipe() {
+    this.setState({
+      selectedRecipe: this.state.backupRecipe
+    })
   }
 
   setSelectedIngredient(ingredient) {
-    console.log(ingredient);
     this.setState({
       selectedIngredient: ingredient,
     })
   }
 
-  removeIngredientFromRecipe(ingredient) {
-    console.log(ingredient);
+  removeIngredientFromRecipe() {
+    var currentRecipe = this.state.selectedRecipe;
+    const index = this.state.selectedRecipe.ingredients.findIndex((ing) => ing === this.state.selectedIngredient);
+    currentRecipe.ingredients.splice(index, 1);
+    this.setState({
+      selectedRecipe: currentRecipe
+    })
   }
 
   toggle = () => { this.setState({modal: !this.state.modal}) }
 
   toggleSecondary = () => { this.setState({modalSecondary: !this.state.modalSecondary})}
+  
+  handleInputChange = (event) => {
+    event.preventDefault();
+
+    this.setState({
+      [event.target.name]: event.target.value,
+    })
+  }
 
     StyledButton = {
       backgroundColor: "#FAC668",
@@ -188,20 +245,22 @@ class RecipeList extends Component {
                   </UncontrolledPopover>
 
                   <Modal isOpen={this.state.modal} toggle={this.toggle} >
-                    <ModalHeader toggle={this.toggle}> {this.state.selectedRecipe.recipe_name} </ModalHeader>
+                    <ModalHeader toggle={this.toggle}> 
+                        <Input id="recipe_name" name="recipe_name" type="textarea" defaultValue={this.state.selectedRecipe.recipe_name} onChange={this.handleInputChange} style={{height: "calc(1.5em + .75rem + 2px)"}}/>
+                    </ModalHeader>
                     <ModalBody>
                       <Form>
                         <FormGroup>
                           <Label for="instructions">Instructions</Label>
-                          <Input id="instructions" name="text" type="textarea" defaultValue={this.state.selectedRecipe.instructions_list} />
+                          <Input id="instructions" name="instructions_list" type="textarea" defaultValue={this.state.selectedRecipe.instructions_list} onChange={this.handleInputChange}/>
                         </FormGroup>
                       </Form>
                       {' '}
                       <h5>Ingredients</h5>
-                      {this.state.selectedRecipe.ingredients && (
-                        this.state.selectedRecipe.ingredients.map((ingredient) => {
-                          return(
-                            <ListGroup>
+                      <ListGroup>
+                        {this.state.selectedRecipe.ingredients && (
+                          this.state.selectedRecipe.ingredients.map((ingredient) => {
+                            return(
                               <ListGroupItem>
                                   <Button id="modalPopover" type="button" onClick={() => {this.setSelectedIngredient(ingredient)}}>
                                     {ingredient.ingredient_name}
@@ -211,27 +270,27 @@ class RecipeList extends Component {
                                       {this.state.selectedIngredient.ingredient_name}
                                     </PopoverHeader>
                                     <PopoverBody>
-                                      <Button color="primary" onClick={this.toggleSecondary}>Replace</Button>
-                                      <Button color="danger">Remove</Button>
-                                      <Button color="secondary">Cancel</Button>
+                                      <Button color="primary" onClick={() => {this.toggleSecondary(); document.body.click()}}>Replace</Button>
+                                      <Button color="danger" onClick={() => {this.removeIngredientFromRecipe()}}>Remove</Button>
                                     </PopoverBody>
                                   </UncontrolledPopover>
                               </ListGroupItem>
-                            </ListGroup>
-                          )
-                        })
-                      )}
+                            )
+                          })
+                        )}
+                        <Button color="success" onClick={this.toggleSecondary}>Add</Button>
+                      </ListGroup>
                     </ModalBody>
                     <ModalFooter>
-                      <Button color="primary" onClick={this.toggle}>Submit</Button>
-                      <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                      <Button color="primary" onClick={() => {this.toggle(); this.submitEditedRecipe(this.state.selectedRecipe);}}>Submit</Button>
+                      <Button color="secondary" onClick={() => {this.toggle(); this.restoreRecipe();}}>Cancel</Button>
                     </ModalFooter>
                   </Modal>
 
                   <Modal isOpen={this.state.modalSecondary} toggle={this.toggleSecondary}>
                         <ModalHeader trigger={this.toggleSecondary}>Replace {this.state.selectedIngredient.ingredient_name} with ?</ModalHeader>
                         <ModalBody>
-                          <IngredientList />
+                          <IngredientList parentCallback={this.handleCallback}/>
                         </ModalBody>
                         <ModalFooter>
                           <Button color="secondary" onClick={this.toggleSecondary}>Cancel</Button>
