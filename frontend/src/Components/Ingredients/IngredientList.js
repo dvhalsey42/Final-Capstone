@@ -150,18 +150,25 @@ class IngredientList extends Component {
               return (
                 <ListGroupItem>
                   {/* this is where ingredient this is rendered */}
-                  
-                  <Button
-                    style={StyledButton}> {ingredient.ingredient_name}</Button>
-                    <button
+
+                  <Button style={StyledButton}>
+                    {" "}
+                    {ingredient.ingredient_name}
+                  </Button>
+                  <button
+                    style={{
+                      width: 40,
+                      height: 30,
+                      background: "#FFFFFF",
+                      border: "#FFFFFF",
+                    }}
                     onClick={(e) => {
                       this.handleCallback(ingredient);
                     }}
                   >
                     ➕
-                    </button>
-                  
-                  
+                  </button>
+
                   {/* <Button
                     style={{
                       width: 40,

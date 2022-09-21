@@ -1,12 +1,9 @@
-.logo {
-  max-width: 100rem;
-  margin-right: 45rem;
-}
+
 
 .menu,
 .submenu {
   list-style-type: none;
-  color: #92ab75;
+  color:black;
 }
 
 .submenu {
@@ -18,7 +15,17 @@
 }
 
 .top-section {
-  display: flex;
+ 
+ 
+}
+
+.nav-top {
+ background-image: url(../images/banner3.png);
+ width: 100%;
+}
+
+.main-page {
+  background-color: blue;
 }
 
 nav {

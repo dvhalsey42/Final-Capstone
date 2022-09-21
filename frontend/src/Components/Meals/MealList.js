@@ -7,6 +7,7 @@ import { Card, ListGroup, ListGroupItem, Button, UncontrolledPopover, PopoverHea
 import axios from "axios";
 
 
+
 class MealList extends Component {
     constructor(props) {
         super(props);
@@ -78,51 +79,79 @@ class MealList extends Component {
                 <ListGroup className="row-cols-lg-auto g-3 mb-5 ">
                     {this.state.meals.map((meal) => {
                     return (
-                        <ListGroupItem>
+                      <ListGroupItem>
                         {/* this is where ingredient this is rendered */}
-                            <Button style={StyledButton}  id="MealButton" type="button" onClick={() => {this.setSelectedMeal(meal)}}>
-                                {meal.meal_name}
-                            </Button>
-                            <UncontrolledPopover placement="right" target="MealButton" trigger="legacy">
-                                <PopoverHeader>
-                                    {this.state.selectedMeal.meal_name}
-                                </PopoverHeader>
-                                <PopoverBody>
-                                    <h5>Recipes</h5>
-                                    {this.state.selectedMeal && (
-                                        this.state.selectedMeal.recipes.map((recipe) => {
-                                            return (
-                                                <ListGroup>
-                                                    <ListGroupItem>
-                                                        {recipe.recipe_name}
-                                                        <p>Instructions List</p>
-                                                        {recipe.instructions_list}
-                                                    </ListGroupItem>
-                                                </ListGroup>
-                                            )
-                                        })
-                                        ) 
-                                    }
-                                    <Button onClick={() => {}}>Edit</Button>
-                                    <Button onClick={() => {this.removeMeal(this.state.selectedMeal); document.body.click()}}>Delete</Button>
-                                </PopoverBody>
-                            </UncontrolledPopover>
-                        <button
-                            onClick={() => {
-                            this.removeMeal(meal);
-                            }}
+                        <Button
+                          style={StyledButton}
+                          id="MealButton"
+                          type="button"
+                          onClick={() => {
+                            this.setSelectedMeal(meal);
+                          }}
                         >
-                            ✖️
+                          {meal.meal_name}
+                        </Button>
+                        <UncontrolledPopover
+                          placement="right"
+                          target="MealButton"
+                          trigger="legacy"
+                        >
+                          <PopoverHeader>
+                            {this.state.selectedMeal.meal_name}
+                          </PopoverHeader>
+                          <PopoverBody>
+                            <h5>Recipes</h5>
+                            {this.state.selectedMeal &&
+                              this.state.selectedMeal.recipes.map((recipe) => {
+                                return (
+                                  <ListGroup>
+                                    <ListGroupItem>
+                                      {recipe.recipe_name}
+                                      <p>Instructions List</p>
+                                      {recipe.instructions_list}
+                                    </ListGroupItem>
+                                  </ListGroup>
+                                );
+                              })}
+                            <Button onClick={() => {}}>Edit</Button>
+                            <Button
+                              onClick={() => {
+                                this.removeMeal(this.state.selectedMeal);
+                                document.body.click();
+                              }}
+                            >
+                              Delete
+                            </Button>
+                          </PopoverBody>
+                        </UncontrolledPopover>
+                        <button
+                          style={{
+                            width: 40,
+                            height: 30,
+                            background: "#FFFFFF",
+                            border: "#FFFFFF",
+                          }}
+                          onClick={() => {
+                            this.removeMeal(meal);
+                          }}
+                        >
+                          ✖️
                         </button>
                         <button
-                            onClick={() => {
+                          style={{
+                            width: 40,
+                            height: 30,
+                            background: "#FFFFFF",
+                            border: "#FFFFFF",
+                          }}
+                          onClick={() => {
                             // this.handleAddMealToRecipe(meal);
                             this.handleCallback(meal);
-                            }}
+                          }}
                         >
-                            ✖️
+                          ➕
                         </button>
-                        </ListGroupItem>
+                      </ListGroupItem>
                     );
                     })}
                 </ListGroup>

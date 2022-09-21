@@ -107,7 +107,7 @@ class MyMeals extends Component {
     return (
   
       <div className="row">
-        <h1 className="text-center mb-5" style={{ fontSize: "3rem" }}>🧄 Organize your recipes into meals you enjoy 🍲</h1>
+        <h1 className="text-center mb-5 mt-5" style={{ fontSize: "3rem" }}>🧄 Organize your recipes into meals you enjoy 🍲</h1>
         <div className="meal-layout">
           <div className="new-meal">
             <Card body className="text-start ">

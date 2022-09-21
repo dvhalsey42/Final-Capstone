@@ -13,6 +13,8 @@ import { baseUrl } from "../../Shared/baseUrl";
 
 import { Card, ListGroup, ListGroupItem, Button, UncontrolledPopover, PopoverHeader, PopoverBody, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input, Label } from "reactstrap";
 import IngredientList from "../Ingredients/IngredientList";
+import "../Recipes/RecipeList.css"
+
 
 
 
@@ -110,6 +112,7 @@ class RecipeList extends Component {
         <Card
           style={{
             maxWidth: "100%",
+          
           }}
         >
           <h2>My Recipes</h2>

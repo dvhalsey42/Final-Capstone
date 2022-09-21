@@ -95,7 +95,7 @@ class MyRecipes extends Component {
       position: "fixed",
       left: "0",
       bottom: "0",
-      height: "60px",
+      height: "20px",
       width: "100%",
     };
     const StyledButton = {
@@ -107,8 +107,8 @@ class MyRecipes extends Component {
     };
     return (
       <div className="">
-        <h1 className="text-center mb-5">Craft Your Recipes</h1>
-        <h2 className="text-center mb-5">
+        <h1 className="text-center mt-5 mb-5">Craft Your Recipes</h1>
+        <h2 className="text-center mb-5 ">
           🧄 Create & Catalogue Recipes You Love 🍲
         </h2>
         <div className="container">
@@ -156,13 +156,10 @@ class MyRecipes extends Component {
                                 border: "#FFFFFF",
                               }}
                               className="text-center"
-                            >
-                            
-                            </Button>
+                            ></Button>
                           </ListGroupItem>
                         );
                       })}
-                   
                   </ListGroup>
                 </FormGroup>
                 <FormGroup style={{ color: "#92ab75" }}>
@@ -187,22 +184,25 @@ class MyRecipes extends Component {
           <IngredientList parentCallback={this.handleCallback} />
         </div>
 
-        <div>
-          <Card id="recList" className="align-items-center">
-            <RecipeList parentCallback={this.handleCallback} key={this.state.counter}/>
+        <div >
+          <Card id="recList" className="recipe-card align-items-center mb-5">
+            <RecipeList
+              parentCallback={this.handleCallback}
+              key={this.state.counter}
+            />
             <Link to="/mymeals" className="mt-5 mb-5">
               <Button style={StyledButton}>Start Creating Meals</Button>
             </Link>
           </Card>
         </div>
-        <footer className="text-center pt-5" style={footerStyle}>
+        <footer className="text-center pt-5 mt-5" style={footerStyle}>
           <Link to="/home" style={{ color: "#556b2f" }}>
             Home |{" "}
           </Link>
           <Link
             to="/login"
             onClick={this.handleLogout}
-            style={{ color: "#556b2f" }}
+            style={{ color: "#556b2f", }}
           >
             Logout
           </Link>
