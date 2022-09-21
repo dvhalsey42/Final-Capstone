@@ -2,9 +2,10 @@ import { Link, withRouter } from "react-router-dom";
 import "../Home/Home.css";
 import { Component } from "react";
 import { connect } from "react-redux";
-import scallions from "../images/7.2.png"
-import meal from "../images/9.2.png"
+import user2 from "../images/user2.png"
 import cal from "../images/cal.png"
+import food from "../images/food1.png"
+import mealplan from "../images/mealplan1.png"
 import mainlogo from "../images/transparentlogo.png"
 import {Button} from "reactstrap"
 
@@ -75,12 +76,12 @@ class Home extends Component {
           <p>PLAN PREP ENJOY</p>
           <h2 className="mt-5">Start By Crafting Your Recipe</h2>
           <img
-            className="scallion"
-            src={scallions}
-            alt="SP"
+            className=""
+            src={user2}
+            alt="food"
             style={{
-              maxWidth: 250,
-              maxHeight: 300,
+              maxWidth: 800,
+              maxHeight: 500,
               marginTop: 20,
               marginBottom: 20,
             }}
@@ -94,11 +95,11 @@ class Home extends Component {
           <h2 className="mt-5"> Create Meals To Enjoy </h2>
           <img
             className=" text-center meal"
-            src={meal}
+            src={food}
             alt="meal"
             style={{
-              maxWidth: 250,
-              maxHeight: 300,
+              maxWidth: 800,
+              maxHeight: 500,
               marginTop: 20,
               marginBottom: 20,
             }}
@@ -113,11 +114,11 @@ class Home extends Component {
           <h2 className="mt-5">Plan Your Meals With Ease</h2>
           <img
             className="scallion"
-            src={cal}
+            src={mealplan}
             alt="calendar"
             style={{
-              maxWidth: 250,
-              maxHeight: 300,
+              maxWidth: 800,
+              maxHeight: 500,
               marginTop: 20,
               marginBottom: 20,
             }}

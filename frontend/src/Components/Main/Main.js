@@ -24,6 +24,7 @@ import Ingredient from "../Ingredients/Ingredient";
 import MyRecipes from "../Recipes/MyRecipes";
 import LandingPage from "../Non-Protected/LandingPage";
 import Account from "../Account/Account.js"
+import banner from "../images/banner.png";
 
 const mapStateToProps = (state) => {
   return {
@@ -75,65 +76,58 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <Navbar xs={12} sm={3} md={2} lg={1}>
-          <div className="top-section">
-            <Link to="/home" className="logo">
-              <img src={logo} alt="logo" width={"300"} height={"240"}></img>
-            </Link>
+        <Navbar className="nav-top" xs={12} sm={3} md={2} lg={1}>
+          <Link to="/home" className="logo">
+            <img src={logo} alt="logo" width={"300"} height={"240"}></img>
+          </Link>
 
-            {this.props.token.token !== undefined ? (
-              <div>
-                <Col className="bg-light border">
-                  <UncontrolledDropdown className="">
-                    <DropdownToggle nav caret className="menu">
-                      MENU
-                    </DropdownToggle>
-                    <DropdownMenu right className="sub-menu">
-                      <DropdownItem className="sub-item">
-                        <NavItem className="links">
-                          <NavLink className="links" tag={Link} to="/myrecipes">
-                            Recipes
-                          </NavLink>
-                        </NavItem>
-                      </DropdownItem>
-                      <DropdownItem className="sub-item">
-                        <NavItem>
-                          <NavLink className="links" tag={Link} to="/mymeals">
-                            Meals
-                          </NavLink>
-                        </NavItem>
-                      </DropdownItem>
-                      <DropdownItem className="sub-item">
-                        <NavItem>
-                          <NavLink
-                            className="links"
-                            tag={Link}
-                            to="/mymealplans"
-                          >
-                            Meal Plans
-                          </NavLink>
-                        </NavItem>
-                      </DropdownItem>
-                      <DropdownItem className="sub-item">
-                        <NavItem>
-                          <NavLink className="links" tag={Link} to="/myaccount">
-                            Account
-                          </NavLink>
-                        </NavItem>
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                </Col>
-                <Redirect to="/home" />
-              </div>
-            ) : (
-              <footer>
-                <Link to="/login" style={{ color: "#556b2f" }}>
-                  Login{" "}
-                </Link>
-              </footer>
-            )}
-          </div>
+          {this.props.token.token !== undefined ? (
+            <div>
+              <UncontrolledDropdown className="">
+                <DropdownToggle nav caret className="menu">
+                  MENU
+                </DropdownToggle>
+                <DropdownMenu right className="sub-menu">
+                  <DropdownItem className="sub-item">
+                    <NavItem className="links">
+                      <NavLink className="links" tag={Link} to="/myrecipes">
+                        Recipes
+                      </NavLink>
+                    </NavItem>
+                  </DropdownItem>
+                  <DropdownItem className="sub-item">
+                    <NavItem>
+                      <NavLink className="links" tag={Link} to="/mymeals">
+                        Meals
+                      </NavLink>
+                    </NavItem>
+                  </DropdownItem>
+                  <DropdownItem className="sub-item">
+                    <NavItem>
+                      <NavLink className="links" tag={Link} to="/mymealplans">
+                        Meal Plans
+                      </NavLink>
+                    </NavItem>
+                  </DropdownItem>
+                  <DropdownItem className="sub-item">
+                    <NavItem>
+                      <NavLink className="links" tag={Link} to="/myaccount">
+                        Account
+                      </NavLink>
+                    </NavItem>
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+
+              <Redirect to="/home" />
+            </div>
+          ) : (
+            <footer>
+              <Link to="/login" style={{ color: "#556b2f" }}>
+                Login{" "}
+              </Link>
+            </footer>
+          )}
         </Navbar>
         {/* below is where you can edit/add the rounting of front-end endpoints to their components */}
         <Switch>
@@ -182,7 +176,13 @@ class Main extends Component {
             path="/myaccount"
             component={
               this.props.token.token !== undefined
-                ? () => <Account user={this.props.user.id} username={this.props.user.username} password={this.props.user.password}/>
+                ? () => (
+                    <Account
+                      user={this.props.user.id}
+                      username={this.props.user.username}
+                      password={this.props.user.password}
+                    />
+                  )
                 : null
             }
           />

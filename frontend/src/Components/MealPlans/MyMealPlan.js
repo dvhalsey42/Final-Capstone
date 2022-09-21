@@ -70,6 +70,13 @@ class MyMealPlans extends Component {
   };
 
   render() {
+    const StyledButton = {
+      backgroundColor: "#FAC668",
+      width: 200,
+      height: "3rem",
+      border: "none",
+      color: "#556b2f",
+    };
     const footerStyle = {
       backgroundColor: "#f0eae1",
       borderTop: "1px solid #E7E7E7",
@@ -83,6 +90,7 @@ class MyMealPlans extends Component {
     };
     return (
       <div className="row">
+        <h1 className="text-center mb-5" style={{ fontSize: "3rem" }}>🧄 Plan your meals and prep for the week 🍲</h1>
         <div className="mealplan-layout">
           <div className="new-mealplan">
             <Card body className="text-start my-2">
@@ -110,14 +118,14 @@ class MyMealPlans extends Component {
                     )}
                   </ListGroup>
                 </FormGroup>
-                <Button>Submit</Button>
+                <Button style={StyledButton}>Submit</Button>
               </Form>
             </Card>
           </div>
         
 
           <div style={{width: "20rem",}}>
-            <Card className="border-dark align-items-center">
+            <Card className="align-items-center">
               <MealList parentMeals={this.state.meals} user={this.props.user} parentCallback={this.handleCallback} />
               <Form>
                 <Input 
@@ -130,7 +138,7 @@ class MyMealPlans extends Component {
                   onChange={this.handleInputChange}
                   required
                 />                
-                <Button type="submit">Add to List</Button>
+                <Button type="submit" style={StyledButton}>Add to List</Button>
               </Form>
             </Card>
           </div>

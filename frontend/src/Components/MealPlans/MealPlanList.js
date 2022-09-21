@@ -65,6 +65,13 @@ class MealPlanList extends Component {
     }
 
     render() {
+        const StyledButton = {
+            backgroundColor: "#FAC668",
+            width: 100,
+            height: "3rem",
+            border: "none",
+            color: "#556b2f",
+          };
         return (
             <div className="align-items-center">
                 <Card
@@ -77,82 +84,134 @@ class MealPlanList extends Component {
                 <ListGroup className="row-cols-lg-auto g-3 mb-5 ">
                     {this.state.meal_plans.map((meal_plan) => {
                     return (
-                        <ListGroupItem>
+                      <ListGroupItem>
                         {/* this is where ingredient this is rendered */}
-                        <Button id="MealPlanButton" type="button" onClick={() => {this.setSelectedMealPlan(meal_plan)}}>
-                            {meal_plan.meal_plan_name}
+                        <Button
+                          style={StyledButton}
+                          id="MealPlanButton"
+                          type="button"
+                          onClick={() => {
+                            this.setSelectedMealPlan(meal_plan);
+                          }}
+                        >
+                          {meal_plan.meal_plan_name}
                         </Button>
-                        <UncontrolledPopover placement="right" target="MealPlanButton" trigger="legacy">
-                            <PopoverHeader>
-                                {this.state.selectedMealPlan.meal_plan_name}
-                            </PopoverHeader>
-                            <PopoverBody>
-                                <h5>Meals</h5>
-                                {this.state.selectedMealPlan && (
-                                    this.state.selectedMealPlan.meals.map((meal) => {
-                                        return (
+                        <UncontrolledPopover
+                          placement="right"
+                          target="MealPlanButton"
+                          trigger="legacy"
+                        >
+                          <PopoverHeader>
+                            {this.state.selectedMealPlan.meal_plan_name}
+                          </PopoverHeader>
+                          <PopoverBody>
+                            <h5>Meals</h5>
+                            {this.state.selectedMealPlan &&
+                              this.state.selectedMealPlan.meals.map((meal) => {
+                                return (
+                                  <ListGroup>
+                                    <ListGroupItem>
+                                      {meal.meal_name}
+                                      <h5>Recipes</h5>
+                                      {meal.recipes &&
+                                        meal.recipes.map((recipe) => {
+                                          return (
                                             <ListGroup>
-                                                <ListGroupItem>
-                                                    {meal.meal_name}
-                                                    <h5>Recipes</h5>
-                                                    {meal.recipes && (
-                                                        meal.recipes.map((recipe) => {
-                                                            return (
-                                                                <ListGroup>
-                                                                    <ListGroupItem>
-                                                                        <Button id="MealPlanRecipeButton" type="button" onClick={() => {this.setSelectedRecipe(recipe)}}>
-                                                                            {recipe.recipe_name}
-                                                                        </Button>
-                                                                        <UncontrolledPopover placement="bottom" target="MealPlanRecipeButton" trigger="legacy">
-                                                                            <PopoverHeader>
-                                                                                {this.state.selectedRecipe.recipe_name}
-                                                                            </PopoverHeader>
-                                                                            <PopoverBody>
-                                                                                <h5>Instructions List</h5>
-                                                                                {this.state.selectedRecipe.instructions_list}
-                                                                                <h5>Ingredients</h5>
-                                                                                {this.state.selectedRecipe.ingredients && (
-                                                                                    this.state.selectedRecipe.ingredients.map((ingredient) => {
-                                                                                        return(
-                                                                                            <ListGroup>
-                                                                                                <ListGroupItem>
-                                                                                                    {ingredient.ingredient_name}
-                                                                                                </ListGroupItem>
-                                                                                            </ListGroup>
-                                                                                        )
-                                                                                    })
-                                                                                )}
-                                                                            </PopoverBody>
-                                                                        </UncontrolledPopover>
-                                                                    </ListGroupItem>
-                                                                </ListGroup>
-                                                            )
-                                                        })
-                                                    )}
-                                                </ListGroupItem>
+                                              <ListGroupItem>
+                                                <Button
+                                                  id="MealPlanRecipeButton"
+                                                  type="button"
+                                                  onClick={() => {
+                                                    this.setSelectedRecipe(
+                                                      recipe
+                                                    );
+                                                  }}
+                                                >
+                                                  {recipe.recipe_name}
+                                                </Button>
+                                                <UncontrolledPopover
+                                                  placement="bottom"
+                                                  target="MealPlanRecipeButton"
+                                                  trigger="legacy"
+                                                >
+                                                  <PopoverHeader>
+                                                    {
+                                                      this.state.selectedRecipe
+                                                        .recipe_name
+                                                    }
+                                                  </PopoverHeader>
+                                                  <PopoverBody>
+                                                    <h5>Instructions List</h5>
+                                                    {
+                                                      this.state.selectedRecipe
+                                                        .instructions_list
+                                                    }
+                                                    <h5>Ingredients</h5>
+                                                    {this.state.selectedRecipe
+                                                      .ingredients &&
+                                                      this.state.selectedRecipe.ingredients.map(
+                                                        (ingredient) => {
+                                                          return (
+                                                            <ListGroup>
+                                                              <ListGroupItem>
+                                                                {
+                                                                  ingredient.ingredient_name
+                                                                }
+                                                              </ListGroupItem>
+                                                            </ListGroup>
+                                                          );
+                                                        }
+                                                      )}
+                                                  </PopoverBody>
+                                                </UncontrolledPopover>
+                                              </ListGroupItem>
                                             </ListGroup>
-                                        )
-                                    })
-                                )}
-                                <Button onClick={() => {}}>Edit</Button>
-                                <Button onClick={() => {this.removeMealPlan(this.state.selectedMealPlan); document.body.click()}}>Delete</Button>
-                            </PopoverBody>
+                                          );
+                                        })}
+                                    </ListGroupItem>
+                                  </ListGroup>
+                                );
+                              })}
+                            <Button onClick={() => {}}>Edit</Button>
+                            <Button
+                              onClick={() => {
+                                this.removeMealPlan(
+                                  this.state.selectedMealPlan
+                                );
+                                document.body.click();
+                              }}
+                            >
+                              Delete
+                            </Button>
+                          </PopoverBody>
                         </UncontrolledPopover>
                         <button
-                            onClick={() => {
+                          style={{
+                            width: 40,
+                            height: 30,
+                            background: "#FFFFFF",
+                            border: "#FFFFFF",
+                          }}
+                          onClick={() => {
                             this.removeMealPlan(meal_plan);
-                            }}
+                          }}
                         >
-                            x
+                          ✖️
                         </button>
                         <button
-                            onClick={() => {
+                          style={{
+                            width: 40,
+                            height: 30,
+                            background: "#FFFFFF",
+                            border: "#FFFFFF",
+                          }}
+                          onClick={() => {
                             this.handleAddMealPlanToMeal(meal_plan);
-                            }}
+                          }}
                         >
-                            +
+                          ➕
                         </button>
-                        </ListGroupItem>
+                      </ListGroupItem>
                     );
                     })}
                 </ListGroup>

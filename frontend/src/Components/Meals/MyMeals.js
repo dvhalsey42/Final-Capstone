@@ -97,15 +97,24 @@ class MyMeals extends Component {
       height: "60px",
       width: "100%"
     };
+    const StyledButton = {
+      backgroundColor: "#FAC668",
+      width: 150,
+      height: "3rem",
+      border: "none",
+      color: "#556b2f",
+    };
     return (
+  
       <div className="row">
+        <h1 className="text-center mb-5 mt-5" style={{ fontSize: "3rem" }}>🧄 Organize your recipes into meals you enjoy 🍲</h1>
         <div className="meal-layout">
           <div className="new-meal">
             <Card body className="text-start ">
               <CardTitle tag="h5">Create Your Meal</CardTitle>
               <CardSubtitle className="">What's This Meal Called?</CardSubtitle>
               <Form onSubmit={this.handleCreateMeal}>
-                <FormGroup>
+                <FormGroup style={{ color: "#92ab75", width: "100%" }}>
                   <Label for="meal_name"></Label>
                   <Input
                     name="meal_name"
@@ -116,30 +125,32 @@ class MyMeals extends Component {
                 <FormGroup>
                   <CardTitle tag="h5">Add Recipes</CardTitle>
                   <CardSubtitle className="mb-5">
-                    Select Recipes From Your Recipe List To Create This Meal
+                  Click ➕ and add from your recipes to build a meal
                   </CardSubtitle>
                   <Label for="recipes">Recipes</Label>
                   <ListGroup>
                     {this.state.mealRecipes &&
                       this.state.mealRecipes.map((recipe) => {
                         return (
-                          <ListGroupItem>{recipe.recipe_name}</ListGroupItem>
+                          <ListGroupItem>{recipe.recipe_name}
+                      
+                            </ListGroupItem>
                         );
                       })}
                   </ListGroup>
                 </FormGroup>
-                <Button>Submit</Button>
+                <Button style={StyledButton}>Submit</Button>
               </Form>
             </Card>
           </div>
           <div style={{ width: "20rem" }}>
-            <Card className="border-dark align-items-center">
+            <Card className=" align-items-center">
               <RecipeList parentCallback={this.handleCallback} />
              
             </Card>
           </div>
           <div style={{ width: "20rem" }}>
-            <Card className="border-dark align-items-center">
+            <Card className=" align-items-center">
               <MealList
                 key={this.state.counter}
                 parentMeals={this.state.meals}
@@ -148,7 +159,7 @@ class MyMeals extends Component {
                 newMeals={this.state.newMeals}
               />
               <Link to="/mymealplans">
-                <Button type="submit">Start A Meal Plan</Button>
+                <Button type="submit" style={StyledButton}>Start A Meal Plan</Button>
               </Link>
             </Card>
           </div>
