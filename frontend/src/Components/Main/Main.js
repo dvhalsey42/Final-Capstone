@@ -116,6 +116,13 @@ class Main extends Component {
                       </NavLink>
                     </NavItem>
                   </DropdownItem>
+                  <DropdownItem className="sub-item">
+                    <NavItem>
+                      <NavLink className="links" tag={Link} to="/home">
+                        Home
+                      </NavLink>
+                    </NavItem>
+                  </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
 

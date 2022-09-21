@@ -16,9 +16,6 @@ import IngredientList from "../Ingredients/IngredientList";
 import "../Recipes/RecipeList.css"
 
 
-
-
-
 const mapDispatchToProps = (dispatch) => ({
   createRecipe: () => dispatch(createRecipe()),
   addToken: () => dispatch(addToken()),
@@ -179,7 +176,6 @@ class RecipeList extends Component {
               return (
                 <ListGroupItem>
                   {/* this is where recipe list is rendered */}
-
                   <Button
                     style={this.StyledButton}
                     id="ScheduleUpdateButton"
@@ -245,7 +241,6 @@ class RecipeList extends Component {
                       </Button>
                     </PopoverBody>
                   </UncontrolledPopover>
-
                   <Modal
                     className="edit-feature"
                     isOpen={this.state.modal}
@@ -327,14 +322,17 @@ class RecipeList extends Component {
                               );
                             }
                           )}
-                        <Button color="success" onClick={this.toggleSecondary}>
+                        <Button
+                          style={{ backgroundColor: "#556B30" }}
+                          onClick={this.toggleSecondary}
+                        >
                           Add
                         </Button>
                       </ListGroup>
                     </ModalBody>
                     <ModalFooter>
                       <Button
-                        color="primary"
+                        style={{ backgroundColor: "#556B30" }}
                         onClick={() => {
                           this.toggle();
                           this.submitEditedRecipe(this.state.selectedRecipe);
@@ -353,7 +351,6 @@ class RecipeList extends Component {
                       </Button>
                     </ModalFooter>
                   </Modal>
-
                   <Modal
                     isOpen={this.state.modalSecondary}
                     toggle={this.toggleSecondary}
@@ -366,12 +363,12 @@ class RecipeList extends Component {
                       <IngredientList parentCallback={this.handleCallback} />
                     </ModalBody>
                     <ModalFooter>
-                      <Button color="secondary" onClick={this.toggleSecondary}>
+                      <Button color="#556B30" onClick={this.toggleSecondary}>
                         Cancel
                       </Button>
                     </ModalFooter>
                   </Modal>
-                  {this.props.plusButton === true && 
+                  {this.props.plusButton === true && (
                     <button
                       onClick={() => {
                         this.handleAddRecipeToMeal(recipe);
@@ -385,7 +382,20 @@ class RecipeList extends Component {
                     >
                       ➕
                     </button>
-                  }
+                  )}
+                  <button
+                    onClick={() => {
+                      this.removeRecipe(recipe);
+                    }}
+                    style={{
+                      width: 40,
+                      height: 30,
+                      background: "#FFFFFF",
+                      border: "#FFFFFF",
+                    }}
+                  >
+                    ✖️
+                  </button>
                 </ListGroupItem>
               );
             })}

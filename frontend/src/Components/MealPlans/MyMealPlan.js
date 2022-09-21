@@ -90,7 +90,7 @@ class MyMealPlans extends Component {
     };
     return (
       <div className="row">
-        <h1 className="text-center mb-5 mt-5" >Plan The Perfect Meals</h1>
+        <h1 className="text-center mb-5 mt-5">Plan The Perfect Meals</h1>
         <h2 className="text-center mb-5">
           🗓 Plan your meals and prep for the week 🍽
         </h2>
@@ -116,7 +116,7 @@ class MyMealPlans extends Component {
                       })}
                   </ListGroup>
                 </FormGroup>
-                <Button style={StyledButton}>Submit</Button>
+                <Button style={StyledButton}>Save This Meal Plan</Button>
               </Form>
             </Card>
           </div>
@@ -124,25 +124,11 @@ class MyMealPlans extends Component {
           <div style={{ width: "20rem" }}>
             <Card className="align-items-center">
               <MealList
+                plusButton={true}
                 parentMeals={this.state.meals}
                 user={this.props.user}
                 parentCallback={this.handleCallback}
               />
-              <Form>
-                <Input
-                  type="text"
-                  id="meals"
-                  name="meal_name"
-                  className="form-control"
-                  placeholder="Meal"
-                  v-model="meal.meal_name"
-                  onChange={this.handleInputChange}
-                  required
-                />
-                <Button type="submit" style={StyledButton}>
-                  Add to List
-                </Button>
-              </Form>
             </Card>
           </div>
 
