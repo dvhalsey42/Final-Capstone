@@ -119,7 +119,7 @@ class MyMeals extends Component {
               style={{
                 backgroundColor: "#F6F2F0",
                 border: "none",
-               marginRight: 100,
+                marginRight: 100,
               }}
             >
               <CardTitle tag="h5">Create Your Meal</CardTitle>
@@ -135,7 +135,7 @@ class MyMeals extends Component {
                 </FormGroup>
                 <FormGroup>
                   <CardTitle tag="h5">Add Recipes</CardTitle>
-                  <CardSubtitle className="mb-5">
+                  <CardSubtitle className="">
                     Click ➕ to add recipes to your meals ➡️
                   </CardSubtitle>
                   <Label for="recipes"></Label>
@@ -148,20 +148,26 @@ class MyMeals extends Component {
                       })}
                   </ListGroup>
                 </FormGroup>
-                <Button style={StyledButton}>Save This Meal</Button>
+                <Button className="mt-5" style={StyledButton}>
+                  Save This Meal
+                </Button>
               </Form>
             </Card>
           </div>
 
           <div style={{ width: "20rem" }}>
             <Card className=" align-items-center">
-              <RecipeList parentCallback={this.handleCallback} />
+              <RecipeList
+                plusButton={true}
+                parentCallback={this.handleCallback}
+              />
             </Card>
           </div>
         </div>
         <div>
           <Card className=" align-items-center">
             <MealList
+              plusButton={false}
               key={this.state.counter}
               parentMeals={this.state.meals}
               user={this.props.user}

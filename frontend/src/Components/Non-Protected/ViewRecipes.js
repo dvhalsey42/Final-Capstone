@@ -7,6 +7,15 @@ import viewphoto from "../images/viewlanding.png"
 
 
 class ViewRecipes extends Component {
+
+  
+  toggle = () => {
+    this.setState({ modal: this.state.modal });
+  };
+
+  toggleSecondary = () => {
+    this.setState({ modalSecondary: this.state.modalSecondary });
+  };
   render() {
     return (
       <div>
@@ -20,8 +29,8 @@ class ViewRecipes extends Component {
             style={{ maxWidth: 800 }}
             alt="cooking"
           ></img>
-          <div className="recipe-view-table" >
-          <RecipeList  />
+          <div className="recipe-view-table">
+            <RecipeList />
           </div>
         </div>
 

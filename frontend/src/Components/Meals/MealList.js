@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { fetchMeals } from "../../Redux/actionCreators";
 import { baseUrl } from "../../Shared/baseUrl";
-import { Card, ListGroup, ListGroupItem, Button, UncontrolledPopover, PopoverHeader, PopoverBody, Modal, ModalHeader, ModalBody, ModalFooter, Input, Form, FormGroup, Label } from "reactstrap";
+import { Card, ListGroup, ListGroupItem, Button, UncontrolledPopover, PopoverHeader, PopoverBody, Modal, ModalHeader, ModalBody, ModalFooter, Input } from "reactstrap";
 import axios from "axios";
 import RecipeList from "../Recipes/RecipeList";
 
@@ -27,7 +27,7 @@ class MealList extends Component {
         this.removeMeal = this.removeMeal.bind(this);
     }    
 
-    toggleModal = () => {this.setState({modal: !this.state.modal})}
+    toggleModal = () => {this.setState({modal: this.state.modal})}
     toggleSecondaryModal = () => {this.setState({modalSecondary: !this.state.modalSecondary})}
 
     componentDidMount() {
@@ -183,7 +183,13 @@ class MealList extends Component {
                                   </ListGroup>
                                 );
                               })}
-                            <Button onClick={() => {this.toggleModal()}}>Edit</Button>
+                            <Button
+                              onClick={() => {
+                                this.toggleModal();
+                              }}
+                            >
+                              Edit
+                            </Button>
                             <Button
                               onClick={() => {
                                 this.removeMeal(this.state.selectedMeal);
@@ -194,19 +200,7 @@ class MealList extends Component {
                             </Button>
                           </PopoverBody>
                         </UncontrolledPopover>
-                        <button
-                          style={{
-                            width: 40,
-                            height: 30,
-                            background: "#FFFFFF",
-                            border: "#FFFFFF",
-                          }}
-                          onClick={() => {
-                            this.removeMeal(meal);
-                          }}
-                        >
-                          ✖️
-                        </button>
+                         {this.props.plusButton === true && 
                         <button
                           style={{
                             width: 40,
@@ -220,6 +214,19 @@ class MealList extends Component {
                           }}
                         >
                           ➕
+                        </button>}
+                        <button
+                          style={{
+                            width: 40,
+                            height: 30,
+                            background: "#FFFFFF",
+                            border: "#FFFFFF",
+                          }}
+                          onClick={() => {
+                            this.removeMeal(meal);
+                          }}
+                        >
+                          ✖️
                         </button>
                       </ListGroupItem>
                     );

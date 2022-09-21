@@ -198,7 +198,7 @@ class MealPlanList extends Component {
                         >
                           ✖️
                         </button>
-                        <button
+                        {/* <button
                           style={{
                             width: 40,
                             height: 30,
@@ -210,7 +210,7 @@ class MealPlanList extends Component {
                           }}
                         >
                           ➕
-                        </button>
+                        </button> */}
                       </ListGroupItem>
                     );
                     })}
