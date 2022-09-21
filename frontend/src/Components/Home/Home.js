@@ -73,7 +73,7 @@ class Home extends Component {
               marginInlineEnd: 20,
             }}
           />
-          <p>PLAN PREP ENJOY</p>
+          <p className="mb-5">PLAN PREP ENJOY</p>
           <h2 className="mt-5">Start By Crafting Your Recipe</h2>
           <img
             className=""

@@ -95,7 +95,7 @@ class MyRecipes extends Component {
       position: "fixed",
       left: "0",
       bottom: "0",
-      height: "20px",
+      height: "10px",
       width: "100%",
     };
     const StyledButton = {
@@ -105,13 +105,14 @@ class MyRecipes extends Component {
       border: "none",
       color: "#556b2f",
     };
+    
     return (
       <div className="">
-        <h1 className="text-center mt-5 mb-5">Craft Your Recipes</h1>
+        <h1 className="text-center mt-5 mb-5">Craft Recipes</h1>
         <h2 className="text-center mb-5 ">
           🧄 Create & Catalogue Recipes You Love 🍲
         </h2>
-        <div className="container">
+        <div className="container border">
           <Card
             body
             className=""
@@ -180,11 +181,12 @@ class MyRecipes extends Component {
               <Button style={StyledButton}>Save My Recipe</Button>
             </Form>
           </Card>
-
-          <IngredientList parentCallback={this.handleCallback} />
+          <div className="">
+            <IngredientList parentCallback={this.handleCallback} />
+          </div>
         </div>
 
-        <div >
+        <div>
           <Card id="recList" className="recipe-card align-items-center mb-5">
             <RecipeList
               plusButton={false}
@@ -203,7 +205,7 @@ class MyRecipes extends Component {
           <Link
             to="/login"
             onClick={this.handleLogout}
-            style={{ color: "#556b2f", }}
+            style={{ color: "#556b2f" }}
           >
             Logout
           </Link>

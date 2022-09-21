@@ -144,7 +144,7 @@ class IngredientList extends Component {
             overflow: "auto",
           }}
         >
-          <h2>Ingredients</h2>
+          <h2 className="text-center">Ingredients</h2>
           <ListGroup className="row-cols-lg-auto g-3 mb-5 ">
             {this.state.ingredients.map((ingredient) => {
               return (
