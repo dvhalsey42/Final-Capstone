@@ -133,7 +133,7 @@ class MyMealPlans extends Component {
           </div>
 
           <div style={{ width: "20rem" }}>
-            <MealPlanList key={this.state.counter} />
+            <MealPlanList user={this.props.user} key={this.state.counter} />
           </div>
 
           <footer className="text-center pt-5" style={footerStyle}>

@@ -96,14 +96,17 @@ public class JdbcMealDao implements MealDao{
             recipes.add(recipe);
         }
 
-        String removeSql = "DELETE FROM meal_recipes WHERE recipe_id = ? AND meal_id = ?";
-        for (int i = 0; i < updatedMeal.getRecipes().size(); i++) {
-            for (int a = 0; a < recipes.size(); a++) {
-                if (updatedMeal.getRecipes().get(i).getRecipe_id() == recipes.get(a).getRecipe_id()) {
-                    jdbcTemplate.update(removeSql, updatedMeal.getRecipes().get(i).getRecipe_id(), meal_id);
-                }
-            }
-        }
+        String deleteSql = "DELETE FROM meal_recipes WHERE meal_id = ?";
+        jdbcTemplate.update(deleteSql, meal_id);
+
+//        String removeSql = "DELETE FROM meal_recipes WHERE recipe_id = ? AND meal_id = ?";
+//        for (int i = 0; i < updatedMeal.getRecipes().size(); i++) {
+//            for (int a = 0; a < recipes.size(); a++) {
+//                if (updatedMeal.getRecipes().get(i).getRecipe_id() == recipes.get(a).getRecipe_id()) {
+//                    jdbcTemplate.update(removeSql, updatedMeal.getRecipes().get(i).getRecipe_id(), meal_id);
+//                }
+//            }
+//        }
 
         String sqlForJoiner = "INSERT INTO meal_recipes (meal_id, recipe_id) VALUES (?,?)";
         for (Recipe recipe : updatedMeal.getRecipes()) {

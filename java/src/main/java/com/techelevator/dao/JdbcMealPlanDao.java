@@ -97,15 +97,18 @@ public class JdbcMealPlanDao implements MealPlanDao {
             knownMeals.add(meal);
         }
 
-        String removingSql = "DELETE FROM plan_meals WHERE plan_id = ? AND meal_id = ?";
-        for (int i = 0; i < editedPlan.getMeals().size(); i++) {
-            for (int a = 0; a < knownMeals.size(); a++) {
-                if (editedPlan.getMeals().get(i).getMeal_id() == knownMeals.get(a).getMeal_id()) {
-                    // remove meal from database
-                    jdbcTemplate.update(removingSql, mealPlan_id, editedPlan.getMeals().get(i).getMeal_id());
-                }
-            }
-        }
+        String deleteSql = "DELETE FROM plan_meals WHERE plan_id = ?";
+        jdbcTemplate.update(deleteSql, mealPlan_id);
+
+//        String removingSql = "DELETE FROM plan_meals WHERE plan_id = ? AND meal_id = ?";
+//        for (int i = 0; i < editedPlan.getMeals().size(); i++) {
+//            for (int a = 0; a < knownMeals.size(); a++) {
+//                if (editedPlan.getMeals().get(i).getMeal_id() == knownMeals.get(a).getMeal_id()) {
+//                    // remove meal from database
+//                    jdbcTemplate.update(removingSql, mealPlan_id, editedPlan.getMeals().get(i).getMeal_id());
+//                }
+//            }
+//        }
 
         String addNewMeals = "INSERT INTO plan_meals (plan_id, meal_id) VALUES (?,?)";
         for (Meal meal : editedPlan.getMeals()) {
