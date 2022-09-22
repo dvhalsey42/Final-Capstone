@@ -20,14 +20,14 @@ class MealList extends Component {
             selectedRecipe: '',
             meal_name: '',
             backupMeal: '',
-            modal: false,
+            mealModal: false,
             modalSecondary: false,
         };
         this.handleRecipeCallback = this.handleRecipeCallback.bind(this);
         this.removeMeal = this.removeMeal.bind(this);
     }    
 
-    toggleModal = () => {this.setState({modal: this.state.modal})}
+    toggleModal = () => {this.setState({mealModal: !this.state.mealModal}); document.body.click();}
     toggleSecondaryModal = () => {this.setState({modalSecondary: !this.state.modalSecondary})}
 
     componentDidMount() {
@@ -233,7 +233,7 @@ class MealList extends Component {
                     })}
                 </ListGroup>
                 </Card>
-                <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                <Modal isOpen={this.state.mealModal} toggle={this.toggleModal}>
                   <ModalHeader toggle={this.toggleModal}>
                     <Input id="meal_name" name="meal_name" type="textarea" defaultValue={this.state.selectedMeal.meal_name} onChange={this.handleInputChange} style={{height: "calc(1.5em + .75rem + 2px)"}} />
                   </ModalHeader>
@@ -252,8 +252,8 @@ class MealList extends Component {
                                   {this.state.selectedRecipe.recipe_name}
                               </PopoverHeader>
                               <PopoverBody>
-                                <Button color="primary" onClick={() => {this.toggleSecondaryModal();}}>Replace</Button>
-                                <Button color="danger" onClick={() => {this.removeRecipeFromMeal();}}>Remove</Button>
+                                <Button color="primary" onClick={() => {this.toggleSecondaryModal(); document.body.click(); }}>Replace</Button>
+                                <Button color="danger" onClick={() => {this.removeRecipeFromMeal(); document.body.click(); }}>Remove</Button>
                               </PopoverBody>
                             </UncontrolledPopover>
                           </ListGroupItem>

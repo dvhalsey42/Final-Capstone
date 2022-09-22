@@ -83,6 +83,15 @@ class MyMeals extends Component {
     });
   };
 
+  removeRecipeFromMeal(recipe) {
+    var recipeList = this.state.mealRecipes;
+    const index = recipeList.findIndex((recip) => recip === recipe);
+    recipeList.splice(index,1);
+    this.setState({
+      mealRecipes: recipeList
+    })
+  }
+
   render() {
 
     const footerStyle = {
@@ -142,7 +151,10 @@ class MyMeals extends Component {
                     {this.state.mealRecipes &&
                       this.state.mealRecipes.map((recipe) => {
                         return (
-                          <ListGroupItem>{recipe.recipe_name}</ListGroupItem>
+                          <ListGroupItem>
+                            {recipe.recipe_name}
+                            <Button type="button" onClick={() => {this.removeRecipeFromMeal(recipe)}}>X</Button>
+                          </ListGroupItem>
                         );
                       })}
                   </ListGroup>
@@ -159,6 +171,7 @@ class MyMeals extends Component {
               <RecipeList
                 plusButton={true}
                 parentCallback={this.handleCallback}
+                loggedIn={true}
               />
             </Card>
           </div>

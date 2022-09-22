@@ -79,6 +79,15 @@ class MyRecipes extends Component {
     });
   };
 
+  removeIngredientFromRecipe(ingredient) {
+    var ingredientList = this.state.recipeIngredients;
+    const index = ingredientList.findIndex((ing) => ing === ingredient);
+    ingredientList.splice(index, 1);
+    this.setState({
+      recipeIngredients: ingredientList
+    })
+  }
+
   render() {
     const mystyle = {
       color: "rgb(204,85,0)",
@@ -153,11 +162,10 @@ class MyRecipes extends Component {
                               style={{
                                 width: 40,
                                 height: 30,
-                                background: "#FFFFFF",
-                                border: "#FFFFFF",
                               }}
                               className="text-center"
-                            ></Button>
+                              onClick={() => {this.removeIngredientFromRecipe(ingredient)}}
+                            >X</Button>
                           </ListGroupItem>
                         );
                       })}
@@ -191,7 +199,8 @@ class MyRecipes extends Component {
             <RecipeList
               plusButton={false}
               parentCallback={this.handleCallback}
-              key={this.state.counter}
+              key={this.state.counter}  
+              loggedIn={true}
             />
             <Link to="/mymeals" className="mt-5 mb-5">
               <Button style={StyledButton}>Start Creating Meals</Button>
