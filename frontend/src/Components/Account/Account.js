@@ -3,6 +3,7 @@ import {withRouter, Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {Button, Card, CardHeader, ListGroup, ListGroupItem } from "reactstrap";
 import "../Account/Account.css";
+import pantry from "../images/greenpantry.png"
 
 class Account extends Component {
   constructor(props) {
@@ -24,15 +25,27 @@ class Account extends Component {
 
 
   render() {
+
+    const footerStyle = {
+      backgroundColor: "#f0eae1",
+      borderTop: "1px solid #E7E7E7",
+      textAlign: "center",
+      padding: "20px",
+      position: "fixed",
+      left: "0",
+      bottom: "0",
+      height: "10px",
+      width: "100%",
+    };
     return (
       <div>
         <Card
-          className="text-center"
+          className="text-center align-items-center mb-5"
           style={{
-            width: "25rem",
-          }}
+            width: "25rem", left: 650, top: 100,
+            border: "none", backgroundImage: `url(${pantry})`, height:"30rem" }}
         >
-          <CardHeader>Welcome, {this.props.username} !</CardHeader>
+          <CardHeader style={{color:"black", fontSize:20}}>Welcome, {this.props.username} !</CardHeader>
           <ListGroup flush>
             <ListGroupItem>Your user ID is {this.props.user}</ListGroupItem>
             <ListGroupItem>
@@ -52,6 +65,19 @@ class Account extends Component {
             </ListGroupItem>
           </ListGroup>
         </Card>
+
+        <footer className="text-center pt-5 mt-5" style={footerStyle}>
+          <Link to="/home" style={{ color: "#556b2f" }}>
+            Home |{" "}
+          </Link>
+          <Link
+            to="/login"
+            onClick={this.handleLogout}
+            style={{ color: "#556b2f" }}
+          >
+            Logout
+          </Link>
+        </footer>
       </div>
     );
   }

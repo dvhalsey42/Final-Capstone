@@ -5,3 +5,11 @@
     gap: 35px;
     background-color: #f0eae1;
   }
+
+  #mealList{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+
+  }

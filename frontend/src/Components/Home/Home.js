@@ -39,7 +39,7 @@ class Home extends Component {
   StyledButton = {
     backgroundColor: "#FAC668",
     width: 200,
-    height: "3rem",
+    height: "5rem",
     border: "none",
     color: "#556b2f",
     textDecoration: "none",

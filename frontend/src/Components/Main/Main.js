@@ -14,7 +14,6 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Col,
 } from "reactstrap";
 import "../Main/Main.css";
 import MyMealPlans from "../MealPlans/MyMealPlan";
