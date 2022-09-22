@@ -25,13 +25,14 @@ class MealPlanList extends Component {
             modalSecond: '',
             meal_plan_name: '',
             selectedMeal: '',
-
+            groceryListModal: '',
         };
         this.handleMealCallback = this.handleMealCallback.bind(this);
     }
 
     planModalToggle = () => {this.setState({modal: !this.state.modal})}
     planModalSecondary = () => {this.setState({modalSecond: !this.state.modalSecond})}
+    groceryListToggle = () => {this.setState({groceryListModal: !this.state.groceryListModal})}
 
     componentDidMount() {
         this.handleFetchMealPlans();
@@ -166,9 +167,14 @@ class MealPlanList extends Component {
                         >
                           <PopoverHeader>
                             {this.state.selectedMealPlan.meal_plan_name}
+                            
                           </PopoverHeader>
                           <PopoverBody>
+                            <div className="fixedDiv">
                             <h5>Meals</h5>
+                            <span></span>
+                            <Button color="success" style={{padding: "5px"}} onClick={this.groceryListToggle} >Listify</Button>
+                            </div>
                             {this.state.selectedMealPlan &&
                               this.state.selectedMealPlan.meals.map((meal) => {
                                 return (
@@ -336,6 +342,51 @@ class MealPlanList extends Component {
                   <ModalFooter>
                         <Button color="secondary" onClick={this.planModalSecondary}>Cancel</Button>
                   </ModalFooter>
+                </Modal>
+
+                <Modal isOpen={this.state.groceryListModal} toggle={this.groceryListToggle}>
+                      <ModalHeader toggle={this.groceryListToggle}>
+                        Grocery List for {this.state.selectedMealPlan.meal_plan_name}!
+                      </ModalHeader>
+                      <ModalBody>
+                        {this.state.selectedMealPlan.meals && (
+                          this.state.selectedMealPlan.meals.map((meal) => {
+                            return (
+                              <ListGroup>
+                                <ListGroupItem>
+                                  {meal.meal_name}
+                                  {meal.recipes && (
+                                    meal.recipes.map((recipe) => {
+                                      return (
+                                        <ListGroup>
+                                          <ListGroupItem>
+                                            {recipe.recipe_name}
+                                            {recipe.ingredients && (
+                                              recipe.ingredients.map((ingredient) => {
+                                                var checked = false;
+                                                return (
+                                                  <ListGroup>
+                                                    <ListGroupItem>
+                                                      {ingredient.ingredient_name}
+                                                      <Input type="checkbox"/>
+                                                    </ListGroupItem>
+                                                  </ListGroup>
+                                                )
+                                              })
+                                            )}
+                                          </ListGroupItem>
+                                        </ListGroup>
+                                      )
+                                    })
+                                  )}
+                                </ListGroupItem>
+                              </ListGroup>
+                            )
+                          }))}
+                      </ModalBody>
+                      <ModalFooter>
+
+                      </ModalFooter>
                 </Modal>
             </div>
         );
