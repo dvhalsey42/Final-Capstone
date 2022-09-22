@@ -224,21 +224,20 @@ class MealList extends Component {
                           </PopoverBody>
                         </UncontrolledPopover>
                         {this.props.plusButton === true && (
-                          <button
-                            style={{
-                              width: 40,
-                              height: 30,
-                              background: "#FFFFFF",
-                              border: "#FFFFFF",
-                            }}
-                            onClick={() => {
-                              // this.handleAddMealToRecipe(meal);
-                              this.handleCallback(meal);
-                            }}
-                          >
-                            ➕
-                          </button>
-                        )}
+                        <button
+                          style={{
+                            width: 40,
+                            height: 30,
+                            background: "#FFFFFF",
+                            border: "#FFFFFF",
+                          }}
+                          onClick={() => {
+                            // this.handleAddMealToRecipe(meal);
+                            this.handleCallback(meal);
+                          }}
+                        >
+                          ➕
+                        </button>)}
                         <button
                           style={{
                             width: 40,

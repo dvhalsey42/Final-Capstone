@@ -366,7 +366,7 @@ class MealPlanList extends Component {
                 <Modal isOpen={this.state.modalSecond} toggle={this.planModalSecondary}>
                   <ModalHeader toggle={this.planModalSecondary}>{this.state.selectedMeal.meal_name}</ModalHeader>
                   <ModalBody>
-                    <MealList user={this.props.user} parentCallback={this.handleMealCallback} />
+                    <MealList plusButton={true} user={this.props.user} parentCallback={this.handleMealCallback} />
                   </ModalBody>
                   <ModalFooter>
                         <Button color="secondary" onClick={this.planModalSecondary}>Cancel</Button>
