@@ -378,6 +378,7 @@ class MealPlanList extends Component {
                     Add
                   </Button>
                 </ListGroup>
+<<<<<<< HEAD
               </ModalBody>
               <ModalFooter>
                 <Button
@@ -418,6 +419,109 @@ class MealPlanList extends Component {
                 </Button>
               </ModalFooter>
             </Modal>
+=======
+                </Card>
+                <Modal isOpen={this.state.modal} toggle={this.planModalToggle}>
+                  <ModalHeader toggle={this.planModalToggle}>
+                    <Input id="meal_plan_name" 
+                    name="meal_plan_name" 
+                    type="textarea" 
+                    defaultValue={this.state.selectedMealPlan.meal_plan_name} 
+                    onChange={this.handleInputChange}  
+                    style={{ height: "calc(1.5em + .75rem + 2px)" }}
+                    />
+                  </ModalHeader>
+                  <ModalBody>
+                    <h5>Meals</h5>
+                    <ListGroup>
+                    {this.state.selectedMealPlan.meals && (
+                      this.state.selectedMealPlan.meals.map((meal) => {
+                        return (
+                          <ListGroupItem>
+                            <Button 
+                              id="mealPlanModalPopover"
+                              type="button"
+                              onClick={() => {this.setSelectedMeal(meal)}}
+                            >
+                              {meal.meal_name}
+                            </Button>
+                            <UncontrolledPopover
+                              flip
+                              target="mealPlanModalPopover"
+                              trigger="legacy"
+                            >
+                              <PopoverHeader>
+                                {this.state.selectedMeal.meal_name}
+                              </PopoverHeader>
+                              <PopoverBody>
+                                <Button color='primary' onClick={() => {this.planModalSecondary(); document.body.click();}}>Replace</Button>
+                                <Button color='danger' onClick={() => {this.removeMealFromMealPlan(); }}>Remove</Button>
+                              </PopoverBody>
+                            </UncontrolledPopover>
+                          </ListGroupItem>
+                        )
+                      })
+                    )}
+                    <Button color="success" onClick={this.planModalSecondary}>Add</Button>
+                    </ListGroup>
+                  </ModalBody>
+                  <ModalFooter>
+                      <Button color="primary" onClick={() => {this.submitEditedMealPlan(this.state.selectedMealPlan); this.planModalToggle();}}>Submit</Button>
+                      <Button color="secondary" onClick={() => {this.planModalToggle();}}>Cancel</Button>
+                  </ModalFooter>
+                </Modal>
+                <Modal isOpen={this.state.modalSecond} toggle={this.planModalSecondary}>
+                  <ModalHeader toggle={this.planModalSecondary}>{this.state.selectedMeal.meal_name}</ModalHeader>
+                  <ModalBody>
+                    <MealList plusButton={true} user={this.props.user} parentCallback={this.handleMealCallback} />
+                  </ModalBody>
+                  <ModalFooter>
+                        <Button color="secondary" onClick={this.planModalSecondary}>Cancel</Button>
+                  </ModalFooter>
+                </Modal>
+
+                <Modal isOpen={this.state.groceryListModal} toggle={this.groceryListToggle}>
+                      <ModalHeader toggle={this.groceryListToggle}>
+                        Grocery List for {this.state.selectedMealPlan.meal_plan_name}!
+                      </ModalHeader>
+                      <ModalBody>
+                        {this.state.selectedMealPlan.meals && (
+                          this.state.selectedMealPlan.meals.map((meal) => {
+                            return (
+                              <ListGroup>
+                                <ListGroupItem>
+                                  {meal.meal_name}
+                                  {meal.recipes && (
+                                    meal.recipes.map((recipe) => {
+                                      return (
+                                        <ListGroup>
+                                          <ListGroupItem>
+                                            {recipe.recipe_name}
+                                            {recipe.ingredients && (
+                                              recipe.ingredients.map((ingredient) => {
+                                                var checked = false;
+                                                return (
+                                                  <ListGroup>
+                                                    <ListGroupItem>
+                                                      {ingredient.ingredient_name}
+                                                      <Input type="checkbox"/>
+                                                    </ListGroupItem>
+                                                  </ListGroup>
+                                                )
+                                              })
+                                            )}
+                                          </ListGroupItem>
+                                        </ListGroup>
+                                      )
+                                    })
+                                  )}
+                                </ListGroupItem>
+                              </ListGroup>
+                            )
+                          }))}
+                      </ModalBody>
+                      <ModalFooter>
+>>>>>>> 16948810fbf1698104469c6c087968bddad6f4c8
 
             <Modal
               isOpen={this.state.groceryListModal}

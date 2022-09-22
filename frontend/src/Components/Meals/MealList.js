@@ -138,6 +138,7 @@ class MealList extends Component {
         };
 
         return (
+<<<<<<< HEAD
           <div className="text-center mb-5">
             <Card
               className="meal-card mt-5"
@@ -227,6 +228,108 @@ class MealList extends Component {
                         </PopoverBody>
                       </UncontrolledPopover>
                       {this.props.plusButton === true && (
+=======
+            <div className="text-center">
+                <Card
+                className="meal-card mt-5"
+                style={{
+                    
+                }}
+                >
+                <h2>Meals</h2>
+                <ListGroup className="row-cols-lg-auto g-3 mb-5 ">
+                    {this.state.meals.map((meal) => {
+                    return (
+                      <ListGroupItem>
+                        {/* this is where ingredient this is rendered */}
+                        <Button
+                          style={StyledButton}
+                          id="MealButton"
+                          type="button"
+                          onClick={() => {
+                            this.setSelectedMeal(meal);
+                          }}
+                        >
+                          {meal.meal_name}
+                        </Button>
+                        <UncontrolledPopover
+                          style={{ width: 200, background: "#F6F2F0" }}
+                          placement="right"
+                          target="MealButton"
+                          trigger="legacy"
+                        >
+                          <PopoverHeader>
+                            {this.state.selectedMeal.meal_name}
+                          </PopoverHeader>
+                          <PopoverBody>
+                            {this.state.selectedMeal &&
+                              this.state.selectedMeal.recipes.map((recipe) => {
+                                return (
+                                  <ListGroup className="mb-2">
+                                    <ListGroupItemHeading>
+                                      Recipe:
+                                    </ListGroupItemHeading>
+                                    <ListGroupItem>
+                                      <ListGroupItemText>
+                                        {" "}
+                                        {recipe.recipe_name}
+                                      </ListGroupItemText>
+                                    </ListGroupItem>
+                                    <h8>Cooking Instructions:</h8>
+                                    <ListGroupItem>
+                                      <ListGroupItemText>
+                                        {" "}
+                                        {recipe.instructions_list}
+                                      </ListGroupItemText>
+                                    </ListGroupItem>
+                                  </ListGroup>
+                                );
+                              })}
+                            <Button
+                              style={{
+                                width: 40,
+                                height: 30,
+                                background: "#F6F2F0",
+                                border: "#F6F2F0",
+                              }}
+                              onClick={() => {
+                                this.toggleModal();
+                              }}
+                            >
+                              ✍️
+                            </Button>
+                            <Button
+                              style={{
+                                width: 40,
+                                height: 30,
+                                background: "#F6F2F0",
+                                border: "#F6F2F0",
+                              }}
+                              onClick={() => {
+                                this.removeMeal(this.state.selectedMeal);
+                                document.body.click();
+                              }}
+                            >
+                              ✖️
+                            </Button>
+                          </PopoverBody>
+                        </UncontrolledPopover>
+                        {this.props.plusButton === true && (
+                        <button
+                          style={{
+                            width: 40,
+                            height: 30,
+                            background: "#FFFFFF",
+                            border: "#FFFFFF",
+                          }}
+                          onClick={() => {
+                            // this.handleAddMealToRecipe(meal);
+                            this.handleCallback(meal);
+                          }}
+                        >
+                          ➕
+                        </button>)}
+>>>>>>> 16948810fbf1698104469c6c087968bddad6f4c8
                         <button
                           style={{
                             width: 40,
