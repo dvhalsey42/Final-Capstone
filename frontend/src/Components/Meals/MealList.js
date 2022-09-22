@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { fetchMeals } from "../../Redux/actionCreators";
 import { baseUrl } from "../../Shared/baseUrl";
-import { Card, ListGroup, ListGroupItem, Button, UncontrolledPopover, PopoverHeader, PopoverBody, Modal, ModalHeader, ModalBody, ModalFooter, Input } from "reactstrap";
+import { Card, ListGroup, ListGroupItem, Button, UncontrolledPopover, PopoverHeader, PopoverBody, Modal, ModalHeader, ModalBody, ModalFooter, Input, ListGroupItemHeading, ListGroupItemText } from "reactstrap";
 import axios from "axios";
 import RecipeList from "../Recipes/RecipeList";
 
@@ -130,19 +130,19 @@ class MealList extends Component {
     render() {
 
         const StyledButton = {
-            backgroundColor: "#FAC668",
-            width: 100,
-            height: "3rem",
-            border: "none",
-            color: "#556b2f",
-          };
+          backgroundColor: "#FAC668",
+          width: 200,
+          height: "5rem",
+          border: "none",
+          color: "#556b2f",
+        };
 
         return (
-            <div className="align-items-center">
+            <div className="text-center">
                 <Card
-                className="meal-card"
+                className="meal-card mt-5"
                 style={{
-                    width: "15rem",
+                    
                 }}
                 >
                 <h2>Meals</h2>
@@ -162,6 +162,7 @@ class MealList extends Component {
                           {meal.meal_name}
                         </Button>
                         <UncontrolledPopover
+                          style={{ width: 200, background: "#F6F2F0" }}
                           placement="right"
                           target="MealButton"
                           trigger="legacy"
@@ -170,51 +171,74 @@ class MealList extends Component {
                             {this.state.selectedMeal.meal_name}
                           </PopoverHeader>
                           <PopoverBody>
-                            <h5>Recipes</h5>
                             {this.state.selectedMeal &&
                               this.state.selectedMeal.recipes.map((recipe) => {
                                 return (
-                                  <ListGroup>
+                                  <ListGroup className="mb-2">
+                                    <ListGroupItemHeading>
+                                      Recipe:
+                                    </ListGroupItemHeading>
                                     <ListGroupItem>
-                                      {recipe.recipe_name}
-                                      <p>Instructions List</p>
-                                      {recipe.instructions_list}
+                                      <ListGroupItemText>
+                                        {" "}
+                                        {recipe.recipe_name}
+                                      </ListGroupItemText>
+                                    </ListGroupItem>
+                                    <h8>Cooking Instructions:</h8>
+                                    <ListGroupItem>
+                                      <ListGroupItemText>
+                                        {" "}
+                                        {recipe.instructions_list}
+                                      </ListGroupItemText>
                                     </ListGroupItem>
                                   </ListGroup>
                                 );
                               })}
                             <Button
+                              style={{
+                                width: 40,
+                                height: 30,
+                                background: "#F6F2F0",
+                                border: "#F6F2F0",
+                              }}
                               onClick={() => {
                                 this.toggleModal();
                               }}
                             >
-                              Edit
+                              ✍️
                             </Button>
                             <Button
+                              style={{
+                                width: 40,
+                                height: 30,
+                                background: "#F6F2F0",
+                                border: "#F6F2F0",
+                              }}
                               onClick={() => {
                                 this.removeMeal(this.state.selectedMeal);
                                 document.body.click();
                               }}
                             >
-                              Delete
+                              ✖️
                             </Button>
                           </PopoverBody>
                         </UncontrolledPopover>
-                         {this.props.plusButton === true && 
-                        <button
-                          style={{
-                            width: 40,
-                            height: 30,
-                            background: "#FFFFFF",
-                            border: "#FFFFFF",
-                          }}
-                          onClick={() => {
-                            // this.handleAddMealToRecipe(meal);
-                            this.handleCallback(meal);
-                          }}
-                        >
-                          ➕
-                        </button>}
+                        {this.props.plusButton === true && (
+                          <button
+                            style={{
+                              width: 40,
+                              height: 30,
+                              background: "#FFFFFF",
+                              border: "#FFFFFF",
+                            }}
+                            onClick={() => {
+                              // this.handleAddMealToRecipe(meal);
+                              this.handleCallback(meal);
+                            }}
+                          >
+                            ➕
+                          </button>
+                        )}
                         <button
                           style={{
                             width: 40,

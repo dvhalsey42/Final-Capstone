@@ -131,20 +131,21 @@ class MealPlanList extends Component {
     render() {
         const StyledButton = {
             backgroundColor: "#FAC668",
-            width: 100,
-            height: "3rem",
+            width: 200,
+            height: "5rem",
             border: "none",
             color: "#556b2f",
           };
         return (
             <div className="align-items-center">
                 <Card
-                className="meal-plan-card"
+                className="meal-plan-card text-center mt-5 mb-5"
                 style={{
-                    width: "15rem",
+                   
                 }}
                 >
-                <h2>Meal Plans</h2>
+                <h2 >Meal Plans</h2>
+                <h4>Grocery List 📝</h4>
                 <ListGroup className="row-cols-lg-auto g-3 mb-5 ">
                     {this.state.meal_plans.map((meal_plan) => {
                     return (
@@ -161,19 +162,29 @@ class MealPlanList extends Component {
                           {meal_plan.meal_plan_name}
                         </Button>
                         <UncontrolledPopover
+                          style={{
+                            background: "#F6F2F0",
+                          }}
                           placement="right"
                           target="MealPlanButton"
                           trigger="legacy"
                         >
                           <PopoverHeader>
                             {this.state.selectedMealPlan.meal_plan_name}
-                            
                           </PopoverHeader>
                           <PopoverBody>
                             <div className="fixedDiv">
-                            <h5>Meals</h5>
-                            <span></span>
-                            <Button color="success" style={{padding: "5px"}} onClick={this.groceryListToggle} >Listify</Button>
+                              <h5>Meals</h5>
+                              <span></span>
+                              <Button
+                                style={{
+                                  padding: "5px",
+                                  backgroundColor: "#556B30",
+                                }}
+                                onClick={this.groceryListToggle}
+                              >
+                                Listify
+                              </Button>
                             </div>
                             {this.state.selectedMealPlan &&
                               this.state.selectedMealPlan.meals.map((meal) => {
@@ -241,8 +252,26 @@ class MealPlanList extends Component {
                                   </ListGroup>
                                 );
                               })}
-                            <Button onClick={() => {this.planModalToggle()}}>Edit</Button>
                             <Button
+                              style={{
+                                width: 40,
+                                height: 30,
+                                background: "#F6F2F0",
+                                border: "#F6F2F0",
+                              }}
+                              onClick={() => {
+                                this.planModalToggle();
+                              }}
+                            >
+                              ✍️
+                            </Button>
+                            <Button
+                              style={{
+                                width: 40,
+                                height: 30,
+                                background: "#F6F2F0",
+                                border: "#F6F2F0",
+                              }}
                               onClick={() => {
                                 this.removeMealPlan(
                                   this.state.selectedMealPlan
@@ -250,7 +279,7 @@ class MealPlanList extends Component {
                                 document.body.click();
                               }}
                             >
-                              Delete
+                              ✖️
                             </Button>
                           </PopoverBody>
                         </UncontrolledPopover>

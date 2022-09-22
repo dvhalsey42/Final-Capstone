@@ -153,7 +153,7 @@ class RecipeList extends Component {
     StyledButton = {
       backgroundColor: "#FAC668",
       width: 200,
-      height: "3rem",
+      height: "5rem",
       border: "none",
       color: "#556b2f",
     };
@@ -382,19 +382,21 @@ class RecipeList extends Component {
                       ➕
                     </button>
                   )}
-                  <button
-                    onClick={() => {
-                      this.removeRecipe(recipe);
-                    }}
-                    style={{
-                      width: 40,
-                      height: 30,
-                      background: "#FFFFFF",
-                      border: "#FFFFFF",
-                    }}
-                  >
-                    ✖️
-                  </button>
+                  {this.props.minusButton === true && (
+                    <button
+                      onClick={() => {
+                        this.removeRecipe(recipe);
+                      }}
+                      style={{
+                        width: 40,
+                        height: 30,
+                        background: "#FFFFFF",
+                        border: "#FFFFFF",
+                      }}
+                    >
+                      ✖️
+                    </button>
+                  )}
                 </ListGroupItem>
               );
             })}

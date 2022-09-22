@@ -127,7 +127,7 @@ class IngredientList extends Component {
     const StyledButton = {
       backgroundColor: "#FAC668",
       width: 120,
-      height: "3rem",
+      height: "5rem",
       border: "none",
       color: "#556b2f",
     };

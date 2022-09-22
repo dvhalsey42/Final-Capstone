@@ -105,7 +105,7 @@ class MyRecipes extends Component {
       border: "none",
       color: "#556b2f",
     };
-    
+
     return (
       <div className="">
         <h1 className="text-center mt-5 mb-5">Craft Recipes</h1>
@@ -190,6 +190,7 @@ class MyRecipes extends Component {
           <Card id="recList" className="recipe-card align-items-center mb-5">
             <RecipeList
               plusButton={false}
+              minusButton={false}
               parentCallback={this.handleCallback}
               key={this.state.counter}
             />
