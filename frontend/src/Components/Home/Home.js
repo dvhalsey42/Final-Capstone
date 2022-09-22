@@ -3,7 +3,6 @@ import "../Home/Home.css";
 import { Component } from "react";
 import { connect } from "react-redux";
 import user2 from "../images/user2.png"
-import cal from "../images/cal.png"
 import food from "../images/food1.png"
 import mealplan from "../images/mealplan1.png"
 import mainlogo from "../images/transparentlogo.png"

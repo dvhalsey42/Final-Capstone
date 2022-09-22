@@ -138,107 +138,95 @@ class MealList extends Component {
         };
 
         return (
-            <div className="text-center">
-                <Card
-                className="meal-card mt-5"
-                style={{
-                    
-                }}
-                >
-                <h2>Meals</h2>
-                <ListGroup className="row-cols-lg-auto g-3 mb-5 ">
-                    {this.state.meals.map((meal) => {
-                    return (
-                      <ListGroupItem>
-                        {/* this is where ingredient this is rendered */}
-                        <Button
-                          style={StyledButton}
-                          id="MealButton"
-                          type="button"
-                          onClick={() => {
-                            this.setSelectedMeal(meal);
-                          }}
-                        >
-                          {meal.meal_name}
-                        </Button>
-                        <UncontrolledPopover
-                          style={{ width: 200, background: "#F6F2F0" }}
-                          placement="right"
-                          target="MealButton"
-                          trigger="legacy"
-                        >
-                          <PopoverHeader>
-                            {this.state.selectedMeal.meal_name}
-                          </PopoverHeader>
-                          <PopoverBody>
-                            {this.state.selectedMeal &&
-                              this.state.selectedMeal.recipes.map((recipe) => {
-                                return (
-                                  <ListGroup className="mb-2">
-                                    <ListGroupItemHeading>
-                                      Recipe:
-                                    </ListGroupItemHeading>
-                                    <ListGroupItem>
-                                      <ListGroupItemText>
-                                        {" "}
-                                        {recipe.recipe_name}
-                                      </ListGroupItemText>
-                                    </ListGroupItem>
-                                    <h8>Cooking Instructions:</h8>
-                                    <ListGroupItem>
-                                      <ListGroupItemText>
-                                        {" "}
-                                        {recipe.instructions_list}
-                                      </ListGroupItemText>
-                                    </ListGroupItem>
-                                  </ListGroup>
-                                );
-                              })}
-                            <Button
-                              style={{
-                                width: 40,
-                                height: 30,
-                                background: "#F6F2F0",
-                                border: "#F6F2F0",
-                              }}
-                              onClick={() => {
-                                this.toggleModal();
-                              }}
-                            >
-                              ✍️
-                            </Button>
-                            <Button
-                              style={{
-                                width: 40,
-                                height: 30,
-                                background: "#F6F2F0",
-                                border: "#F6F2F0",
-                              }}
-                              onClick={() => {
-                                this.removeMeal(this.state.selectedMeal);
-                                document.body.click();
-                              }}
-                            >
-                              ✖️
-                            </Button>
-                          </PopoverBody>
-                        </UncontrolledPopover>
-                        {this.props.plusButton === true && (
-                          <button
+          <div className="text-center mb-5">
+            <Card
+              className="meal-card mt-5"
+              style={{
+                maxHeight: 400,
+                maxWidth: 400,
+                overflow: "auto",
+              }}
+            >
+              <h2>Meals</h2>
+              <p>click each meal to view details</p>
+              <ListGroup className="row-cols-lg-auto g-3 mb-5 ">
+                {this.state.meals.map((meal) => {
+                  return (
+                    <ListGroupItem>
+                      {/* this is where ingredient this is rendered */}
+                      <Button
+                        style={StyledButton}
+                        id="MealButton"
+                        type="button"
+                        onClick={() => {
+                          this.setSelectedMeal(meal);
+                        }}
+                      >
+                        {meal.meal_name}
+                      </Button>
+                      <UncontrolledPopover
+                        style={{ width: 200, background: "#F6F2F0" }}
+                        placement="right"
+                        target="MealButton"
+                        trigger="legacy"
+                      >
+                        <PopoverHeader>
+                          {this.state.selectedMeal.meal_name}
+                        </PopoverHeader>
+                        <PopoverBody>
+                          {this.state.selectedMeal &&
+                            this.state.selectedMeal.recipes.map((recipe) => {
+                              return (
+                                <ListGroup className="mb-2">
+                                  <ListGroupItemHeading>
+                                    Recipe:
+                                  </ListGroupItemHeading>
+                                  <ListGroupItem>
+                                    <ListGroupItemText>
+                                      {" "}
+                                      {recipe.recipe_name}
+                                    </ListGroupItemText>
+                                  </ListGroupItem>
+                                  <h8>Cooking Instructions:</h8>
+                                  <ListGroupItem>
+                                    <ListGroupItemText>
+                                      {" "}
+                                      {recipe.instructions_list}
+                                    </ListGroupItemText>
+                                  </ListGroupItem>
+                                </ListGroup>
+                              );
+                            })}
+                          <Button
                             style={{
                               width: 40,
                               height: 30,
-                              background: "#FFFFFF",
-                              border: "#FFFFFF",
+                              background: "#F6F2F0",
+                              border: "#F6F2F0",
                             }}
                             onClick={() => {
-                              // this.handleAddMealToRecipe(meal);
-                              this.handleCallback(meal);
+                              this.toggleModal();
                             }}
                           >
-                            ➕
-                          </button>
-                        )}
+                            ✍️
+                          </Button>
+                          <Button
+                            style={{
+                              width: 40,
+                              height: 30,
+                              background: "#F6F2F0",
+                              border: "#F6F2F0",
+                            }}
+                            onClick={() => {
+                              this.removeMeal(this.state.selectedMeal);
+                              document.body.click();
+                            }}
+                          >
+                            ✖️
+                          </Button>
+                        </PopoverBody>
+                      </UncontrolledPopover>
+                      {this.props.plusButton === true && (
                         <button
                           style={{
                             width: 40,
@@ -247,64 +235,145 @@ class MealList extends Component {
                             border: "#FFFFFF",
                           }}
                           onClick={() => {
-                            this.removeMeal(meal);
+                            // this.handleAddMealToRecipe(meal);
+                            this.handleCallback(meal);
                           }}
                         >
-                          ✖️
+                          ➕
                         </button>
-                      </ListGroupItem>
-                    );
+                      )}
+                      {/* <button
+                        style={{
+                          width: 40,
+                          height: 30,
+                          background: "#FFFFFF",
+                          border: "#FFFFFF",
+                        }}
+                        onClick={() => {
+                          this.removeMeal(meal);
+                        }}
+                      >
+                        ✖️
+                      </button> */}
+                    </ListGroupItem>
+                  );
+                })}
+              </ListGroup>
+            </Card>
+            <Modal isOpen={this.state.mealModal} toggle={this.toggleModal}>
+              <ModalHeader toggle={this.toggleModal}>
+                <Input
+                  id="meal_name"
+                  name="meal_name"
+                  type="textarea"
+                  defaultValue={this.state.selectedMeal.meal_name}
+                  onChange={this.handleInputChange}
+                  style={{ height: "calc(1.5em + .75rem + 2px)" }}
+                />
+              </ModalHeader>
+              <ModalBody>
+                <h5>Recipes</h5>
+                <ListGroup>
+                  {this.state.selectedMeal.recipes &&
+                    this.state.selectedMeal.recipes.map((recipe) => {
+                      return (
+                        <ListGroupItem>
+                          <Button
+                            style={{ backgroundColor: "#556B30" }}
+                            id="recipePopover"
+                            type="button"
+                            onClick={() => {
+                              this.setSelectedRecipe(recipe);
+                            }}
+                          >
+                            {recipe.recipe_name}
+                          </Button>
+                          <UncontrolledPopover
+                            flip
+                            target="recipePopover"
+                            trigger="legacy"
+                          >
+                            <PopoverHeader>
+                              {this.state.selectedRecipe.recipe_name}
+                            </PopoverHeader>
+                            <PopoverBody>
+                              <Button
+                            
+                                onClick={() => {
+                                  this.toggleSecondaryModal();
+                                  document.body.click();
+                                }}
+                              >
+                                Replace
+                              </Button>
+                              <Button
+                               
+                                onClick={() => {
+                                  this.removeRecipeFromMeal();
+                                  document.body.click();
+                                }}
+                              >
+                                Remove
+                              </Button>
+                            </PopoverBody>
+                          </UncontrolledPopover>
+                        </ListGroupItem>
+                      );
                     })}
+                  <Button
+                    style={{ backgroundColor: "#556B30" }}
+                    onClick={this.toggleSecondaryModal}
+                  >
+                    Add
+                  </Button>
                 </ListGroup>
-                </Card>
-                <Modal isOpen={this.state.mealModal} toggle={this.toggleModal}>
-                  <ModalHeader toggle={this.toggleModal}>
-                    <Input id="meal_name" name="meal_name" type="textarea" defaultValue={this.state.selectedMeal.meal_name} onChange={this.handleInputChange} style={{height: "calc(1.5em + .75rem + 2px)"}} />
-                  </ModalHeader>
-                  <ModalBody>
-                    <h5>Recipes</h5>
-                    <ListGroup>
-                    {this.state.selectedMeal.recipes && (
-                      this.state.selectedMeal.recipes.map((recipe) => {
-                        return (
-                          <ListGroupItem>
-                            <Button id="recipePopover" type="button" onClick={() => {this.setSelectedRecipe(recipe)}}>
-                              {recipe.recipe_name}
-                            </Button>
-                            <UncontrolledPopover flip target="recipePopover" trigger="legacy">
-                              <PopoverHeader>
-                                  {this.state.selectedRecipe.recipe_name}
-                              </PopoverHeader>
-                              <PopoverBody>
-                                <Button color="primary" onClick={() => {this.toggleSecondaryModal(); document.body.click(); }}>Replace</Button>
-                                <Button color="danger" onClick={() => {this.removeRecipeFromMeal(); document.body.click(); }}>Remove</Button>
-                              </PopoverBody>
-                            </UncontrolledPopover>
-                          </ListGroupItem>
-                        )
-                      })
-                    )}
-                    <Button color="success" onClick={this.toggleSecondaryModal}>Add</Button>
-                    </ListGroup>
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button color="primary" onClick={() => {this.submitEditedMeal(this.state.selectedMeal); this.toggleModal();  }}>Submit</Button>
-                    <Button color="secondary" onClick={() => {this.toggleModal(); this.restoreMeal();}}>Cancel</Button>
-                  </ModalFooter>
-                </Modal>
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  onClick={() => {
+                    this.submitEditedMeal(this.state.selectedMeal);
+                    this.toggleModal();
+                  }}
+                >
+                  Submit
+                </Button>
+                <Button
+                  color="secondary"
+                  onClick={() => {
+                    this.toggleModal();
+                    this.restoreMeal();
+                  }}
+                >
+                  Cancel
+                </Button>
+              </ModalFooter>
+            </Modal>
 
-                <Modal isOpen={this.state.modalSecondary} toggle={this.toggleSecondaryModal}>
-                  <ModalHeader trigger={this.toggleSecondaryModal}>
-                      Replace {this.state.selectedRecipe.recipe_name} with ?
-                  </ModalHeader>
-                  <ModalBody>
-                      <RecipeList parentCallback={this.handleRecipeCallback} plusButton={true} />
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button color="secondary" onClick={() => {this.toggleSecondaryModal();}}>Cancel</Button>
-                  </ModalFooter>
-                </Modal>
-            </div>
+            <Modal
+              isOpen={this.state.modalSecondary}
+              toggle={this.toggleSecondaryModal}
+            >
+              <ModalHeader trigger={this.toggleSecondaryModal}>
+                Replace {this.state.selectedRecipe.recipe_name} with ?
+              </ModalHeader>
+              <ModalBody>
+                <RecipeList
+                  parentCallback={this.handleRecipeCallback}
+                  plusButton={true}
+                />
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="secondary"
+                  onClick={() => {
+                    this.toggleSecondaryModal();
+                  }}
+                >
+                  Cancel
+                </Button>
+              </ModalFooter>
+            </Modal>
+          </div>
         );
     }
 }

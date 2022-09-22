@@ -169,7 +169,7 @@ class RecipeList extends Component {
           // }}
         >
           <h2 className="text-center">Recipes</h2>
-          <p className="text-center">click each recipe to view</p>
+          <p className="text-center">click each recipe to view details</p>
           <ListGroup className=" ">
             {this.state.recipes.map((recipe) => {
               return (
@@ -302,7 +302,7 @@ class RecipeList extends Component {
                                     </PopoverHeader>
                                     <PopoverBody>
                                       <Button
-                                        color="primary"
+                                        color="#556B30"
                                         onClick={() => {
                                           this.toggleSecondary();
                                           document.body.click();
@@ -311,7 +311,7 @@ class RecipeList extends Component {
                                         Replace
                                       </Button>
                                       <Button
-                                        color="danger"
+                                        color="#556B30"
                                         onClick={() => {
                                           this.removeIngredientFromRecipe();
                                         }}

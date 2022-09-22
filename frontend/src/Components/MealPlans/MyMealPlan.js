@@ -129,9 +129,21 @@ class MyMealPlans extends Component {
                         return (
                           <ListGroupItem>
                             {meal.meal_name}
-                            <Button onClick={() => {this.removeMealFromMealPlan(meal)}}>X</Button>
+                            <Button
+                              style={{
+                                width: 40,
+                                height: 30,
+                                background: "ffffff",
+                                border: "none",
+                              }}
+                              onClick={() => {
+                                this.removeMealFromMealPlan(meal);
+                              }}
+                            >
+                              ✖️
+                            </Button>
                           </ListGroupItem>
-                          )
+                        );
                       })}
                   </ListGroup>
                 </FormGroup>

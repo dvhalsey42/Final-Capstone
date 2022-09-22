@@ -21,6 +21,7 @@ import RecipeList from "./RecipeList";
 import IngredientList from "../Ingredients/IngredientList";
 
 
+
 class MyRecipes extends Component {
   constructor(props) {
     super(props);
@@ -132,8 +133,6 @@ class MyRecipes extends Component {
               maxWidth: "50%",
             }}
           >
-            {/* <CardTitle id="h5">Create Your Recipe</CardTitle> */}
-
             <Form onSubmit={this.handleCreateRecipe} className="">
               <div className="">
                 <FormGroup style={{ color: "#92ab75", width: "100%" }}>
@@ -156,16 +155,18 @@ class MyRecipes extends Component {
                     {this.state.recipeIngredients &&
                       this.state.recipeIngredients.map((ingredient) => {
                         return (
-                          <ListGroupItem>
+                          <ListGroupItem style={{maxWidth: 300,}}>
                             {ingredient.ingredient_name}
                             <Button
                               style={{
+                                backgroundColor: "#FFFFFF",
                                 width: 40,
                                 height: 30,
+                                border: "none",
                               }}
                               className="text-center"
                               onClick={() => {this.removeIngredientFromRecipe(ingredient)}}
-                            >X</Button>
+                            >✖️</Button>
                           </ListGroupItem>
                         );
                       })}

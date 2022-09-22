@@ -109,18 +109,7 @@ class IngredientList extends Component {
     });
   };
 
-  // async removeIngredient(ingredient) {
-  //   console.log(
-  //     "Ingredient: " +  ingredient.ingredient_name + " Removed"
-  //   );
-  //   await axios
-  //     .delete(baseUrl + "/myrecipes/" + ingredient.ingredient_id + "/delete")
-  //     .then(() => {
-  //       this.handleFetchRecipes();
-  //     });
-  //   // refetch recipes here for re-render
-  //   // this.handleFetchRecipes();
-  // }
+
 
   render() {
 
@@ -137,7 +126,7 @@ class IngredientList extends Component {
           className="pantry-card"
           style={{
             maxHeight: 400,
-            maxWidth: 300,
+            maxWidth: 400,
             overflow: "auto",
           }}
         >
@@ -166,20 +155,6 @@ class IngredientList extends Component {
                     ➕
                   </button>
 
-                  {/* <Button
-                    style={{
-                      width: 40,
-                      height: 30,
-                      background: "#FFFFFF",
-                      border: "#FFFFFF",
-                    }}
-                    // onClick={() => {
-                    //   this.removeIngredient(ingredient);
-                    // }}
-                    className="text-center"
-                  >
-                    ✖️
-                  </Button> */}
                 </ListGroupItem>
               );
             })}

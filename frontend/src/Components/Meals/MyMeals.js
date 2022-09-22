@@ -130,6 +130,7 @@ class MyMeals extends Component {
                 backgroundColor: "#F6F2F0",
                 border: "none",
                 marginRight: 100,
+                maxWidth: "50%",
               }}
             >
               <CardTitle tag="h5">Create Your Meal</CardTitle>
@@ -155,7 +156,19 @@ class MyMeals extends Component {
                         return (
                           <ListGroupItem>
                             {recipe.recipe_name}
-                            <Button type="button" onClick={() => {this.removeRecipeFromMeal(recipe)}}>X</Button>
+                            <Button
+                              style={{
+                                backgroundColor: "#FFFFFF",
+                                width: 40,
+                                height: 30,
+                                border: "none",
+                              }}
+                              onClick={() => {
+                                this.removeRecipeFromMeal(recipe);
+                              }}
+                            >
+                              ✖️
+                            </Button>
                           </ListGroupItem>
                         );
                       })}
@@ -169,7 +182,13 @@ class MyMeals extends Component {
           </div>
 
           <div style={{ width: "20rem" }}>
-            <Card className=" align-items-center" style={{backgroundColor: "#F6F2F0", backgroundImage: `url(${list})`}}>
+            <Card
+              className=" align-items-center"
+              style={{
+                backgroundColor: "#F6F2F0",
+                backgroundImage: `url(${list})`,
+              }}
+            >
               <RecipeList
                 plusButton={true}
                 parentCallback={this.handleCallback}
@@ -178,8 +197,14 @@ class MyMeals extends Component {
             </Card>
           </div>
         </div>
-        <div style={{ width: "20rem" }}>
-          <Card id="mealList" className="meal-card align-items-center mb-5" style={{backgroundImage: `url(${meals})`, width: "35rem", left:"center"}}>
+        <div className="meal-list align-items-center mb-5">
+          <Card
+            className="align-items-center mt-5 mb-5"
+            style={{
+              backgroundImage: `url(${meals})`,
+              width: "35rem",
+            }}
+          >
             <MealList
               plusButton={false}
               key={this.state.counter}
@@ -189,7 +214,8 @@ class MyMeals extends Component {
               newMeals={this.state.newMeals}
             />
             <Link to="/mymealplans" className="mt-5 mb-5">
-              <Button type="submit" style={StyledButton}>Start A Meal Plan
+              <Button type="submit" style={StyledButton}>
+                Start A Meal Plan
               </Button>
             </Link>
           </Card>

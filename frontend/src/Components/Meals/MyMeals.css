@@ -6,10 +6,11 @@
     background-color: #f0eae1;
   }
 
-  #mealList{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
+  .meal-list {
+  margin-left: 550px;
+  }
 
+  .meal-list-page {
+      align-items: center;
+       justify-content: center;
   }
