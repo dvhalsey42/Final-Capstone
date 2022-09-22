@@ -124,6 +124,8 @@ public class JdbcMealDao implements MealDao{
     public boolean deleteMeal(int meal_id) {
         String sql = "DELETE FROM meal_recipes WHERE meal_id = ?";
         jdbcTemplate.update(sql, meal_id);
+        sql = "DELETE FROM plan_meals WHERE meal_id =?";
+        jdbcTemplate.update(sql, meal_id);
         sql = "DELETE FROM meals WHERE meal_id = ?";
         jdbcTemplate.update(sql, meal_id);
         return true;
