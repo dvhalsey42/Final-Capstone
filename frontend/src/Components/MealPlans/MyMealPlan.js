@@ -70,6 +70,15 @@ class MyMealPlans extends Component {
     });
   };
 
+  removeMealFromMealPlan(meal) {
+    var mealList = this.state.mealplan_meals;
+    const index = mealList.findIndex((mel) => mel === meal);
+    mealList.splice(index,1);
+    this.setState({
+      mealplan_meals: mealList
+    })
+  }
+
   render() {
     const StyledButton = {
       backgroundColor: "#FAC668",
@@ -117,7 +126,12 @@ class MyMealPlans extends Component {
                   <ListGroup >
                     {this.state.mealplan_meals &&
                       this.state.mealplan_meals.map((meal) => {
-                        return <ListGroupItem>{meal.meal_name}</ListGroupItem>;
+                        return (
+                          <ListGroupItem>
+                            {meal.meal_name}
+                            <Button onClick={() => {this.removeMealFromMealPlan(meal)}}>X</Button>
+                          </ListGroupItem>
+                          )
                       })}
                   </ListGroup>
                 </FormGroup>

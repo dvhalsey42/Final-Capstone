@@ -210,6 +210,7 @@ class RecipeList extends Component {
                             );
                           }
                         )}
+                        {this.props.loggedIn === true && (
                       <Button
                         style={{
                           width: 40,
@@ -223,7 +224,9 @@ class RecipeList extends Component {
                         }}
                       >
                         ✍️
-                      </Button>{" "}
+                      </Button>)}
+                      {" "}
+                      {this.props.loggedIn === true && (
                       <Button
                         style={{
                           width: 40,
@@ -237,7 +240,7 @@ class RecipeList extends Component {
                         }}
                       >
                         ✖️
-                      </Button>
+                      </Button> )}
                     </PopoverBody>
                   </UncontrolledPopover>
                   <Modal
