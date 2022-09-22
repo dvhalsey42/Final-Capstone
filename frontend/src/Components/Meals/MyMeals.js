@@ -22,6 +22,8 @@ import axios from "axios";
 import { baseUrl } from "../../Shared/baseUrl";
 import "../Meals/MyMeals.css"
 import MealList from "./MealList";
+import meals from "../images/meals.jpg"
+import list from "../images/List1.png"
 
 const mapDispatchToProps = (dispatch) => ({
   fetchMeals: () => dispatch(fetchMeals()),
@@ -155,7 +157,7 @@ class MyMeals extends Component {
           </div>
 
           <div style={{ width: "20rem" }}>
-            <Card className=" align-items-center">
+            <Card className=" align-items-center" style={{backgroundColor: "#F6F2F0", backgroundImage: `url(${list})`}}>
               <RecipeList
                 plusButton={true}
                 parentCallback={this.handleCallback}
@@ -163,8 +165,8 @@ class MyMeals extends Component {
             </Card>
           </div>
         </div>
-        <div>
-          <Card className=" align-items-center">
+        <div style={{ width: "20rem" }}>
+          <Card id="mealList" className="meal-card align-items-center mb-5" style={{backgroundImage: `url(${meals})`, width: "35rem", left:"center"}}>
             <MealList
               plusButton={false}
               key={this.state.counter}
@@ -173,9 +175,8 @@ class MyMeals extends Component {
               parentCallback={this.handleCallback}
               newMeals={this.state.newMeals}
             />
-            <Link to="/mymealplans">
-              <Button type="submit" style={StyledButton}>
-                Start A Meal Plan
+            <Link to="/mymealplans" className="mt-5 mb-5">
+              <Button type="submit" style={StyledButton}>Start A Meal Plan
               </Button>
             </Link>
           </Card>
