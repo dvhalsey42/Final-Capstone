@@ -6,6 +6,7 @@ import { List } from "reactstrap";
 import "../Non-Protected/LandingPage.css";
 import meal3 from "../images/_meallanding.png"
 import user from "../images/user1.png"
+import mainlogo from "../images/transparentlogo.png"
 import Register from "../Register/Register";
 import {Button } from "reactstrap"
 
@@ -27,6 +28,18 @@ class LandingPage extends Component {
   render() {
     return (
       <div>
+         <img
+            className="logo"
+            src={mainlogo}
+            alt="Lets Eat Logo"
+            style={{
+              maxWidth: 500,
+              maxHeight: 300,
+              marginTop: 5,
+              marginBottom: -30,
+              marginInlineEnd: 20,
+            }}
+          />
         <h1 className="text-center mt-5 ">Meal Planning Just Got Easier</h1>
         <List type="unstyled" className="text-center pt-5 ml-5 mb-5">
           <h2>Catalogue your favorite recipes</h2>
