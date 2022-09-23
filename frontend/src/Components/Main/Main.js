@@ -82,7 +82,10 @@ class Main extends Component {
 
           {this.props.token.token !== undefined ? (
             <div>
-              <UncontrolledDropdown className="border dark">
+              <UncontrolledDropdown
+                style={{ background: "#F6F2F0" }}
+                className="border"
+              >
                 <DropdownToggle nav caret className="menu">
                   MENU
                 </DropdownToggle>

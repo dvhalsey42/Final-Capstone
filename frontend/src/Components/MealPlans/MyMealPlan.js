@@ -106,24 +106,29 @@ class MyMealPlans extends Component {
         </h2>
         <div className="container border">
           <div className="new-mealplan mt-5">
-            <Card body className="text-start my-2" style={{
+            <Card
+              body
+              className="text-start my-2"
+              style={{
                 backgroundColor: "#F6F2F0",
                 border: "none",
                 marginRight: 100,
-              }}>
+              }}
+            >
               <CardTitle tag="h5">Create Your Meal Plan</CardTitle>
               <Form onSubmit={this.handleCreateMealPlan}>
                 <FormGroup style={{ color: "#92ab75" }}>
                   <Label for="meal_plan_name">Meal Plan Name</Label>
                   <Input
                     name="meal_plan_name"
+                    style={{ maxWidth: 400, marginLeft: 0 }}
                     placeholder="Meal Plan Name"
                     onChange={this.handleInputChange}
                   ></Input>
                 </FormGroup>
-                <FormGroup >
+                <FormGroup>
                   <Label for="meals">Meals</Label>
-                  <ListGroup >
+                  <ListGroup>
                     {this.state.mealplan_meals &&
                       this.state.mealplan_meals.map((meal) => {
                         return (
@@ -133,8 +138,8 @@ class MyMealPlans extends Component {
                               style={{
                                 width: 40,
                                 height: 30,
-                                background: "ffffff",
-                                border: "none",
+                                background: "#FFFFFF",
+                                border: "#FFFFFF",
                               }}
                               onClick={() => {
                                 this.removeMealFromMealPlan(meal);
@@ -153,9 +158,14 @@ class MyMealPlans extends Component {
           </div>
 
           <div style={{ width: "30rem" }}>
-            <Card className="align-items-center" style={{
-              border: "none", backgroundImage: `url(${meals})`, width:"20rem"
-              }}>
+            <Card
+              className="align-items-center"
+              style={{
+                border: "none",
+                backgroundImage: `url(${meals})`,
+                width: "20rem",
+              }}
+            >
               <MealList
                 plusButton={true}
                 parentMeals={this.state.meals}
@@ -166,13 +176,17 @@ class MyMealPlans extends Component {
           </div>
 
           <div style={{ width: "20rem" }}>
-          <Card className=" align-items-center" style={{
+            <Card
+              className=" align-items-center"
+              style={{
                 backgroundColor: "#F6F2F0",
                 border: "none",
-                marginRight: 0, backgroundImage:`url(${food})`
-              }}>
-            <MealPlanList user={this.props.user} key={this.state.counter} />
-          </Card>
+                marginRight: 0,
+                backgroundImage: `url(${food})`,
+              }}
+            >
+              <MealPlanList user={this.props.user} key={this.state.counter} />
+            </Card>
           </div>
 
           <footer className="text-center pt-5" style={footerStyle}>

@@ -136,9 +136,10 @@ class MyMeals extends Component {
               <CardTitle tag="h5">Create Your Meal</CardTitle>
               <CardSubtitle className="">What's This Meal Called?</CardSubtitle>
               <Form onSubmit={this.handleCreateMeal}>
-                <FormGroup style={{ color: "#92ab75" }}>
+                <FormGroup style={{ maxWidth: 400, color: "#92ab75" }}>
                   <Label for="meal_name"></Label>
                   <Input
+                    style={{ marginLeft: 0 }}
                     name="meal_name"
                     placeholder="Meal Name"
                     onChange={this.handleInputChange}

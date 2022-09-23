@@ -140,9 +140,9 @@ class MyRecipes extends Component {
                     Name Your Recipe
                   </CardTitle>
                   <Input
-                    name="recipe_name"
+                  name="recipe_name"
                     placeholder="recipe name"
-                    style={{ maxWidth: 400 }}
+                    style={{ maxWidth: 400, marginLeft: 0 }}
                     onChange={this.handleInputChange}
                   />
                 </FormGroup>

@@ -76,7 +76,7 @@ class Register extends Component {
         <div className="row">
           <Link to="/login">Have an account?</Link>
           <button type="submit" onClick={this.handleSubmit}>
-            Sign in
+            Create Account
           </button>
         </div>
       </div>

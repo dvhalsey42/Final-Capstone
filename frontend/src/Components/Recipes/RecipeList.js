@@ -162,11 +162,13 @@ class RecipeList extends Component {
   render() {
     return (
       <div className="align-items-center">
-        <Card className="mt-5"
-          // style={{
-          //   maxWidth: "100%",
-          
-          // }}
+        <Card
+          className="mt-5"
+          style={{
+            maxHeight: 500,
+            maxWidth: 500,
+            overflow: "auto",
+          }}
         >
           <h2 className="text-center">Recipes</h2>
           <p className="text-center">click each recipe to view details</p>
@@ -210,37 +212,38 @@ class RecipeList extends Component {
                             );
                           }
                         )}
-                        {this.props.loggedIn === true && (
-                      <Button
-                        style={{
-                          width: 40,
-                          height: 30,
-                          background: "#F6F2F0",
-                          border: "#F6F2F0",
-                        }}
-                        onClick={() => {
-                          document.body.click();
-                          this.toggle();
-                        }}
-                      >
-                        ✍️
-                      </Button>)}
-                      {" "}
                       {this.props.loggedIn === true && (
-                      <Button
-                        style={{
-                          width: 40,
-                          height: 30,
-                          background: "#F6F2F0",
-                          border: "#F6F2F0",
-                        }}
-                        onClick={() => {
-                          this.removeRecipe(this.state.selectedRecipe);
-                          document.body.click();
-                        }}
-                      >
-                        ✖️
-                      </Button> )}
+                        <Button
+                          style={{
+                            width: 40,
+                            height: 30,
+                            background: "#F6F2F0",
+                            border: "#F6F2F0",
+                          }}
+                          onClick={() => {
+                            document.body.click();
+                            this.toggle();
+                          }}
+                        >
+                          ✍️
+                        </Button>
+                      )}{" "}
+                      {this.props.loggedIn === true && (
+                        <Button
+                          style={{
+                            width: 40,
+                            height: 30,
+                            background: "#F6F2F0",
+                            border: "#F6F2F0",
+                          }}
+                          onClick={() => {
+                            this.removeRecipe(this.state.selectedRecipe);
+                            document.body.click();
+                          }}
+                        >
+                          ✖️
+                        </Button>
+                      )}
                     </PopoverBody>
                   </UncontrolledPopover>
                   <Modal
@@ -405,7 +408,6 @@ class RecipeList extends Component {
             })}
           </ListGroup>
         </Card>
-        
       </div>
     );
   }

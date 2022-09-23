@@ -3,7 +3,9 @@
 .menu,
 .submenu {
   list-style-type: none;
-  color:#F0EAE1;
+  color:#556B30;
+  border: #556B30;
+ 
 }
 
 .submenu {
